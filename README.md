@@ -4,12 +4,19 @@ Based on the frontend steps for building the moments fullstack app [in this repo
 
 ## Setting up the project
 
-Bootstrap [getting started](https://react-bootstrap.github.io/docs/getting-started/introduction)
+Bootstrap [4.6 getting started](https://react-bootstrap-v4.netlify.app/)
 
 ```sh
 npm install react-bootstrap@1.6.3 bootstrap@4.6.0
 ```
 
+Add ES7+ React/Redux/React-Native snippets v4.4.3
+
+[Font awesome](https://fontawesome.com/) [free](https://fontawesome.com/search?m=free&o=r) icons.
+
+[Css Modules in React](https://medium.com/@ralph1786/using-css-modules-in-react-app-c2079eadbb87)
+
+[Adding a CSS Modules Stylesheet](https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/)
 
 ## Original readme
 
