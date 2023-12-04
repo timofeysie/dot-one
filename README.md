@@ -1,5 +1,18 @@
 ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
 
+Based on the frontend steps for building the moments fullstack app [in this repo](https://github.com/Code-Institute-Solutions/moments).
+
+## Setting up the project
+
+Bootstrap [getting started](https://react-bootstrap.github.io/docs/getting-started/introduction)
+
+```sh
+npm install react-bootstrap@1.6.3 bootstrap@4.6.0
+```
+
+
+## Original readme
+
 Welcome,
 
 This is the Code Institute student template for React apps on the Codeanywhere IDE. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.  
