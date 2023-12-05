@@ -18,6 +18,30 @@ Add ES7+ React/Redux/React-Native snippets v4.4.3
 
 [Adding a CSS Modules Stylesheet](https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/)
 
+# Routing
+
+Instead of the command ```npm install react-router-dom``` use this ```npm install react-router-dom@5.3.0```
+
+I'm so used to seeing example code that looks like this:
+
+```js
+<Switch>
+    <Route exact path="/" render={() => <h1>Home page</h1>} />
+    <Route exact path="/signin" render={() => <h1>Sign in</h1>} />
+    ...
+</Switch>
+```
+
+and having to convert that to router 4:
+
+```js
+<Routes>
+    <Route path="/" element={<section>...</section>} />
+    <Route path="/posts/:postId" element={<SinglePostPage />} />
+```
+
+Just thought I would point that out in case it helps someone.
+
 ## Original readme
 
 Welcome,
