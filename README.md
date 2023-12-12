@@ -42,6 +42,143 @@ and having to convert that to router 4:
 
 Just thought I would point that out in case it helps someone.
 
+## Authentication
+
+Provide the Heroku keys:
+
+```txt
+CLIENT_ORIGIN = the react app url.
+CLIENT_ORIGIN_DEV = the gitpod url.
+```
+
+Import axios into the frontend:
+
+```sh
+npm i axios
+```
+
+Create an src/api/axiosDefaults.js
+
+```js
+import axios from "axios";
+
+axios.defaults.baseURL = "https://drf-api-rec.herokuapp.com/";
+axios.defaults.headers.post["Content-Type"] = "multipart/form-data";
+axios.defaults.withCredentials = true;
+
+export const axiosReq = axios.create();
+export const axiosRes = axios.create();
+```
+
+### Bootstrap forms
+
+Add/update these style sheets:
+
+- App.module.css
+- Button.module.css
+- SignInUpForm.module.css
+
+Add the pages/auth directory with [this file](https://github.com/Code-Institute-Solutions/moments-starter-code/blob/master/06-starter-code/SignUpForm.js).
+
+[Bootstrap forms](https://react-bootstrap-v4.netlify.app/components/forms/) have sample code that was modified a bit to look like the example below.
+
+To hide elements *use the .d-none class or one of the .d-{sm,md,lg,xl}-none classes for any responsive screen variation* (from [these docs](https://getbootstrap.com/docs/4.4/utilities/display/)).
+
+```tsx
+<Form.Group controlId="username">
+    <Form.Label className="d-none">username</Form.Label>
+    <Form.Control
+        className="styles.Input"
+        type="text"
+        placeholder="username"
+        name="username"
+        value={username}
+        onChange={handleChange}
+    />
+</Form.Group>
+```
+
+### The submit handler
+
+POST the sign-up form to the API and redirect to the sign-in page using React history.push method.
+
+Set the form onSubmit function to call the event handler.
+
+I have also added some notes on the nifty use of computed properties, destructuring and the spread operator.
+
+```js
+import { Link, useHistory } from "react-router-dom";
+...
+
+const SignUpForm = () => {
+    /** Initialize the field variables with computed properties. */
+    const [signUpData, setSignUpData] = useState({
+        username: "",
+        password1: "",
+        password2: "",
+    });
+    // restructure the signup data so that the dot notation is not needed to access them
+    const { username, password1, password2 } = signUpData;
+    const [errors, setErrors] = useState({});
+
+    /** To redirect to the sign in page after the registration call */
+    const history = useHistory();
+
+    /**
+     * Instead of writing separate handlers for each variable, this function
+     * sets the [property]=value pair using a spread operator to copy the other fields
+     * and the left-hand bracket notation to set the appropriate property name.
+     * @param {*} event
+     */
+    const handleChange = (event) => {
+        setSignUpData({
+            ...signUpData,
+            [event.target.name]: event.target.value,
+        });
+    };
+
+    const handleSubmit = async (event) => {
+      event.preventDefault(); // so the page doesn't refresh as in the old HTML norm
+      try {
+        await axios.post("/dj-rest-auth/registration/", signUpData);
+        history.push("/signin");
+      } catch (err) {
+        setErrors(err.response?.data);
+      }
+    };
+
+    return (
+      <Row className={styles.Row}>
+          <Col className="my-auto py-2 p-md-2" md={6}>
+              <Container className={`${appStyles.Content} p-4 `}>
+                  <h1 className={styles.Header}>sign up</h1>
+
+                  <Form onSubmit={{ handleSubmit }}>
+                  ...
+                   </Form.Group>
+                  {errors.username?.map((message, idx) => (
+                    <Alert variant="warning" key={idx}>
+                      {message}
+                    </Alert>
+                  ))}
+```
+
+The submit button can show errors when the password don't match with a null_field_error:
+
+```js
+<Button
+    className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright}`}
+    type="submit"
+>
+    Sign up
+</Button>
+{errors.non_field_errors?.map((message, idx) => (
+    <Alert key={idx} variant="warning" className="mt-3">
+        {message}
+    </Alert>
+))}
+```
+
 ## Original readme
 
 Welcome,
