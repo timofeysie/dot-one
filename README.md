@@ -179,6 +179,40 @@ The submit button can show errors when the password don't match with a null_fiel
 ))}
 ```
 
+## Creating the SignIn form
+
+This is a challenge section with the following brief:
+
+“As a user I can sign in to the app so that I can access functionality for logged in users”
+
+- The form
+- Handle Events
+- Handle Errors
+
+### The form
+
+- A field for the Username
+- A field for the Password
+- A Sign In Button
+
+And the basic setup steps:
+
+1. Create SignInForm.js in "src/pages/auth"
+2. Import it into App.js
+3. Add "/signin" to the route render prop
+
+### Handling Events
+
+- Handle Changes from the Username or Password inputs
+- Handle a Form Submit Event
+- Redirect to the Sign In page, once a form has successfully been submitted.
+
+### Handling Errors for SignInForm
+
+- Errors on the Username Field
+- Errors on the Password Field
+- Non_field_errors, such as providing incorrect credentials.
+
 ## Original readme
 
 Welcome,
