@@ -213,6 +213,144 @@ And the basic setup steps:
 - Errors on the Password Field
 - Non_field_errors, such as providing incorrect credentials.
 
+## The useContext hook
+
+To make these getters and setters available to all children of the providers, here are the basics.
+
+[src/App.js](https://github.com/mr-fibonacci/moments/blob/a6d063e846e748d68b203b7d8f2d76068a1ccb4a/src/App.js)
+
+```js
+import { createContext, useEffect, useState } from "react";
+import axios from "axios";
+
+export const CurrentUserContext = createContext();
+export const SetCurrentUserContext = createContext();
+
+function App() {
+  const [currentUser, setCurrentUser] = useState(null);
+
+  const handleMount = async () => {
+    try {
+      const { data } = await axios.get("dj-rest-auth/user/");
+      setCurrentUser(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    handleMount();
+  }, []);
+
+  return (
+    <CurrentUserContext.Provider value={currentUser}>
+      <SetCurrentUserContext.Provider value={setCurrentUser}>
+```
+
+This feature is used to update the user on login and change the navbar accordingly.
+
+### Uncaught TypeError: Cannot read property 'post' of undefined
+
+On a side note, if you see the above error, its just the wrong import format of axios.
+
+Instead of this 'named import':
+
+```js
+import { axios } from "axios";
+```
+
+Use this 'default import':
+
+```js
+import axios from 'axios';
+```
+
+A file can only have one default export, but as many named exports as you'd like.
+
+### Using a provider context
+
+In the src/pages/auth/SignInForm.js file, this is how the useCOntext hook is used with the SetCurrentUserContext defined in the App.js.
+
+```js
+import React, { useContext, useState } from "react";
+...
+import { SetCurrentUserContext } from "../../App";
+
+function SignInForm() {
+  const setCurrentUser = useContext(SetCurrentUserContext);
+
+  ...
+
+      const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            const { data } = await axios.post("/dj-rest-auth/login/", signInData);
+            setCurrentUser(data.user);
+            history.push("/");
+        } catch (err) {
+            setErrors(err.response?.data);
+        }
+    };
+
+```
+
+A similar thing is done in the navbar to use the logged in username:
+
+```js
+import { CurrentUserContext } from "../App";
+
+const NavBar = () => {
+  const currentUser = useContext(CurrentUserContext);
+```
+
+In the navar we also now use loggedInIcons loggedOutIcons variables to simplify the UI.  We don't want to show the sign-in/up icons after a user is logged in.
+
+The more business logic and if/else boolean flags used in the UI, the harder it is to read and add features to without breaking something else.  So these variables simplify that with the ternary logic happening in one place:
+
+```js
+{currentUser ? loggedInIcons : loggedOutIcons}
+```
+
+### Functions with arrows and standards
+
+The above code shows a bit of inconsistency in showing code with the function format when it used the arrow version in the sign up component.
+
+The functional component versus the version with a 'fat' arrow version:
+
+#### Snippet: rfce (react functional component w/ export default at the bottom)
+
+```js
+function SignInForm() {
+```
+
+#### Snippet: rafce (react component utilizing an arrow function)
+
+```js
+const SignUpForm = () => {
+```
+
+Its best to follow a consistent pattern in a code base.  This stops developers wasting time arguing and re-working code that doesn't change the function of the code in anyway.  Things like formatting and arguments about tabs versus spaces just waste precious time.
+
+Using Prettier to take formatting off the table is a great idea.  Use the default settings unless there is agreement among developers on a specific project that there is a reason to change something.  Manually fixing indentation is also a waste of time.
+
+An example of this is when I started work on a project with a sizable pre-existing code base which had tab size set to 4.
+
+The default Prettier tab size is 2.  We decided to stick with 4 as the only exception to the defaults.
+
+This was done by having this is .vscode\settings.json
+
+```json
+{
+    "prettier.tabWidth": 4,
+}
+```
+
+In user settings, it chang be changed for all projects:
+
+Prettier: Tab Width: 2
+
+In this way all projects except the one with an exception can use the default.
+
 ## Original readme
 
 Welcome,
@@ -229,13 +367,13 @@ In Codeanywhere you have superuser security privileges by default. Therefore you
 
 To log into the Heroku toolbelt CLI:
 
-1. Log in to your Heroku account and go to _Account Settings_ in the menu under your avatar.
-2. Scroll down to the _API Key_ and click _Reveal_
+1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
+2. Scroll down to the *API Key* and click *Reveal*
 3. Copy the key
 4. In Codeanywhere, from the terminal, run `heroku_config`
 5. Paste in your API key when asked
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with *Regenerate API Key*.
 
 ---
 
