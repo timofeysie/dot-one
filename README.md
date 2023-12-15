@@ -386,6 +386,110 @@ function SignInForm() {
   const setCurrentUser = useSetCurrentUser();
 ```
 
+## Refresh tokens
+
+The data returned from the server on login looks like this:
+
+```json
+{
+    "access_token": "eyJ0eXA...",
+    "refresh_token": "eyJ0eXA...",
+    "user": {
+        "pk": 14,
+        "username": "asdf",
+        "email": "",
+        "first_name": "",
+        "last_name": "",
+        "profile": {
+            "id": 14,
+            "owner": "asdf",
+            "created_at": "12 Dec 2023",
+            "updated_at": "12 Dec 2023",
+            "name": "",
+            "content": "",
+            "image": "https://res.cloudinary.com/...",
+            "is_owner": true,
+            "following_id": null,
+            "posts_count": 0,
+            "followers_count": 0,
+            "following_count": 0
+        },
+        "profile_id": 14,
+        "profile_image": "https://res.cloudinary.com/..."
+    }
+}
+```
+
+JWT access tokens only last for five minutes.  The refresh token for one day.
+
+### axios interceptors
+
+Interceptors can:
+
+- automatically intercept both requests and responses from our API
+- run custom code before they are passed on.
+
+That will happen in src\contexts\CurrentUserContext.js where a useMemo hook used.
+
+useMemo is usually used to cache complex values that take time to compute.  
+here it is used because want to attach the interceptors before the children mount,  
+as that’s where we’ll be using  them and making the requests from.
+
+```js
+  useMemo(() => {
+    axiosReq.interceptors.request.use(
+      async (config) => {
+        try {
+          // try to refresh the token before sending the request
+          await axios.post("/dj-rest-auth/token/refresh/");
+        } catch (err) {
+          setCurrentUser((prevCurrentUser) => {
+            if (prevCurrentUser) {
+              // if that fails and the user was previously logged in it means that the refresh token has expired
+              // so redirect the user to the SignIn page and set currentUser to null
+              history.push("/signin");
+            }
+            return null;
+          });
+          return config;
+        }
+        return config;
+      },
+      (err) => {
+        // if there's an error reject the Promise with the returned config
+        return Promise.reject(err);
+      }
+    );
+
+    axiosRes.interceptors.response.use(
+      (response) => response,
+      async (err) => {
+        if (err.response?.status === 401) {
+          try {
+            await axios.post("/dj-rest-auth/token/refresh/");
+          } catch (err) {
+            setCurrentUser((prevCurrentUser) => {
+              // if the user was logged in redirect to signin and set data to null
+              if (prevCurrentUser) {
+                history.push("/signin");
+              }
+              return null;
+            });
+          }
+          // If there’s no error refreshing the token return an axios instance with the error config
+          return axios(err.config);
+        }
+        // In case the error wasn’t 401 reject the Promise with the error
+        return Promise.reject(err);
+      }
+    );
+  }, [history]);
+  ```
+
+The handleMount function should use the axiosRes.get() instead of axios.get.
+
+Nothing is using the request yet, but that will come.
+
 ## Original readme
 
 Welcome,
