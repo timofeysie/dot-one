@@ -351,6 +351,41 @@ Prettier: Tab Width: 2
 
 In this way all projects except the one with an exception can use the default.
 
+## Custom hooks
+
+Here a new directory contexts/CurrentUserContext.js is created to hold the context handleMount and useEffect and context object code from the App.js file shown in the previous section.
+
+The new component then gets used higher up in the index.js file like this:
+
+```js
+ReactDOM.render(
+  <React.StrictMode>
+    <Router>
+      <CurrentUserProvider>
+        <App />
+      </CurrentUserProvider>
+    </Router>
+  </React.StrictMode>,
+  document.getElementById("root")
+);
+```
+
+Along with the code from the App.js file, two more custom hooks are added to the CurrentUserContext.js file:
+
+```js
+export const useCurrentUser = () => useContext(CurrentUserContext);
+export const useSetCurrentUser = () => useContext(SetCurrentUserContext);
+```
+
+This is done to make accessing current use and set current user easier.  They are then used like this:
+
+```js
+import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
+
+function SignInForm() {
+  const setCurrentUser = useSetCurrentUser();
+```
+
 ## Original readme
 
 Welcome,
