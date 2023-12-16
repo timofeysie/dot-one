@@ -269,7 +269,7 @@ A file can only have one default export, but as many named exports as you'd like
 
 ### Using a provider context
 
-In the src/pages/auth/SignInForm.js file, this is how the useCOntext hook is used with the SetCurrentUserContext defined in the App.js.
+In the src/pages/auth/SignInForm.js file, this is how the useContext hook is used with the SetCurrentUserContext defined in the App.js.
 
 ```js
 import React, { useContext, useState } from "react";
@@ -315,7 +315,7 @@ The more business logic and if/else boolean flags used in the UI, the harder it 
 
 The above code shows a bit of inconsistency in showing code with the function format when it used the arrow version in the sign up component.
 
-The functional component versus the version with a 'fat' arrow version:
+The functional component versus the version with a 'fat' arrow version (sometimes also called a lambda):
 
 #### Snippet: rfce (react functional component w/ export default at the bottom)
 
@@ -424,6 +424,8 @@ JWT access tokens only last for five minutes.  The refresh token for one day.
 
 ### axios interceptors
 
+The source code for these changes can be found [here](https://github.com/mr-fibonacci/moments/blob/a981c39da1671a70023a3d6f3cf1410164e84e06/src/contexts/CurrentUserContext.js).
+
 Interceptors can:
 
 - automatically intercept both requests and responses from our API
@@ -489,6 +491,174 @@ as that’s where we’ll be using  them and making the requests from.
 The handleMount function should use the axiosRes.get() instead of axios.get.
 
 Nothing is using the request yet, but that will come.
+
+## Update navBar for loggedIn/loggedOut
+
+The [source code for these changes](https://github.com/mr-fibonacci/moments/tree/747d9d2350c57c995b52b4ff48a2e2b40cbf74b6).
+
+Add the remaining icons to our NavBar for logged in users.  Here is what the add post icon looks like:
+
+```js
+const NavBar = () => {
+  ...
+
+  const addPostIcon = (
+    <NavLink
+      className={styles.NavLink}
+      activeClassName={styles.Active}
+      to="/posts/create"
+    >
+      <i className="far fa-plus-square"></i>Add post
+    </NavLink>
+  );
+  ...
+    return (
+    <Navbar className={styles.NavBar} expand="md" fixed="top">
+      <Container>
+        <NavLink to="/"> ... </NavLink>
+        {currentUser && addPostIcon}
+  ```
+
+The logged in user will have an avatar image, which is done with a specific component.
+
+
+```css
+.Avatar {
+  border-radius: 50%;
+  margin: 0px 8px 0px 8px;
+  object-fit: cover;
+}
+```
+
+The object-fitcover:  will make sure the profile image fits its container no matter what the image dimensions are.
+
+```js
+import React from "react";
+import styles from "../styles/Avatar.module.css";
+
+const Avatar = ({ src, height = 45, text }) => {
+  return (
+    <span>
+      <img
+        className={styles.Avatar}
+        src={src}
+        height={height}
+        width={height}
+        alt="avatar"
+      />
+      {text}
+    </span>
+  );
+};
+
+export default Avatar;
+```
+
+This used the ‘rafce’ code snippet from the ES7Snippets plugin.
+
+The Avatar component takes some props which is descructures and provides a default height.
+
+Check out [destructuring-assignment default values](9https://zaiste.net/posts/javascript-destructuring-assignment-default-values/) for more about that.
+
+As a note, that can also be done like this:
+
+```js
+const Avatar = (props) => {
+  const { src, height = 45, text } = props;
+  ```
+
+## NavBar burger toggle with a custom hook
+
+The burger menu has an issue that when we click open we have to close it manually.
+
+The changes for this work are [here](https://github.com/mr-fibonacci/moments/tree/35369a14e40c6132b7ad033aac90faa8143a7c75).
+
+This change will references the DOM using the useRef hook.
+
+Bootstrap Nabar has an expanded property which we tie to a state variable.  This get toggled in the ```onClick={() => setExpanded(!expanded)}``` function
+
+```js
+const ref = useRef(null);
+useEffect(() => {
+  const handleClickOutside = (event) => {
+    if (ref.current && !ref.current.contains(event.target)) {
+      setExpanded(false);
+    }
+};
+```
+
+Used on the tag like this:
+
+```js
+        <Navbar.Toggle
+          ref={ref}
+```
+
+The code is first shown in-situ in the NavBar.  After it works it is refactored by putting the whole thing in a custom hook.  There are good reasons for this.
+
+- It makes the code cleaner with all the logic for our toggle functionality in one place.
+- The above follows the Single Responsibility Principal (SRP or the SOLID principals of development) which also allows the navbar to only be responsible for what it does.
+- It can be reusable any time we want to toggle any element.
+
+The custom hook looks like this:
+
+```js
+import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
+
+const NavBar = () => {
+  const currentUser = useCurrentUser();
+  const setCurrentUser = useSetCurrentUser();
+
+  const { expanded, setExpanded, ref } = useClickOutsideToggle();
+  ...
+    return (
+    <Navbar
+      expanded={expanded}
+      className={styles.NavBar}
+      expand="md"
+      fixed="top"
+    >
+      <Container>
+        <NavLink to="/"> ... </NavLink>
+        {currentUser && addPostIcon}
+        <Navbar.Toggle
+          ref={ref}
+          onClick={() => setExpanded(!expanded)}
+          aria-controls="basic-navbar-nav"
+        />
+        ...
+```
+
+The ref prop references the DOM element and detects if the mouse clicks outside of it.
+
+It relies on a useEffect hook.
+
+```js
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setExpanded(false);
+      }
+    };
+    document.addEventListener("mouseup", handleClickOutside);
+    return () => {
+      document.removeEventListener("mouseup", handleClickOutside);
+    };
+  }, [ref]);
+```
+
+The handleClickOutside function has an event argument.
+
+If the element is null which is the initial value.
+
+If the user has clicked outside the referenced button call setExpanded false to close the menu.
+
+The mouseup event listener sets the handleClickOutside as its callback.  This means the hook will run every time the user clicks somewhere (technically after the click).
+
+The cleanup function removes the listener.  Even though the navbar won’t be unmounted, it’s a best practice to remove event  
+listeners in case it’s used on an element that could unmount.
+
+The ref is put in the useEffect’s dependency array so this effect runs when it changes.
 
 ## Original readme
 
