@@ -428,7 +428,7 @@ The source code for these changes can be found [here](https://github.com/mr-fibo
 
 Interceptors can:
 
-- automatically intercept both requests and responses from our API
+- automatically intercept both requests and responses from the API
 - run custom code before they are passed on.
 
 That will happen in src\contexts\CurrentUserContext.js where a useMemo hook used.
@@ -496,7 +496,7 @@ Nothing is using the request yet, but that will come.
 
 The [source code for these changes](https://github.com/mr-fibonacci/moments/tree/747d9d2350c57c995b52b4ff48a2e2b40cbf74b6).
 
-Add the remaining icons to our NavBar for logged in users.  Here is what the add post icon looks like:
+Add the remaining icons to the NavBar for logged in users.  Here is what the add post icon looks like:
 
 ```js
 const NavBar = () => {
@@ -520,7 +520,6 @@ const NavBar = () => {
   ```
 
 The logged in user will have an avatar image, which is done with a specific component.
-
 
 ```css
 .Avatar {
@@ -596,7 +595,7 @@ Used on the tag like this:
 
 The code is first shown in-situ in the NavBar.  After it works it is refactored by putting the whole thing in a custom hook.  There are good reasons for this.
 
-- It makes the code cleaner with all the logic for our toggle functionality in one place.
+- It makes the code cleaner with all the logic for the toggle functionality in one place.
 - The above follows the Single Responsibility Principal (SRP or the SOLID principals of development) which also allows the navbar to only be responsible for what it does.
 - It can be reusable any time we want to toggle any element.
 
@@ -659,6 +658,131 @@ The cleanup function removes the listener.  Even though the navbar won’t be un
 listeners in case it’s used on an element that could unmount.
 
 The ref is put in the useEffect’s dependency array so this effect runs when it changes.
+
+## Creating Posts
+
+Add a new route in the App.js file:
+
+```js
+<Route exact path="/posts/create" render={() => <PostCreateForm />} />
+```
+
+Add as well as a PostCreateForm.js file and a reusable Asset.js file both with CSS modules.
+
+Next, add the input fields for the post title and content and write the logic to store and update the state of the input fields.
+
+This is done in the same pattern as the sign up form:
+
+```js
+  const [data, setData] = useState({
+      x: "",
+      y: "",
+      z: "",
+  });
+  // restructure the signup data so that the dot notation is not needed to access them
+  const { x, x, y } = data;
+
+  const handleChange = (event) => {
+      setData({
+          ...data,
+          [event.target.name]: event.target.value,
+      });
+  };
+```
+
+Then we make the upload function:
+
+```js
+  const handleChangeImage = (event) => {
+    if (event.target.files.length) {
+      URL.revokeObjectURL(image);
+      setPostData({
+        ...postData,
+        image: URL.createObjectURL(event.target.files[0]),
+      });
+    }
+  };
+```
+
+Check if a file chosen a file then setPostData with the postData and the files array on event.target  
+
+More about [URL and its methods](https://developer.mozilla.org/en-US/docs/Web/API/URL).
+
+URL.revokeObjectURL is called to clear the browser's reference to the previous file in case it was changed.
+
+The image preview is a fragment with a figure and a div
+
+```js
+  {image ? (
+    <>
+      <figure>
+        <Image className={appStyles.Image} src={image} rounded />
+      </figure>
+      <div>
+        <Form.Label
+          className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
+          htmlFor="image-upload"
+        >
+          Change the image
+        </Form.Label>
+      </div>
+    </>
+  ) : (
+    ...
+  )}
+```
+
+## sending image data to the API
+
+Create a reference to the Form.File component  
+
+so that we can access the image  file when we submit our form.  
+Can you remember which react hook we used  before to create a reference to a component?
+If you answered useRef, you’re correct! 
+So we’ll use and import the useRef hook  to declare a new imageInput variable,  
+and we’ll set it’s initial value to null.   
+Then in our Form.File component we’ll set  the ref prop to our imageInput variable.
+Ok, now let’s write a function  to handle the form submission.  
+We'll first define the history variable by  using and importing the useHistory hook,  
+so that we can redirect our users.
+Then, we’ll define the handleSubmit async  function that will accept an event as an argument.  
+First, we’ll prevent the default form behaviour.  Then, we’ll instantiate a formData object instance  
+and append all three relevant pieces of  data: title, content and image.
+If you’re new to using the FormData class, we’ve added  a link below the video to learn more about it.
+To send our image file, we’ll need to  access the referenced imageInput component,  
+and reach in to get the first file in  the current attributes files array.
+Because we are sending an image file as  well as text to our API we need to refresh  
+the user's access token before we make a  request to create a post. For this, we’ll  
+import and use the axiosReq instance and post  the formData to the posts endpoint of our API.
+Our API will respond with data about our newly  created post, including its id. We can create  
+a unique url for the new post by adding the  post id to our posts/ url string. So let's  
+put that inside a history.push() method to redirect our  user to the page for their newly created post.  
+At the moment this url will just render the “page  not found” message, as we haven’t created the  
+page to display a post yet.
+In case there’s an error with our API request,  
+we’ll log it out to the console and  update the ‘errors’ state variable  
+only if the error isn’t 401, as the user would  get redirected thanks to the interceptor logic. 
+Now that we have the submit handler defined, we  can set our Form’s onSubmit prop to handleSubmit.
+Now let’s try to add a post with our new form.  
+Cool, we can see in the url here that  we’ve been redirected to ‘posts/’  
+and then the id of our post. We’ll build out  the content of this page in a coming lesson.
+But until then, we can prove to ourselves that  our form worked and our API has saved the post,  
+by going to our deployed API project  link, and adding /posts to the end.  
+There we can see the details  of the post we just created.
+Finally, let’s wire up our cancel  button to take our user back to the  
+previous page in their browser history. On our cancel button we’ll add an onClick  
+attribute set to an arrow function that  calls goBack on our history object.
+Let’s test that it works. Yes, we’re  redirected back to the last page we were on.
+Great work! Now that we have our form working,  we have one last challenge for you in this video.  
+We’d like you to add the alerts for the error  messages under the Form.Group components for  
+the title, content and image form inputs, just  like you have done for the sign in and sign up forms.
+As before, your alerts should have a  key prop, and a variant prop set to “warning”. 
+Please pause the video for a  few moments to add those in.
+Welcome back, here’s the  solution code. As you can see,  
+each one is identical, with only  our errors key that has changed.
+Great job, we built a working form  so that our users can create posts.  
+In the next video, we’ll build the Post component,  
+to give our users the ability to view,  like and see how many comments a post has.
 
 ## Original readme
 
