@@ -735,54 +735,127 @@ The image preview is a fragment with a figure and a div
 ## sending image data to the API
 
 Create a reference to the Form.File component  
+Use history to redirect.
 
-so that we can access the image  file when we submit our form.  
-Can you remember which react hook we used  before to create a reference to a component?
-If you answered useRef, you’re correct! 
-So we’ll use and import the useRef hook  to declare a new imageInput variable,  
-and we’ll set it’s initial value to null.   
-Then in our Form.File component we’ll set  the ref prop to our imageInput variable.
-Ok, now let’s write a function  to handle the form submission.  
-We'll first define the history variable by  using and importing the useHistory hook,  
-so that we can redirect our users.
-Then, we’ll define the handleSubmit async  function that will accept an event as an argument.  
-First, we’ll prevent the default form behaviour.  Then, we’ll instantiate a formData object instance  
-and append all three relevant pieces of  data: title, content and image.
-If you’re new to using the FormData class, we’ve added  a link below the video to learn more about it.
-To send our image file, we’ll need to  access the referenced imageInput component,  
-and reach in to get the first file in  the current attributes files array.
-Because we are sending an image file as  well as text to our API we need to refresh  
-the user's access token before we make a  request to create a post. For this, we’ll  
-import and use the axiosReq instance and post  the formData to the posts endpoint of our API.
-Our API will respond with data about our newly  created post, including its id. We can create  
-a unique url for the new post by adding the  post id to our posts/ url string. So let's  
-put that inside a history.push() method to redirect our  user to the page for their newly created post.  
-At the moment this url will just render the “page  not found” message, as we haven’t created the  
-page to display a post yet.
-In case there’s an error with our API request,  
-we’ll log it out to the console and  update the ‘errors’ state variable  
-only if the error isn’t 401, as the user would  get redirected thanks to the interceptor logic. 
-Now that we have the submit handler defined, we  can set our Form’s onSubmit prop to handleSubmit.
-Now let’s try to add a post with our new form.  
-Cool, we can see in the url here that  we’ve been redirected to ‘posts/’  
-and then the id of our post. We’ll build out  the content of this page in a coming lesson.
-But until then, we can prove to ourselves that  our form worked and our API has saved the post,  
-by going to our deployed API project  link, and adding /posts to the end.  
-There we can see the details  of the post we just created.
-Finally, let’s wire up our cancel  button to take our user back to the  
-previous page in their browser history. On our cancel button we’ll add an onClick  
-attribute set to an arrow function that  calls goBack on our history object.
-Let’s test that it works. Yes, we’re  redirected back to the last page we were on.
-Great work! Now that we have our form working,  we have one last challenge for you in this video.  
-We’d like you to add the alerts for the error  messages under the Form.Group components for  
-the title, content and image form inputs, just  like you have done for the sign in and sign up forms.
-As before, your alerts should have a  key prop, and a variant prop set to “warning”. 
-Please pause the video for a  few moments to add those in.
-Welcome back, here’s the  solution code. As you can see,  
-each one is identical, with only  our errors key that has changed.
-Great job, we built a working form  so that our users can create posts.  
-In the next video, we’ll build the Post component,  
-to give our users the ability to view,  like and see how many comments a post has.
+The [formData object instance](https://developer.mozilla.org/en-US/docs/Web/API/FormData) provides a way to construct a set of key/value pairs representing form fields and their values, which can be sent using the fetch(), XMLHttpRequest.send() or navigator.sendBeacon() methods. It uses the same format a form would use if the encoding type were set to "multipart/form-data".
+
+```js
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+
+    formData.append("title", title);
+    formData.append("content", content);
+    formData.append("image", imageInput.current.files[0]);
+
+    try {
+      const { data } = await axiosReq.post("/posts/", formData);
+      history.push(`/posts/${data.id}`);
+    } catch (err) {
+      console.log(err);
+      if (err.response?.status !== 401) {
+        setErrors(err.response?.data);
+      }
+    }
+  };
+```
+
+## The Post Page
+
+The user story: "As a user I  can view the details of a single post so that I can learn more about it."
+
+The link has an id:
+
+```js
+<Route exact path="/posts/:id" render={() => <PostPage />} />
+```
+
+Use on the page like this:
+
+```js
+function PostPage() {
+  const { id } = useParams();
+```
+
+The request is done in an effect hooks which will run everytime the id changes:
+
+```js
+  useEffect(() => {
+    const handleMount = async () => {
+      try {
+        const [{ data: post }] = await Promise.all([
+          axiosReq.get(`/posts/${id}`),
+        ]);
+        setPost({ results: [post] });
+        console.log(post);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    handleMount();
+  }, [id]);
+```
+
+Later there will be two requests for a post and comments.
+
+Destructing the data property returned from the API and renaming it to post is a pretty neat way to use Promise.all which the comments call can be added to later.
+
+## The Post Component
+
+In the src\pages\posts\Post.js detail page, if the currentUser is the owner of the post we will add functionality later to edit it.  It looks like this:
+
+```js
+          <div className="d-flex align-items-center">
+            <span>{updated_at}</span>
+            {is_owner && postPage && "..."}
+          </div>
+```
+
+To achieve this the Post component a prop from the PostPage:
+
+```js
+<Post {...post.results[0]} setPosts={setPost} postPage />
+```
+
+The tutorial says: *Notice that we don’t need to give our postPage prop a value here, simply applying it means it will be returned as true inside our Post component.*
+
+What?  Is that a reference to the post page?  It's times like this that I miss TypeScript.
+
+Here is where the prop comes in:
+
+```js
+const Post = (props) => {
+  const {
+    id,
+    owner,
+    profile_id,
+    profile_image,
+    comments_count,
+    likes_count,
+    like_id,
+    title,
+    content,
+    image,
+    updated_at,
+    postPage,
+  } = props;
+```
+
+I still don't get it.  Is it a boolean?  I guess despite the name, an un-named string on a React component ends up being a boolean.  For example, what is the difference between this:
+
+```js
+<Post {...post.results[0]} setPosts={setPost} />
+```
+
+And this:
+
+```js
+<Post {...post.results[0]} setPosts={setPost} postPage />
+```
+
+The Post component weill see postPage as false in the first usage, and true in the second.  Kind of like React magic I suppose.  It could have been named something like allowPostEditBoolean or some other descriptive name.
+
+Remaining are the like and comment icons and their associated UI logic.
 
 ## Original readme
 
