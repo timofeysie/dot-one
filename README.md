@@ -857,6 +857,36 @@ The Post component weill see postPage as false in the first usage, and true in t
 
 Remaining are the like and comment icons and their associated UI logic.
 
+## Liking and Unliking Posts
+
+handleLike & handleUnlike
+
+```js
+      const { data } = await axiosRes.post("/likes/", { post: id });
+      setPosts((prevPosts) => ({
+        ...prevPosts,
+        results: prevPosts.results.map((post) => {
+          return post.id === id
+            ? { ...post, likes_count: post.likes_count + 1, like_id: data.id }
+            : post; // <-- do nothing to this one
+        }),
+      }));
+```
+
+We spread the previousPosts in the object then map over it and inside use a ternary operator to check if post id matches the id of the post that was liked. 
+
+If it does match, we’ll return the post object with the likes count incremented by one, and the like_id set to the id of the response data.
+
+The unlike is the same but decrements the count and calls the DELETE endpoint with no result needed:
+
+```js
+      await axiosRes.delete(`/likes/${like_id}/`);
+```
+
+## Displaying the Posts List
+
+The part one user story: "As a user I can view all the most recent posts,  so that I am up to date with the newest content."
+
 ## Original readme
 
 Welcome,
