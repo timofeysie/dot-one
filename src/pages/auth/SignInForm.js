@@ -33,7 +33,6 @@ function SignInForm() {
 
     try {
       const { data } = await axios.post("/dj-rest-auth/login/", signInData);
-      console.log('data', data)
       setCurrentUser(data.user);
       history.push("/");
     } catch (err) {
@@ -42,10 +41,10 @@ function SignInForm() {
   };
 
   const handleChange = (event) => {
-    setSignInData({
-      ...signInData,
+    setSignInData((prevSignInData) => ({
+      ...prevSignInData,
       [event.target.name]: event.target.value,
-    });
+    }));
   };
 
   return (
@@ -61,7 +60,7 @@ function SignInForm() {
                 placeholder="Username"
                 name="username"
                 className={styles.Input}
-                value={username ? username : ""}
+                value={username}
                 onChange={handleChange}
               />
             </Form.Group>

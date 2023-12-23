@@ -574,7 +574,7 @@ The changes for this work are [here](https://github.com/mr-fibonacci/moments/tre
 
 This change will references the DOM using the useRef hook.
 
-Bootstrap Nabar has an expanded property which we tie to a state variable.  This get toggled in the ```onClick={() => setExpanded(!expanded)}``` function
+Bootstrap Navbar has an expanded property which we tie to a state variable.  This get toggled in the ```onClick={() => setExpanded(!expanded)}``` function
 
 ```js
 const ref = useRef(null);
@@ -873,7 +873,7 @@ handleLike & handleUnlike
       }));
 ```
 
-We spread the previousPosts in the object then map over it and inside use a ternary operator to check if post id matches the id of the post that was liked. 
+We spread the previousPosts in the object then map over it and inside use a ternary operator to check if post id matches the id of the post that was liked.
 
 If it does match, we’ll return the post object with the likes count incremented by one, and the like_id set to the id of the response data.
 
@@ -885,7 +885,39 @@ The unlike is the same but decrements the count and calls the DELETE endpoint wi
 
 ## Displaying the Posts List
 
-The part one user story: "As a user I can view all the most recent posts,  so that I am up to date with the newest content."
+The part one user story: "As a user I can view all the most recent posts,  so that I am up to date with the newest content.".
+
+THis includes business logic in the App.js for search results and a link to the posts page.
+
+```js
+path="/"
+path="/feed"
+path="/liked"
+```
+
+In part two we add the logic to make requests to the API based on filters.
+
+The useLocation hook is used to get the current URL to switch between home, feed and liked pages.
+
+A loading spinner is used to show the loading state.
+
+Map over the returned posts and pass the object into post detail page created earlier.
+
+```js
+  {hasLoaded ? (
+    <>
+      {posts.results.length ? (
+        posts.results.map((post) => (
+          <Post key={post.id} {...post} setPosts={setPosts} />
+        ))
+      ) : (
+        // show no results
+      )}
+    </>
+  ) : (
+    // show spinner
+  )}
+```
 
 ## Original readme
 
