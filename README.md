@@ -919,6 +919,161 @@ Map over the returned posts and pass the object into post detail page created ea
   )}
 ```
 
+## The search bar
+
+The user story: "As  a user, I can search for posts with keywords, so that I can find the posts and user  profiles I am most interested in."
+
+```js
+ const [query, setQuery] = useState("");
+
+  useEffect(() => { /* fetch posts */ });
+
+    setHasLoaded(false);
+    const timer = setTimeout(() => {
+      fetchPosts();
+    }, 1000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [filter, query, pathname]);
+
+  return (
+    <Row className="h-100">
+      <Col className="py-2 p-0 p-lg-2" lg={8}>
+        <p>Popular profiles mobile</p>
+        <i className={`fas fa-search ${styles.SearchIcon}`} />
+        <Form
+          className={styles.SearchBar}
+          onSubmit={(event) => event.preventDefault()}
+        >
+          <Form.Control
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            type="text"
+            className="mr-sm-2"
+            placeholder="Search posts"
+          />
+        </Form>
+```
+
+To avoid the whole page flashing every time a key is pressed we want to wait a moment after the user has stopped typing and then call the API request.
+
+## Infinite scroll
+
+This feature uses the [react-infinite-scroll-component](https://www.npmjs.com/package/react-infinite-scroll-component) library.
+
+```sh
+npm install --save react-infinite-scroll-component
+```
+
+The [Source code](https://github.com/mr-fibonacci/moments/tree/7c6f06ba01857522c52ed4841fbd8a86b7c6c567) for this section implements the following user story:
+
+*As a user I can  keep scrolling through the images on the site that are loaded for me automatically so  that I don't have to click on "next page" button.*nb
+
+Here is a sample result for request method GET: /posts/?search=
+
+```json
+{
+    "count": 12,
+    "next": "https://drf-api-rec.herokuapp.com/posts/?page=2&search=",
+    "previous": null,
+    "results": [
+        {
+            "id": 12,
+            "owner": "asdf",
+            "is_owner": true,
+            "profile_id": 14,
+            "profile_image": "https://res.cloudinary.com/dgjrrvdbl/image/upload/v1/media/../default_profile_qdjgyp",
+            "created_at": "18 Dec 2023",
+            "updated_at": "18 Dec 2023",
+            "title": "The team",
+            "content": "Oh my.",
+            "image": "https://res.cloudinary.com/dgjrrvdbl/image/upload/v1/media/images/Capture-boy-actors_czsqtu",
+            "image_filter": "normal",
+            "like_id": null,
+            "likes_count": 0,
+            "comments_count": 0
+        },
+        ...
+    ]
+}
+```
+
+The infinite scroll has the following props:
+
+- the “children” prop will tell the InfiniteScroll component which child components we want it to render.  
+- the dataLength prop tells the component how many posts are currently being displayed: posts.results.length.
+- the loader prop for the spinner
+- the hasMore prop for more data to load on reaching the bottom of the current page.  For this the posts result object from the API contains a key called ‘next’ which is a link to the next page of results. the last page, that value will be null.
+The component looks like this:
+- the next prop is a function called to load the next page of results if the hasMore prop is true
+
+```js
+  <InfiniteScroll
+    children={posts.results.map((post) => (
+      <Post key={post.id} {...post} setPosts={setPosts} />
+    ))}
+    dataLength={posts.results.length}
+    loader={<Asset spinner />}
+    hasMore={!!posts.next}
+    next={() => fetchMoreData(posts, setPosts)}
+  />
+```
+
+The "double bang" syntax: ```!!posts.next```, a.k.a. [Double NOT (!!)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_NOT#double_not_!!).
+
+This operator returns true for truthy values, and false for falsy values.
+
+### utils/utils.js fetchMoreData function
+
+The fetchMoreData function is created to reuse it later on for fetching other paginated data, like comments and profiles.
+
+It accepts two arguments to update different types of data for the InfiniteScroll component.  They could be posts/setPosts or comments/setComments.
+
+The resource.next is the URL to the next page of results (in the current JSON result as shown above).
+
+If no error call setResource and pass it a callback function with prevResource as  
+the argument.
+
+The callback function will return an object with the spread prevResource inside.
+
+Then update the next attribute with the URL to the next page of results.
+
+Also update the results array to include the newly fetched results, appending to the existing ones our the state is rendering.
+
+Tha Javascript reduce method is used to reduce multiple values in an array into a single value.  In this case, that's an array of posts.
+
+The reduce method is used to add new posts to the prevResource.results array.  It sets the initial value for the accumulator to the previous results.
+
+We don't display the next page of results the API has sent us because posts could have added or deleted.  Since the newest posts are loaded first users may have added posts since the last results and we now need to filter out any duplicate.
+
+The some() method checks whether the callback passed to it returns true for at least one element in the array and it stops running as soon as it does.
+
+If any post IDs matches an id that already exists in previous results, return the existing accumulator to the reduce method.
+
+If it doesn’t find a match, it's a new post, return the spread accumulator with the new post at the end.
+
+```js
+export const fetchMoreData = async (resource, setResource) => {
+  try {
+    const { data } = await axiosReq.get(resource.next);
+    setResource((prevResource) => ({
+      ...prevResource,
+      next: data.next,
+      results: data.results.reduce((acc, cur) => {   // the reduce method loops thru the new page of results and returns a single result
+        return acc.some((accResult) => { // loop thru the array of posts in the accumulator 
+          return accResult.id === cur.id) // compare each accumulator item id to the current post id from the newly fetched posts array
+          ? acc // if the some() returns true it found a match and we are displaying that post already
+          // so return the accumulator without adding the post to it 
+          : [...acc, cur]; // if the some() method does not find a match, we return an array containing our spread accumulator with the new post added to it
+        }
+      }, prevResource.results), // appended the new results to the existing posts in posts.results
+    }));
+  } catch (err) {}
+};
+```
+
 ## Original readme
 
 Welcome,
