@@ -2,6 +2,15 @@
 
 Based on the frontend steps for building the moments fullstack app [in this repo](https://github.com/Code-Institute-Solutions/moments).
 
+## Workflow
+
+```sh
+npm run lint
+npm start //port 3000
+npm test
+npm run build
+```
+
 ## Setting up the project
 
 Bootstrap [4.6 getting started](https://react-bootstrap-v4.netlify.app/)
@@ -1072,6 +1081,251 @@ export const fetchMoreData = async (resource, setResource) => {
     }));
   } catch (err) {}
 };
+```
+
+## Post Owner Dropdown Menu
+
+In this section we create the edit and delete options for post owners.  The [source code link](https://github.com/mr-fibonacci/moments/tree/a63232e8064c2f639daf7b073b9ef22708b1c8c9).
+
+create the MoreDropdown.module.css file in the /styles directory and MoreDropdown.js file in the components directory.
+
+'popper' is a 3rd party library used by React-Bootstrap. Here we are passing a config object to make sure the dropdown menus position is fixed on all browsers.*
+
+Browser Bug Fix: *To be sure that the position of the dropdown menu is consistent across browsers, we need to add a popperConfig prop to our Dropdown.Menu component.
+
+In MoreDropdown.js, add the popperConfig={{ strategy: "fixed" }} prop to your Dropdown.Menu component:
+
+```js
+<Dropdown.Menu
+   className="text-center"
+   popperConfig={{ strategy: "fixed" }}
+>
+```
+
+In the Post component define functions to handle  editing and deleting posts.
+
+When the user clicks the edit button, redirect them to a new url,  
+
+The DELETE API endpoint is `/posts/${id}/` and uses the ```history.goBack();``` if successful.
+
+Links for this section include:
+
+- [React-Bootstrap custom dropdown menu](https://react-bootstrap-v4.netlify.app/components/dropdowns/#custom-dropdown-components)
+- [Forwarding Refs](https://legacy.reactjs.org/docs/forwarding-refs.html#forwarding-refs-to-dom-components)
+- [Source Code](https://github.com/mr-fibonacci/moments/blob/a63232e8064c2f639daf7b073b9ef22708b1c8c9/src/components/MoreDropdown.js)
+
+### Forwarding refs
+
+I guess that link is from [the legacy react docs](https://legacy.reactjs.org/docs/forwarding-refs.html#forwarding-refs-to-dom-components).  On that page it says: *These docs are old and won’t be updated. Go to react.dev for the new React docs.*
+
+[New documentation pages](https://react.dev/reference/react/forwardRef) *teach modern React*.
+
+What has changed, I'm not sure.
+
+The example from the legacy docs: *passing a ref through a component to one of its children, can be useful for reusable component libraries...*
+
+```js
+const FancyButton = forwardRef((props, ref) => (
+  <button ref={ref} className="FancyButton">
+    {props.children}
+  </button>
+));
+
+// You can now get a ref directly to the DOM button:
+const ref = React.createRef();
+<FancyButton ref={ref}>Click me!</FancyButton>;
+```
+
+And the new docs: *forwardRef lets your component expose a DOM node to parent component with a ref.*
+
+```js
+const MyInput = forwardRef(function MyInput(props, ref) {
+  const { label, ...otherProps } = props;
+  return (
+    <label>
+      {label}
+      <input {...otherProps} />
+    </label>
+  );
+});
+```
+
+## ESLint
+
+To set up linting in a project, these steps can be followed:
+
+```sh
+node_modules/.bin/eslint --init
+```
+
+Add this to the package.json scripts array:
+
+```json
+"lint": "eslint ."
+```
+
+Then to lint the whole project, run:
+
+```sh
+npm run lint
+```
+
+Also, after setup, linting will be run on open files in VSCode.  For an existing project like this, we will start to see a number of errors on files that were previously thought fine.
+
+Setting up linting on the full moments app has the following output:
+
+```sh
+✖ 120 problems (120 errors, 0 warnings)
+'src' is missing in props validationeslintreact/prop-types
+```
+
+This seems like a TypeScript error.  The [docs for this error](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md) which says *Defining types for component props improves reusability of your components by validating received data. It can warn other developers if they make a mistake while reusing the component with improper data type.  Note: You can provide types in runtime types using PropTypes and/or statically using TypeScript or Flow.*
+
+Wow, they are still pushing Flow.  Ironic name as typings often disrupt the normal flow of Javascript (for good reason of course).
+
+### 'x' is missing in props validationeslintreact/prop-types
+
+The first error there: *'src' is missing in props validationeslintreact/prop-types*
+
+I am going to disable this error for now using this line:
+
+```js
+/* eslint-disable react/prop-types */
+```
+
+The solution suggested by the docs page would be to add our own PropTypes, such as this:
+
+```js
+const Avatar = ({ src, height = 45, text }) => {
+  return ( ... );
+};
+export default Avatar;
+
+Avatar.protoTypes = { src: PropTypes.string.isRequired }
+```
+
+I'm used to using TypeScript for everything, so I have to admit I'm a little lost with how to do this with vanilla JS.  Time to figure that out.
+
+This would be the solution for this:
+
+```js
+import React from "react";
+import styles from "../styles/Avatar.module.css";
+import PropTypes from "prop-types";
+
+const Avatar = ({ src, height = 45, text }) => {
+  return ( ... );
+};
+
+Avatar.propTypes = {
+  src: PropTypes.string.isRequired, // Assuming src should be a string and is required
+  height: PropTypes.number, // Assuming height should be a number, but it's optional
+  text: PropTypes.node, // Assuming text can be any node (string, number, element, etc.)
+};
+
+export default Avatar;
+```
+
+This is Assuming src should be a string and is required, height optional and text can be any node (string, number, element, etc.).
+
+I'm not sure if these types would have to be installed separately like this: npm install prop-types
+
+For me, just adding the types above made that issue go away.
+
+### Component definition is missing display nameeslintreact/display-name
+
+The next error I see is: *Component definition is missing display nameeslintreact/display-name (alias) namespace React*
+
+```js
+import React from "react";
+import Dropdown from "react-bootstrap/Dropdown";
+import styles from "../styles/MoreDropdown.module.css";
+
+// The forwardRef is important!!
+// Dropdown needs access to the DOM node in order to position the Menu
+const ThreeDots = React.forwardRef(({ onClick }, ref) => (
+  <i
+    className="fas fa-ellipsis-v"
+    ref={ref}
+    onClick={(e) => {
+      e.preventDefault();
+      onClick(e);
+    }}
+  />
+));
+
+ThreeDots.displayName = "ThreeDots";
+
+const MoreDropdown = function MoreDropdown({ handleEdit, handleDelete }) {
+  return ( ... );
+};
+
+export default MoreDropdown;
+```
+
+According to the [docs](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/display-name.md) we just need to displayName property defined.  This does not apply to the MoreDropdown I guess because it's defined as a named function?  I must have read about this years ago, but again, TypeScript makes this a non-issue.
+
+### `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.eslintreact/no-unescaped-entities
+
+In Posts.js, we see this code:
+
+```js
+<OverlayTrigger
+  placement="top"
+  overlay={<Tooltip>You can't like your own post!</Tooltip>}
+>
+...
+```
+
+I suppose this is needed: &apos;
+
+### 'React' must be in scope when using JSXeslintreact/react-in-jsx-scope
+
+The error occurs here:
+
+```js
+  return (
+    <CurrentUserContext.Provider value={currentUser}>
+      <SetCurrentUserContext.Provider value={setCurrentUser}>
+        {children}
+      </SetCurrentUserContext.Provider>
+    </CurrentUserContext.Provider>
+  );
+```
+
+I believe that is solved just by importing React like this: ```import React from "react"```
+
+### Do not pass children as props
+
+The full error: *Do not pass children as props. Instead, nest children between the opening and closing tags.eslintreact/no-children-prop*
+
+This error occurs in src\pages\posts\PostsPage.js.
+
+```js
+  <InfiniteScroll
+    children={posts.results.map((post) => (
+      <Post key={post.id} {...post} setPosts={setPosts} />
+    ))}
+    dataLength={posts.results.length}
+    loader={<Asset spinner />}
+    hasMore={!!posts.next}
+    next={() => fetchMoreData(posts, setPosts)}
+  />
+```
+
+ChatGPT shows the solution as:
+
+```js
+<InfiniteScroll
+  dataLength={posts.results.length}
+  loader={<Asset spinner />}
+  hasMore={!!posts.next}
+  next={() => fetchMoreData(posts, setPosts)}
+>
+  {posts.results.map((post) => (
+    <Post key={post.id} {...post} setPosts={setPosts} />
+  ))}
+</InfiniteScroll>
 ```
 
 ## Original readme
