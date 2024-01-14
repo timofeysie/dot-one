@@ -1328,6 +1328,31 @@ ChatGPT shows the solution as:
 </InfiniteScroll>
 ```
 
+## The Edit Post form
+
+Here is the user story for this section: *As a post owner I can edit my post so that I can make corrections or update my post after it was created.*
+
+PostEditForm.js starts off as a copy of postCreateForm.js.  The route is /posts/:id/edit for the App.js routs.  As well as the useParams hook to get the edit id, the handleMount async function inside the use effect does the rest.
+
+We only allow the post owner to access the edit post page in the first  place, and redirect other users away.
+
+```js
+  useEffect(() => {
+    const handleMount = async () => {
+      try {
+        const { data } = await axiosReq.get(`/posts/${id}/`);
+        const { title, content, image, is_owner } = data;
+        is_owner ? setPostData({ title, content, image }) : history.push("/");
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    handleMount();
+  }, [history, id]);
+```
+
+The handleSubmit function also needs to call PUT instead of POST.
+
 ## Original readme
 
 Welcome,
