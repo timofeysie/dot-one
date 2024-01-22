@@ -1353,6 +1353,53 @@ We only allow the post owner to access the edit post page in the first  place, a
 
 The handleSubmit function also needs to call PUT instead of POST.
 
+## The Create Comment Form
+
+don’t need to do anything new to make a CommentCreateForm component
+
+The user story: “As a logged in user I can add comments to a post so that I can share my thoughts about the post”
+
+Your completed form should contain:
+
+A Comments Text Field
+An interactive Comments Icon
+Comments Edit Form
+
+Steps
+Please follow the steps below to add this component to the project.
+
+### Step 1
+
+- create a CommentCreateEditForm.module.css file
+- Create a comments directory inside your src/pages directory and a [CommentCreateForm.js file](https://github.com/mr-fibonacci/moments/blob/09254af91d92105468266c3e7691158054284168/src/pages/comments/CommentCreateForm.js)
+
+### Step 2
+
+Make adjustments to PostPage.js (NOT PostsPage.js)
+
+```js
+const currentUser = useCurrentUser();
+const profile_image = currentUser?.profile_image;
+const [comments, setComments] = useState({ results: [] });
+
+...
+{currentUser ? (
+  <CommentCreateForm
+  profile_id={currentUser.profile_id}
+  profileImage={profile_image}
+  post={id}
+  setPost={setPost}
+  setComments={setComments}
+/>
+) : comments.results.length ? (
+  "Comments"
+) : null}
+```
+
+### Step 3
+
+The Comment Component.
+
 ## Original readme
 
 Welcome,
