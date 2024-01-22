@@ -1396,9 +1396,36 @@ const [comments, setComments] = useState({ results: [] });
 ) : null}
 ```
 
-### Step 3
+### Step 3: The Comment Component
 
-The Comment Component.
+In the useEffect handleMount function, we add a call to the comments API and destructure the data properties to rename it comments.
+
+So the Primise.all returns two objects in order, the first data result is named post, the second, comments:
+
+```js
+const [{ data: post }, { data: comments }] = await Promise.all([
+  axiosReq.get(`/posts/${id}`),
+  axiosReq.get(`/comments/?post=${id}`),
+]);
+setPost({ results: [post] });
+setComments(comments);
+```
+
+A ternary checks if there are any comments and show messages depending if the user is logged in or not:
+
+```js
+{comments.results.length ? (
+  comments.results.map((comment) => (
+    <Comment key={comment.id} {...comment} />
+  ))
+) : currentUser ? (
+  <span>No comments yet, be the first to comment!</span>
+) : (
+  <span>No comments... yet</span>
+)}
+```
+
+The Comment component is straight forward, getting all it's props using the spread destructuring operator.
 
 ## Original readme
 
