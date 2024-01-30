@@ -1427,6 +1427,58 @@ A ternary checks if there are any comments and show messages depending if the us
 
 The Comment component is straight forward, getting all it's props using the spread destructuring operator.
 
+## The Comment Component Dropdown Menu
+
+In this section a MoreDropdown menu is added to edit or delete a users own comments.  It needs the following:
+
+- check if the currently logged in user is the owner of a comment similarly to this in the Post.js file
+- decrement the post’s comments_count
+- filter out the deleted comment from the comments array from our state
+
+The id and the setPost and setComments state setter hooks are passed into the Comment component as props.
+
+```js
+const [post, setPost] = useState({ results: [] });
+...
+const [comments, setComments] = useState({ results: [] });
+  ...
+  <Comment
+    key={comment.id}
+    {...comment}
+    setPost={setPost}
+    setComments={setComments}
+  />
+```
+
+Back in the Comment.js file, the delete function looks like this:
+
+```js
+  const handleDelete = async () => {
+    try {
+      await axiosRes.delete(`/comments/${id}/`);
+      // update the post results array with a new comments count
+      setPost((prevPost) => ({
+        results: [
+          {
+            ...prevPost.results[0],
+            comments_count: prevPost.results[0].comments_count - 1,
+          },
+        ],
+      }));
+      /* Remove the comment that matches the id in the filter function which
+      loops over the previous comments result array.  
+      If the id is for the comment we want to remove,
+      the filter method will not return it into the updated results array. */
+      setComments((prevComments) => ({
+        ...prevComments,
+        results: prevComments.results.filter((comment) => comment.id !== id),
+      }));
+    } catch (err) {
+      console.log('err', err);
+    }
+  };
+  ```
+
 ## Original readme
 
 Welcome,
