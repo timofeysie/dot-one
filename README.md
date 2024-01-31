@@ -1479,6 +1479,17 @@ Back in the Comment.js file, the delete function looks like this:
   };
   ```
 
+## The Edit Comment Form
+
+User story which is "As an owner of a comment I can edit my comment so that I can fix or update my existing comment"
+
+The form should contain:
+
+- An interactive Comments Icon
+- A Comments Edit Form
+
+The [code is here for the step](https://github.com/mr-fibonacci/moments/tree/8a8de7e0dcb980ed05a4af95770b65744cf810b1) to create a CommentEditForm.js and update the Comment.js code.  Also check my commit for this section to see the changes.
+
 ## Original readme
 
 Welcome,
