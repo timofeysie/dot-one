@@ -6,28 +6,49 @@ Based on the frontend steps for building the moments fullstack app [in this repo
 
 ```sh
 npm run lint
-npm start //port 3000
+npm start # port 3000
 npm test
 npm run build
 ```
 
 ## Setting up the project
 
-Bootstrap [4.6 getting started](https://react-bootstrap-v4.netlify.app/)
+Bootstrap [4.6 getting started](https://react-bootstrap-v4.netlify.app/) is used in this project.  It was installed like this:
 
 ```sh
 npm install react-bootstrap@1.6.3 bootstrap@4.6.0
 ```
 
-Add ES7+ React/Redux/React-Native snippets v4.4.3
+We also use:
 
-[Font awesome](https://fontawesome.com/) [free](https://fontawesome.com/search?m=free&o=r) icons.
+- ES7+ React/Redux/React-Native snippets v4.4.3
+- [Font awesome](https://fontawesome.com/) [free](https://fontawesome.com/search?m=free&o=r) icons
+- [Css Modules in React](https://medium.com/@ralph1786/using-css-modules-in-react-app-c2079eadbb87)
+- [CSS Modules Stylesheet](https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/)
 
-[Css Modules in React](https://medium.com/@ralph1786/using-css-modules-in-react-app-c2079eadbb87)
+The package.json for the app after its complete uses these version settings:
 
-[Adding a CSS Modules Stylesheet](https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/)
+```js
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.21.4",
+    "bootstrap": "^4.6.0",
+    "jwt-decode": "^3.1.2",
+    "react": "^17.0.2",
+    "react-bootstrap": "^1.6.3",
+    "react-dom": "^17.0.2",
+    "react-infinite-scroll-component": "^6.1.0",
+    "react-router-dom": "^5.3.0",
+    "react-scripts": "^4.0.3",
+    "web-vitals": "^1.1.2"
+  },
+```
 
-# Routing
+These sections follow the [Code Institute](https://codeinstitute.net/global/about-us/) advanced frontend moments project walkthrough.
+
+## Routing
 
 Instead of the command ```npm install react-router-dom``` use this ```npm install react-router-dom@5.3.0```
 
@@ -192,7 +213,7 @@ The submit button can show errors when the password don't match with a null_fiel
 
 This is a challenge section with the following brief:
 
-“As a user I can sign in to the app so that I can access functionality for logged in users”
+"As a user I can sign in to the app so that I can access functionality for logged in users"
 
 - The form
 - Handle Events
@@ -1011,7 +1032,7 @@ Here is a sample result for request method GET: /posts/?search=
 
 The infinite scroll has the following props:
 
-- the “children” prop will tell the InfiniteScroll component which child components we want it to render.  
+- the "children" prop will tell the InfiniteScroll component which child components we want it to render.  
 - the dataLength prop tells the component how many posts are currently being displayed: posts.results.length.
 - the loader prop for the spinner
 - the hasMore prop for more data to load on reaching the bottom of the current page.  For this the posts result object from the API contains a key called ‘next’ which is a link to the next page of results. the last page, that value will be null.
@@ -1357,7 +1378,7 @@ The handleSubmit function also needs to call PUT instead of POST.
 
 don’t need to do anything new to make a CommentCreateForm component
 
-The user story: “As a logged in user I can add comments to a post so that I can share my thoughts about the post”
+The user story: "As a logged in user I can add comments to a post so that I can share my thoughts about the post"
 
 Your completed form should contain:
 
@@ -1536,6 +1557,95 @@ The fixed version without the children prop looks like this:
 ```
 
 The [code for the solution is here](https://github.com/mr-fibonacci/moments/tree/87f14298a88c18d820bc190f263bac11c8ab5704).
+
+## Deploying to Heroku
+
+1. login to Heroku to create an app there.
+2. choose on the "new" button and follow the steps to  create our app. Please remember
+3. to choose a name and region and then choose "Create app".
+4. From the "Deploy" tab, choose on "Github"  in the "Deployment method" section,  
+5. enter the name of the repository just created, and choose "Connect".
+6. choose "deploy  branch" which will trigger Heroku to start
+
+## Running locally with the new backend
+
+The Django REST Framework backend has this in settings.py:
+
+```py
+ALLOWED_HOSTS = ['localhost', 'drf-two.herokuapp.com', 'drf-two-eb17ecbff99f.herokuapp.com']
+...
+if 'CLIENT_ORIGIN' in os.environ:
+    CORS_ALLOWED_ORIGINS = [
+        os.environ.get('CLIENT_ORIGIN')
+    ]
+else:
+    CORS_ALLOWED_ORIGIN_REGEXES = [
+        r"^https://.*\.gitpod\.io$",
+    ]
+
+CORS_ALLOW_CREDENTIALS = True
+```
+
+This API works as expected now when deployed.
+
+However, when running the frontend app locally and using this url in src\api\axiosDefaults.js:
+
+```js
+axios.defaults.baseURL = "https://drf-two-eb17ecbff99f.herokuapp.com/";
+```
+
+We see errors like this:
+
+```txt
+https://drf-two-eb17ecbff99f.herokuapp.com/dj-rest-auth/user/
+Request Method: GET
+Status Code: 401 Unauthorized
+```
+
+To allow the frontend app to use the deployed backend app, we need to update the settings.py file as follows.
+
+```py
+if 'CLIENT_ORIGIN' in os.environ:
+    CORS_ALLOWED_ORIGINS = [
+        os.environ.get('CLIENT_ORIGIN')
+    ]
+else:
+    CORS_ALLOWED_ORIGINS = [
+        'http://localhost:3000',
+        'https://drf-two.herokuapp.com',
+        'https://drf-two-eb17ecbff99f.herokuapp.com',
+    ]
+```
+
+This means that we must always use port 3000 to make this work.
+
+## The broken avatar image
+
+The image tag looks like this:
+
+```html
+<img class="Avatar_Avatar__3fNnk" 
+  src="https://res.cloudinary.com/dr3am91m4/image/upload/v1/media/../default_profile_qdjgyp" 
+  height="40" 
+  width="40" 
+  alt="avatar">
+```
+
+We find this on the backend in the profiles\models.py file:
+
+```py
+class Profile(models.Model):
+    owner = models.OneToOneField(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    name = models.CharField(max_length=255, blank=True)
+    content = models.TextField(blank=True)
+    image = models.ImageField(
+        upload_to='images/', default='../default_profile_qdjgyp'
+    )
+```
+
+I think that image needs to be uploaded manually.
 
 ## Original readme
 
