@@ -1490,6 +1490,53 @@ The form should contain:
 
 The [code is here for the step](https://github.com/mr-fibonacci/moments/tree/8a8de7e0dcb980ed05a4af95770b65744cf810b1) to create a CommentEditForm.js and update the Comment.js code.  Also check my commit for this section to see the changes.
 
+## The infinite scroll for comment components challenge
+
+Similar to the infinite Scroll on the PostsPage we can reuse the InfiniteScroll component for the comments.  You can see the changes required for that in [this commit](https://github.com/timofeysie/moments/commit/834e5dba43ca2eb9d1ca2d23ff21f4ad3faa8f81).
+
+In PostPage.js page we will get the same linting error "do not pass children as props" as before.
+
+The solution code looks like this:
+
+```js
+  <InfiniteScroll
+    children={comments.results.map((comment) => (
+      <Comment
+        key={comment.id}
+        {...comment}
+        setPost={setPost}
+        setComments={setComments}
+      />
+    ))}
+    dataLength={comments.results.length}
+    loader={<Asset spinner />}
+    hasMore={!!comments.next}
+    next={() => fetchMoreData(comments, setComments)}
+  />
+```
+
+The fixed version without the children prop looks like this:
+
+```js
+  <InfiniteScroll
+    dataLength={comments.results.length}
+    loader={<Asset spinner />}
+    hasMore={!!comments.next}
+    next={() => fetchMoreData(comments, setComments)}
+  >
+    {comments.results.map((comment) => (
+      <Comment
+        key={comment.id}
+        {...comment}
+        setPost={setPost}
+        setComments={setComments}
+      />
+    ))}
+  </InfiniteScroll>
+```
+
+The [code for the solution is here](https://github.com/mr-fibonacci/moments/tree/87f14298a88c18d820bc190f263bac11c8ab5704).
+
 ## Original readme
 
 Welcome,
