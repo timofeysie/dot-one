@@ -583,9 +583,7 @@ const Avatar = ({ src, height = 45, text }) => {
 export default Avatar;
 ```
 
-This used the ‘rafce’ code snippet from the ES7Snippets plugin.
-
-The Avatar component takes some props which is descructures and provides a default height.
+The Avatar component takes some props which is destructures and provides a default height.
 
 Check out [destructuring-assignment default values](9https://zaiste.net/posts/javascript-destructuring-assignment-default-values/) for more about that.
 
@@ -1558,10 +1556,147 @@ The fixed version without the children prop looks like this:
 
 The [code for the solution is here](https://github.com/mr-fibonacci/moments/tree/87f14298a88c18d820bc190f263bac11c8ab5704).
 
+## The PopularProfiles Component
+
+In this section we fetch the usernames and display a loading spinner while data from the API is loading.  
+
+- create a profiles folder in the src/pages/profiles
+- add PopularProfiles.js file
+
+The component is started using the 'rafce' code snippet from the ES7Snippets plugin.  If you have installed the React snippets extension in VSCode, then you start typing 'ra' into a file with a .js extension and a auto-complete menu comes up where you can select rafce from and it creates the following snippet:
+
+```js
+import React from 'react'
+
+const PopularProfiles = () => {
+  return (
+    <div>PopularProfiles</div>
+  )
+}
+
+export default PopularProfiles
+```
+
+Notice how it creates the function named after the file.  Pretty neat, huh?
+
+We’ll need both sets of profile data stored in the same state so that they are kept in sync.
+
+The useEffect hook with the handleMount async function has a try-catch block to make a request to the profiles endpoint in the  descending order of how many followers they have so the most followed profile will be at the top.
+
+The previous state is spread which will eventually include the pageProfile data as well as our popularProfiles.
+
+With more and more code, it becomes more and more important to include comments so that when other developers look at the code, they don't have to know the whole story about how the app was created and how a particular function fits into that.  The useEffect hook in React can be particularly mysterious as you need to know about it's dependencies to know when it is run.
+
+```js
+  /**
+   * We’ll need both sets of profile data stored in the same state so that they are kept in sync.
+   * When the component mounts we make a request to the profiles endpoint in descending order of
+   * how many followers a user has so the most followed profile will be at the top.
+   * The previous state is spread which will eventually include the pageProfile data as well as our popularProfiles.  
+   */
+  useEffect(() => {
+    const handleMount = async () => {
+      try {
+        const { data } = await axiosReq.get(
+          "/profiles/?ordering=-followers_count"
+        );
+        setProfileData((prevState) => ({
+          ...prevState,
+          popularProfiles: data,
+        }));
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    handleMount();
+  }, [currentUser]);
+```
+
+### The mobile view
+
+Here we reuse the component for mobile view and use it in two places, one for mobile and one for desktop.
+
+Initially, the component looked like this:
+
+```js
+    <Container className={appStyles.Content}>
+      {popularProfiles.results.length ? (
+        <>
+          <p>Most followed profiles.</p>
+          {popularProfiles.results.map((profile) => (
+            <p key={profile.id}>{profile.owner}</p>
+          ))}
+        </>
+      ) : (
+        <Asset spinner />
+      )}
+    </Container>
+```
+
+Now, the mobile boolean flag is passed in as a prop and used like this in the container.  Display the 4 most popular profiles using the array slice method.  On desktop display all the profiles.
+
+```js
+// eslint-disable-next-line react/prop-types
+const PopularProfiles = ({ mobile }) => {
+  ...
+  return (
+    <Container
+      className={`${appStyles.Content} ${
+        mobile && "d-lg-none text-center mb-3"
+      }`}
+    >
+      {popularProfiles.results.length ? (
+        <>
+          <p>Most followed profiles.</p>
+          {mobile ? (
+            <div className="d-flex justify-content-around">
+              {popularProfiles.results.slice(0, 4).map((profile) => (
+                <p key={profile.id}>{profile.owner}</p>
+              ))}
+            </div>
+          ) : (
+            popularProfiles.results.map((profile) => (
+              <p key={profile.id}>{profile.owner}</p>
+            ))
+          )}
+        </>
+      ) : (
+        <Asset spinner />
+      )}
+    </Container>
+  );
+};
+```
+
+The classes here are some Bootstrap css to hide the component on large screens and up and align the text
+
+- d-lg-none
+- text-center
+- mb-3
+
+Documentation for these kind of styles can be found [here](https://getbootstrap.com/docs/4.0/utilities/display/): *the classes are named using the format*:
+
+```txt
+.d-{value} for xs
+.d-{breakpoint}-{value} for sm, md, lg, and xl.
+```
+
+The Bootstrap flex class ensure the profiles are displayed next to one another.  
+
+- d-flex
+- justify-content-around
+
+The Bootstrap flex class [docs](https://getbootstrap.com/docs/4.0/utilities/flex/) say: *Apply display utilities to create a flexbox container and transform direct children elements into flex items. Flex containers and items are able to be modified further with additional flex properties.*
+
+[Flexbox](https://www.w3schools.com/css/css3_flexbox.asp) is a super easy 2d layout system for CSS that in a lot of ways made Bootstrap layout classes unnecessary.  Before flexbox, it was a lot more difficult to position stuff where we wanted it.  We had to use hacky things like ```float: right```.  It's probably a better idea to use flexbox directly and learn about it instead of hiding knowledge of it behind Bootstrap.  One of the downsides of this advanced tutorial is that it doesn't cover the styles much, and just gives the student large CSS files to account for that.  It's a tradeoff because there is a huge amount of work that goes into a full stack application like the moments front and back end.  So I suppose you have to choose your battles.
+
+The source code for the final step in this section is [here](https://github.com/mr-fibonacci/moments/tree/6451719798c33231c79a9ee11d63355abc8ed679) created with the git commit message "20b PopularProfiles part2".
+
 ## Deploying to Heroku
 
 1. login to Heroku to create an app there.
-2. choose on the "new" button and follow the steps to  create our app. Please remember
+2. choose on the "new" button and follow the steps to create the app
 3. to choose a name and region and then choose "Create app".
 4. From the "Deploy" tab, choose on "Github"  in the "Deployment method" section,  
 5. enter the name of the repository just created, and choose "Connect".
