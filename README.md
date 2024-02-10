@@ -1693,6 +1693,73 @@ The Bootstrap flex class [docs](https://getbootstrap.com/docs/4.0/utilities/flex
 
 The source code for the final step in this section is [here](https://github.com/mr-fibonacci/moments/tree/6451719798c33231c79a9ee11d63355abc8ed679) created with the git commit message "20b PopularProfiles part2".
 
+### The Profile Component
+
+User story: As a user, I can view basic profile information like profile picture and the name so that I can easily check a user's profile page.
+
+This code:
+
+```js
+<p key={profile.id}>{profile.owner}</p>
+```
+
+Will be replaced with this:
+
+```js
+<Profile key={profile.id} profile={profile} />
+```
+
+This will help encapsulate all the logic and styles that will be used for a better looking profile list.
+
+The [Single Responsibility Principal (SRP)](https://www.syncfusion.com/blogs/post/solid-principles-in-javascript.aspx) from the SOLID best practices explains why.
+
+These best practices I think started off for Object Oriented languages like Java, however, the SRP one is very useful in my work, as it keeps the complexity of components down and leads to more composable pages.
+
+The S in SOLID says *There should never be more than one reason for a class to change. In other words, every class should have only one responsibility.*
+
+I've always been a bit confused at where to draw the line of responsibility stops.  Especially in React which combines styles, layout and code all into a tight ball.  However, it's helpful to think in terms of the functionality, and we can clearly see here that a profile component, even in a list, has enough in it to benefit from encapsulating all of that in one file.
+
+This all the JSX that is rendered now to replace that one ```<p>``` tag from above:
+
+```js
+  return (
+    <div className={`my-3 d-flex align-items-center ${mobile && "flex-column"}`} >
+      <div>
+        <Link className="align-self-center" to={`/profiles/${id}`}>
+          <Avatar src={image} height={imageSize} />
+        </Link>
+      </div>
+      <div className={`mx-2 ${styles.WordBreak}`}>
+        <strong>{owner}</strong>
+      </div>
+      <div className={`text-right ${!mobile && "ml-auto"}`}>
+        {!mobile &&
+          currentUser &&
+          !is_owner &&
+          (following_id ? (
+            <Button
+              className={`${btnStyles.Button} ${btnStyles.BlackOutline}`}
+              onClick={() => {}}
+            >
+              unfollow
+            </Button>
+          ) : (
+            <Button
+              className={`${btnStyles.Button} ${btnStyles.Black}`}
+              onClick={() => {}}
+            >
+              follow
+            </Button>
+          ))}
+      </div>
+    </div>
+  );
+```
+
+The unfollow button will have classNames of btnStyles.Button and btnStyles.BlackOutline.  
+
+If a user is logged in they will see a follow buttons.  Nothing is happening yet.  That comes later.
+
 ## Deploying to Heroku
 
 1. login to Heroku to create an app there.
