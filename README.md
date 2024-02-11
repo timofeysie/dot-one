@@ -1,6 +1,8 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Dot One
 
 Based on the frontend steps for building the moments fullstack app [in this repo](https://github.com/Code-Institute-Solutions/moments).
+
+![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
 
 ## Workflow
 
@@ -1759,6 +1761,179 @@ This all the JSX that is rendered now to replace that one ```<p>``` tag from abo
 The unfollow button will have classNames of btnStyles.Button and btnStyles.BlackOutline.  
 
 If a user is logged in they will see a follow buttons.  Nothing is happening yet.  That comes later.
+
+## Profile data context & building the profile header
+
+Since the app needs to access profile data in several places we move it into a context provider.
+
+Create src/contexts/ProfileDataContext.js.
+
+It contains two objects for profileData and the functions to update it
+
+This copies the stateful logic from PopularProfiles.js.
+
+Use the provider in index.js around the App component and use the provider in the opularProfiles.js
+
+### Building the profile header
+
+User story: As a user I can view other users profiles so that I can see their profile stats and learn more about them.
+
+Create the ProfilePage.module.css
+
+```css
+.ProfileImage {
+  object-fit: cover;
+  height: 120px;
+  width: 120px;
+  margin: 4px;
+}
+
+@media screen and (max-width: 991px) {
+  .ProfileImage {
+    width: 250px;
+    height: 250px;
+  }
+}
+```
+
+Don't just skip over looking at the CSS but look at it and understand what it's doing.  If you don't know, [look it up](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit) so that you do know and learn something.
+
+*The object-fit CSS property sets how the content of a replaced element should be resized to fit its container.*
+
+*The replaced content is sized to maintain its aspect ratio while filling the element's entire content box. If the object's aspect ratio does not match the aspect ratio of its box, then the object will be clipped to fit.*
+
+Create the pages/profiles/ProfilePage.js file.
+
+Add a route in App.js with the path "/profiles/:id"
+
+The starter code shows the structure of the desktop/mobile layouts:
+
+```js
+  return (
+    <Row>
+      <Col className="py-2 p-0 p-lg-2" lg={8}>
+        <PopularProfiles mobile />
+        <Container className={appStyles.Content}>
+          {hasLoaded ? (
+            <>
+              {mainProfile}
+              {mainProfilePosts}
+            </>
+          ) : (
+            <Asset spinner />
+          )}
+        </Container>
+      </Col>
+      <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
+        <PopularProfiles />
+      </Col>
+    </Row>
+  );
+```
+
+I want to understand in detail what is going on here.  Bootstrap has a 12 column grid system.
+
+lg={8} takes up 8 columns and has these styles:
+
+- py-2 (padding y axis 2 px)
+- p-0 (padding 0?)
+- p-lg-2 (padding large 2 px)
+
+What's going on here?  It seems a little contradictory to me.
+
+lg={4} takes up the remaining columns and has these styles:
+
+- d-none (display: none?)
+- d-lg-block
+- p-0
+- p-lg-2
+
+I'm not getting it.  You actually have to know a lot to understand what's going on here.  I can understand why the course glosses over the whole CSS/Bootstrap thing.
+
+Granted I haven't done the whole course.  I have only done the DRF and Moments code walkthroughs.  I can see that CSS is taught earlier on.  But I feel like I want to know what the above does so that I can create my own Bootstrap 4 layouts for this app, as well as provide documentation for other developers working on this project also.
+
+I first started using Bootstrap around 2016, and I believe it was version 3.  Bootstrap 4 was released in 2014, but large websites that used the insanely popular Bootstrap 3 took a long time and provided many jobs for developers like myself to transition them to Bootstrap 4.  Believe me there were breaking changes which made industries.
+
+Later when Flexbox became a thing, you would find articles saying "Bootstrap considered dangerous" and it started losing popularity.  These days if given the choice with a React project I would choose Material UI (MUI), but looking at Bootstrap styles makes me nostalgic for the old days, and I suppose it's not as bad as some make it out to be.  The [Wikipedia page for Flexbox](https://en.wikipedia.org/wiki/CSS_Flexible_Box_Layout) even says *the intensive use of popular JavaScript layout frameworks, such as Bootstrap, inspired CSS flex-box and grid layout specifications. CSS modules included solutions akin to this, like Flexbox and grid. Flexbox is originally based on a similar feature available in XUL, the user interface toolkit from Mozilla, used in Firefox.*
+
+So there you have it, Firefox had it first, then Bootstrap, then CSS.
+
+However, I am having difficulty finding any documentation on what the ```<Row></Row>``` component is and how it's used.  I know it comes from ```import Row from "react-bootstrap/Row"```.
+
+The Bootstrap columns creates a layout of 2 thirds width column for the main page content and a one third column for the popular profiles component.
+
+The two variables hold main profile header and posts belonging to the profile.  I know by the naming that a row can contain 12 columns like a grid or table.  I suppose it's like a ```<div style="display: block"></div>``` but I want to know in more detail, so I go looking.
+
+*Bootstrap includes a responsive, mobile first fluid [grid system](https://getbootstrap.com/docs/3.3/css/) that appropriately scales up to 12 columns as the device or viewport size increases.*
+
+Our package.json says ```"bootstrap": "^4.6.0"``` so we need to make sure we are looking at docs for that version.  The above link is for version 3.3, but it explains the 12 columns system appropriately.  I couldn't find the same blurb in the 4.6 docs.
+
+We also have ```"react-bootstrap": "^1.6.3"``` which provides a React wrapper around the vanilla Bootstrap features.  To find out what version we are actually using depends on that "^" character before the version, which means it should install the latest 1.6 compatible version.  If you look in node_modules\react-bootstrap\package.json you will see the installed version is "version": "1.6.3", even though there [appears to be a 1.6.7 available](https://www.npmjs.com/package/react-bootstrap/v/1.6.7).
+
+Finally I find the [docs for the appropriate version](https://react-bootstrap-v4.netlify.app/layout/grid/): *Bootstrap’s grid system uses a series of containers, rows, and columns to layout and align content. It’s built with flexbox and is fully responsive* so there you have it.  Why not use Flexbox itself?  That would require only learning it once, then you can get rid of the above mess of a bloated layout framework inside another bloated Javascript wrapper for it.  This is how it's actually done, and I recommend to anyone to learn the basics of Flexbox before jumping into the above.
+
+```css
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+```
+
+```html
+<div class='row'>
+  <div class='column'>
+    Column One
+  </div>
+  <div class='column'>
+    Column Two
+  </div>
+</div>
+```
+
+However, the responsive stuff makes Bootstrap somewhat worthwhile.
+
+We would need media queries to make different mobile and desktop versions.  But it's not a bad thing to learn those either.  Since I am a developer for a job (I also enjoy it) what I use depends on what job I have.  For one job I use MUI, for another, it's Bootstrap 4.  Next year it will be something different.  Wow, what a digression!
+
+The useEffect hook in the profile page is similar to the one that we moved into the profile data context file:
+
+```js
+/**
+ * Get a profile and a users posts by the route param id, destructure the response and rename it to pageProfile.
+ * It contains the user profile and their posts (done in a later section).
+ * This uses setProfileData from the useSetProfileData hook.
+ * The dependency array to contains the id and setProfileData so it will be rerun if either of these change.*/
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [{ data: pageProfile }, { data: profilePosts }] =
+          await Promise.all([
+            axiosReq.get(`/profiles/${id}/`),
+            axiosReq.get(`/posts/?owner__profile=${id}`),
+          ]);
+        setProfileData((prevState) => ({
+          ...prevState,
+          pageProfile: { results: [pageProfile] },
+        }));
+        setProfilePosts(profilePosts);
+        setHasLoaded(true);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, [id, setProfileData]);
+```
+
+A network request should be in a try-catch block.
 
 ## Deploying to Heroku
 

@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 
 const Avatar = ({ src, height = 45, text }) => {
   //<i class="fa-solid fa-user"></i>
-  console.log('src', src)
   return (
     <span>
       {src === 'https://res.cloudinary.com/dr3am91m4/image/upload/v1/media/../default_profile_qdjgyp' ? (
