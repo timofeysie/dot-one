@@ -1935,6 +1935,8 @@ The useEffect hook in the profile page is similar to the one that we moved into 
 
 A network request should be in a try-catch block.
 
+## Following Profiles
+
 ## Deploying to Heroku
 
 1. login to Heroku to create an app there.
