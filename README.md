@@ -2016,7 +2016,17 @@ export const followHelper = (profile, clickedProfile, following_id) => {
 };
 ```
 
-Next, the un-follow profiles functionality.
+## The un-follow profiles functionality
+
+Similar to the handleFollow, the handleUnfollow function updates the state of the users in question as well as the buttons.
+
+It uses the ```axiosRes.delete(`/followers/${clickedProfile.following_id}/`);``` instead of the post.
+
+And in the utls.js file, we use a unfollowHelper like the follow helper to decrement the counts.  The code is so similar I would probably have passed a flag in to decide to increment or decrement to avoid duplication, but its fine I suppose if it only does the same thing twice.  If you find yourself using the same code three times, the general rule is to refactor to share the duplicated blpcks.
+
+Use the click handler functions in Profile.js and ProfilePage.js pages.
+
+Also update the placeholders in the PostPage.js to show the popular profiles component with desktop and mobile views.
 
 ## Deploying to Heroku
 

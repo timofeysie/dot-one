@@ -31,7 +31,7 @@ function ProfilePage() {
   const currentUser = useCurrentUser();
   const { id } = useParams();
 
-  const { setProfileData, handleFollow } = useSetProfileData();
+  const { setProfileData, handleFollow, handleUnfollow } = useSetProfileData();
   const { pageProfile } = useProfileData();
 
   const [profile] = pageProfile.results;
@@ -40,9 +40,9 @@ function ProfilePage() {
   /**
    * Get a profile and a users posts by the route param id,
    * destructure the response and rename it to pageProfile.
-   * It contains the user profile and their posts (done in a later section).
+   * It contains the user profile and their posts.
    * This uses setProfileData from the useSetProfileData hook.
-   * The dependency array to contains the id and setProfileData so
+   * The dependency array contains the id and setProfileData so
    * it will be rerun if either of these change.*/
   useEffect(() => {
     const fetchData = async () => {
@@ -98,7 +98,7 @@ function ProfilePage() {
             (profile?.following_id ? (
               <Button
                 className={`${btnStyles.Button} ${btnStyles.BlackOutline}`}
-                onClick={() => {}}
+                onClick={() => handleUnfollow(profile)}
               >
                 unfollow
               </Button>
