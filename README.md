@@ -1937,6 +1937,87 @@ A network request should be in a try-catch block.
 
 ## Following Profiles
 
+user story: "As a logged in user I can follow and un-follow other users, so that I can see and remove
+posts by specific users in my post feed"
+
+This change means that the followed and following counts in the profile page need to change when a follow or un-follow button is chosen.
+Also, the follow and un-follow buttons need to change.
+
+Those changes happen in PopularProfiles and the ProfilePage component
+
+The ProfileDataContext is a good place to put shared user logic such as the handleFollow function.
+
+That means that the context provider has an extra function to export, which is done like this:
+
+```js
+<SetProfileDataContext.Provider value={{ setProfileData, handleFollow }}>
+```
+
+Then we import that into the ProfilePage.js
+
+```js
+const { setProfileData, handleFollow } = useSetProfileData();
+```
+
+Grouping similar functionality such as this action handler is a great way to follow the SRP (see the Single Responsibility Principal discussion above).
+
+This function is also added to the Profile.js file.
+
+After this we need to reflect all these changes on the client side.
+
+This is done in the handleFollow function.
+
+```js
+  const handleFollow = async (clickedProfile) => {
+    try {
+      const { data } = await axiosRes.post("/followers/", {
+        followed: clickedProfile.id,
+      });
+
+      setProfileData((prevState) => ({
+        ...prevState,
+        pageProfile: {
+          results: prevState.pageProfile.results.map((profile) =>
+            followHelper(profile, clickedProfile, data.id)
+          ),
+        },
+        popularProfiles: {
+          ...prevState.popularProfiles,
+          results: prevState.popularProfiles.results.map((profile) =>
+            followHelper(profile, clickedProfile, data.id)
+          ),
+        },
+      }));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+```
+
+Notice the followHelper?  This function is put into the util.js file.  That's because the same function needs to be run in the page object also.
+
+```js
+export const followHelper = (profile, clickedProfile, following_id) => {
+  return profile.id === clickedProfile.id
+    ? // This is the profile I clicked on,
+      // update its followers count and set its following id
+      {
+        ...profile,
+        followers_count: profile.followers_count + 1,
+        following_id,
+      }
+    : profile.is_owner
+    ? // This is the profile of the logged in user
+      // update its following count
+      { ...profile, following_count: profile.following_count + 1 }
+    : // this is not the profile the user clicked on or the profile
+      // the user owns, so just return it unchanged
+      profile;
+};
+```
+
+Next, the un-follow profiles functionality.
+
 ## Deploying to Heroku
 
 1. login to Heroku to create an app there.

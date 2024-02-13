@@ -31,14 +31,14 @@ function ProfilePage() {
   const currentUser = useCurrentUser();
   const { id } = useParams();
 
-  const setProfileData = useSetProfileData();
+  const { setProfileData, handleFollow } = useSetProfileData();
   const { pageProfile } = useProfileData();
 
   const [profile] = pageProfile.results;
   const is_owner = currentUser?.username === profile?.owner;
 
   /**
-   * Get a profile and a users posts by the route param id, 
+   * Get a profile and a users posts by the route param id,
    * destructure the response and rename it to pageProfile.
    * It contains the user profile and their posts (done in a later section).
    * This uses setProfileData from the useSetProfileData hook.
@@ -105,7 +105,7 @@ function ProfilePage() {
             ) : (
               <Button
                 className={`${btnStyles.Button} ${btnStyles.Black}`}
-                onClick={() => {}}
+                onClick={() => handleFollow(profile)}
               >
                 follow
               </Button>
