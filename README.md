@@ -2028,6 +2028,34 @@ Use the click handler functions in Profile.js and ProfilePage.js pages.
 
 Also update the placeholders in the PostPage.js to show the popular profiles component with desktop and mobile views.
 
+## Editing the profile
+
+In this section we add a dropdown menu for users to edit their profile and update their username/password.
+
+This includes adding 
+
+UsernameForm.js
+UserPasswordForm.js
+ProfileEditForm.js
+Add the routes in App.js:
+
+Tn UsernameForm and UserPasswordForm we check if the profile_id is the same as the id like this:
+
+```js
+  useEffect(() => {
+    if (currentUser?.profile_id?.toString() === id) {
+      setUsername(currentUser.username);
+    } else {
+      history.push("/");
+    }
+  }, [currentUser, history, id]);
+```
+
+The currentUser is fetched asynchronously on mount so if the user refreshes the page they will be redirected to home because the currentUser is initially null.
+It takes a moment for the API response to return logged in.
+
+Also, the profile id is an integer, and the param id is a string, so convert the integer to a string before the equality check.
+
 ## Deploying to Heroku
 
 1. login to Heroku to create an app there.
