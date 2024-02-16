@@ -36,6 +36,7 @@ function SignInForm() {
       setCurrentUser(data.user);
       history.push("/");
     } catch (err) {
+      console.log('error in /dj-rest-auth/login/')
       setErrors(err.response?.data);
     }
   };
