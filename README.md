@@ -2034,6 +2034,8 @@ In this section we add a dropdown menu for users to edit their profile and updat
 
 This includes adding 
 
+MoreDropdown.js add the ProfileEditDropdown component
+ProfilePage.js
 UsernameForm.js
 UserPasswordForm.js
 ProfileEditForm.js
