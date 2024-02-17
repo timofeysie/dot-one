@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../styles/Avatar.module.css";
 import PropTypes from "prop-types";
 
-const Avatar = ({ src, height = 55, text }) => {
+const Avatar = ({ src, height = 27, text }) => {
   //<i class="fa-solid fa-user"></i>
 
   const classes = `fa-solid fa-user ${styles.minHeight}`
@@ -16,7 +16,7 @@ const Avatar = ({ src, height = 55, text }) => {
           className={styles.Avatar}
           src={src}
           height={height}
-          width={height}
+          width="auto"
           alt="avatar"
         />
       )}

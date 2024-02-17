@@ -2123,6 +2123,20 @@ When a user’s refresh token expires on a failed attempt to like a post on a Po
 
 After sign they are redirected back to the post and we can finally like it.
 
+## Unit tests
+
+Here we will install the library called Mock Service Worker which uses an API to intercept requests so that we can mock API responses.
+
+```sh
+npm install msw --save-dev
+```
+
+Create a mocks directly and handlers.js.
+
+Create a src\setupTests.js file to use the handlers.
+
+The ```screen.debug();``` will print out the rendered component to help crafting tests.
+
 ## House keeping todo
 
 Here are some things that will make the app better for growing bigger.
@@ -2217,6 +2231,11 @@ class Profile(models.Model):
 ```
 
 I think that image needs to be uploaded manually.
+
+## Useful links
+
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+- [About unit testing query methods](https://testing-library.com/docs/queries/about/)
 
 ## Original readme
 
