@@ -10,3 +10,22 @@
 .Active i {
     color: #2142b2;
 }
+
+.logo {
+    position: relative;
+    bottom: 5px;
+}
+
+.version {
+    font-size: xx-small;
+    position: relative;
+    top: 25px;
+    right: 55px;
+}
+
+@media screen and (max-width: 991px) {
+    .version {
+        right: 80px;
+    }
+  }
+  

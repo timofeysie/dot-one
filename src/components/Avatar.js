@@ -2,12 +2,15 @@ import React from "react";
 import styles from "../styles/Avatar.module.css";
 import PropTypes from "prop-types";
 
-const Avatar = ({ src, height = 45, text }) => {
+const Avatar = ({ src, height = 55, text }) => {
   //<i class="fa-solid fa-user"></i>
+
+  const classes = `fa-solid fa-user ${styles.minHeight}`
+
   return (
     <span>
       {src === 'https://res.cloudinary.com/dr3am91m4/image/upload/v1/media/../default_profile_qdjgyp' ? (
-        <i className="fa-solid fa-user"></i>
+        <i className={classes}></i>
       ) : (
         <img
           className={styles.Avatar}
