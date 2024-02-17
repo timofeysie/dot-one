@@ -92,10 +92,12 @@ const NavBar = () => {
       <Container>
         <NavLink to="/">
           <Navbar.Brand>
-            <img src={logo} alt="logo" height="45" className={styles.logo}/>
+          <img src={logo} alt="logo" height="45" className={styles.logo}/>
           </Navbar.Brand>
         </NavLink>
-        <div className={styles.version}>v{ version }</div>
+        <div className={`${styles.version}`}>
+          v{version}
+        </div>
         {currentUser && addPostIcon}
         <Navbar.Toggle
           ref={ref}

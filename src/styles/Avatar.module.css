@@ -2,9 +2,10 @@
   border-radius: 50%;
   margin: 0px 8px 0px 8px;
   object-fit: cover;
-  min-height: 55px;
+  min-height: 27px;
+  width: auto;
 }
 
 .minHeight {
-  min-height: 55px;
+  min-height: 27px;
 }

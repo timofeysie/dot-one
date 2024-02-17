@@ -18,5 +18,15 @@ module.exports = {
         "react"
     ],
     "rules": {
-    }
+    },
+    "overrides": [
+        {
+          "files": [
+            "**/*.test.js",
+          ],
+          "env": {
+            "jest": true
+          }
+        }
+      ]
 };
