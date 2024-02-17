@@ -2058,6 +2058,77 @@ It takes a moment for the API response to return logged in.
 
 Also, the profile id is an integer, and the param id is a string, so convert the integer to a string before the equality check.
 
+## Redirecting the user
+
+This section creates a custom hook containing redirection logic which can be shared between multiple components.
+
+If a user is logged in, they shouldn’t be able to access the sign in and sign up pages, but rather be redirected to the home page.
+
+If a user is not logged in, and they try to access the page to create a post, then we should redirect them back to the home page.
+
+If a user had signed in but their refresh token eventually expired, they will be redirected back to the page they were on a moment ago.
+
+If a new user registers and signs in, they’ll first go back to the sign up page but since they are now logged in, they’ll be redirected to the home page.
+
+The action takes place inside a useEffect handleMount function in the hook:
+
+```js
+try {
+  await axios.post("/dj-rest-auth/token/refresh/");
+  // if user is logged in, the code below will run
+  if (userAuthStatus === "loggedIn") {
+    history.push("/");
+  }
+} catch (err) {
+  // if user is not logged in, the code below will run
+  if (userAuthStatus === "loggedOut") {
+    history.push("/");
+  }
+}
+```
+
+To use the hook in the SignInForm component, use the hook and change ```history.push("/");``` to ```history.goBack();```:
+
+```js
+function SignInForm() {
+  const setCurrentUser = useSetCurrentUser();
+  useRedirect("loggedIn");
+  ...
+      try {
+      const { data } = await axios.post("/dj-rest-auth/login/", signInData);
+      setCurrentUser(data.user);
+      history.goBack();
+    } catch (err) {
+      console.log('error in /dj-rest-auth/login/')
+      setErrors(err.response?.data);
+    }
+```
+
+redirecting any logged out users away from the form to create a post.
+
+The PostCreateForm.js uses the other string for the hook:
+
+```js
+useRedirect("loggedOut");
+```
+
+Now try to go to the /posts/create URL when logged out and you will get redirected to the home page.
+
+When a new user signs up they are redirected to the signin page.
+
+Once we sign in successfully, we’re sent back, but because we’re already signed in,
+we get redirected from the sign up page to the home page.
+
+When a user’s refresh token expires on a failed attempt to like a post on a PostPage they are redirected to the signin page.
+
+After sign they are redirected back to the post and we can finally like it.
+
+## House keeping todo
+
+Here are some things that will make the app better for growing bigger.
+
+- use an enum for strings such as ```useRedirect("loggedIn");``` to avoid typos
+
 ## Deploying to Heroku
 
 1. login to Heroku to create an app there.

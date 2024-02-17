@@ -10,11 +10,12 @@ import {
 import Avatar from "./Avatar";
 import axios from "axios";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
+import packageJson from "../../package.json";
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
-
+  const version = packageJson.version;
   const { expanded, setExpanded, ref } = useClickOutsideToggle();
 
   const handleSignOut = async () => {
@@ -91,9 +92,10 @@ const NavBar = () => {
       <Container>
         <NavLink to="/">
           <Navbar.Brand>
-            <img src={logo} alt="logo" height="45" />
+            <img src={logo} alt="logo" height="45" className={styles.logo}/>
           </Navbar.Brand>
         </NavLink>
+        <div className={styles.version}>v{ version }</div>
         {currentUser && addPostIcon}
         <Navbar.Toggle
           ref={ref}
