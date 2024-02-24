@@ -15,6 +15,18 @@
     border: 1px solid #dadadf;
 }
 
+/* On mobile reduce the top padding to save space. */
+@media screen and (max-width: 991px) {
+    .Main {
+        padding-top: 55px;
+    }
+
+    .Content {
+        padding: 5px 0 0 0;
+    }
+}
+
+
 .FillerImage {
     object-fit: cover;
     height: 100%;

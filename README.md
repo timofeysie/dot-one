@@ -1903,6 +1903,22 @@ However, the responsive stuff makes Bootstrap somewhat worthwhile.
 
 We would need media queries to make different mobile and desktop versions.  But it's not a bad thing to learn those either.  Since I am a developer for a job (I also enjoy it) what I use depends on what job I have.  For one job I use MUI, for another, it's Bootstrap 4.  Next year it will be something different.  Wow, what a digression!
 
+#### Another problem with Bootstrap
+
+Since we have css modules and inline Bootstrap styles, you have to look in two or more places not to work on the styles.
+
+For example this code in the Profile.js:
+
+```js
+    <div
+      className={`my-3 d-flex align-items-center ${mobile && "flex-column"}`}
+    >
+```
+
+I want to reduce the margin for the y axis ```my-3``` to ```my-1``` for mobile, but if I just add that to the mobile condition there, it gets overwritten by the first setting.  So my other option then is to remove the margin from the class name here and put it in the CSS module with another media query.  Then I have three places where the styles live, and my code gets more complex and someone later has to figure it all out when we want a new look for the site.
+
+### The effect
+
 The useEffect hook in the profile page is similar to the one that we moved into the profile data context file:
 
 ```js
@@ -1933,7 +1949,7 @@ The useEffect hook in the profile page is similar to the one that we moved into 
   }, [id, setProfileData]);
 ```
 
-A network request should be in a try-catch block.
+A network requests should be in a try-catch block.
 
 ## Following Profiles
 
@@ -2136,6 +2152,154 @@ Create a mocks directly and handlers.js.
 Create a src\setupTests.js file to use the handlers.
 
 The ```screen.debug();``` will print out the rendered component to help crafting tests.
+
+## Cleaning up Errors
+
+Clean up our code relating to the following:
+
+- repeated console errors caused by failed token refreshes
+- acceptable console errors
+- npm warnings
+
+React.StrictMode component in index.js looks like this:
+
+```js
+ReactDOM.render(
+  <React.StrictMode>
+    <Router>
+      <CurrentUserProvider>
+        <ProfileDataProvider>
+          <App />
+        </ProfileDataProvider>
+      </CurrentUserProvider>
+    </Router>
+  </React.StrictMode>,
+  document.getElementById("root")
+);
+```
+
+Actually in this project, it was never there, so this is just for the notes.
+
+The tutorial states it is *a tool for highlighting potential problems in an application by running additional checks and warnings on the application.* such as "findDOMNode is deprecated in StrictMode". 
+
+StrictMode is for development purposes only and can be removed for final deployment.  We can leave it commented out for now.
+
+### Unnecessary refresh requests
+
+Install a library to decode JSON Web Tokens to access the timestamp within the response.
+
+```sh
+npm install jwt-decode
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: 'moments@0.1.2',
+npm WARN EBADENGINE   required: { node: '16.19.1', npm: '8.19.3' },
+npm WARN EBADENGINE   current: { node: 'v16.20.0', npm: '8.19.4' }
+npm WARN EBADENGINE }
+
+up to date, audited 2340 packages in 17s
+
+213 packages are looking for funding
+  run `npm fund` for details
+
+115 vulnerabilities (1 low, 86 moderate, 18 high, 10 critical)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+```
+
+The tutorial from what must be about two years ago has only one critical vulnerability.  Things move quickly in the front end space.
+
+We already have the setTokenTimestamp, shouldRefreshToken and removeTokenTimestamp functions in the util.js file.
+
+We use them in the SignInForm to set the timestamp and the CurrentUserContext.js to run the POST only if the token should be refreshed as well as in the catch blocks to remove the token timestamp when the refresh token expires.
+
+Acceptable API errors are:
+
+- three 401s on mount when not logged in
+- 401 error when going to sign up/ sign in page
+- 400 error when providing incorrect form input such as submitting the sign in form without entering a username
+- 401 error when an access token has expired
+
+I actually feel like the frontend should also validate the form inputs and not make a request that it knows it will fail to reduce server calls.
+
+The front end is a great place to validate the forms.  It does however add complexity and spreads the business logic from the frontend to the backend, so there is a trade off to creating more validation and possibly using a library to do this.
+
+## The oval icons
+
+I wanted to use the bootstrap icon as a default image, so I did this:
+
+```js
+      {src === 'https://res.cloudinary.com/dr3am91m4/image/upload/v1/media/../default_profile_qdjgyp' ? (
+        <i className={classes}></i>
+      ) : (
+        <img
+          className={styles.Avatar}
+          src={src}
+          height={height}
+          width="auto"
+          alt="avatar"
+        />
+      )}
+```
+
+However, then I noticed that when you choose an image for a profile, the chosen image when shown in the header with the other default images is a different size, so they are not is a straight row anymore.
+
+I tried to set the size to 27 square which is the size fo the icon, but then the icons become ovals.  Here is the code so far.
+
+The imageSize comes in the Profile props.
+
+```js
+const Profile = (props) => {
+  const { profile, mobile, imageSize } = props;
+  ...
+  <Avatar src={image} height={imageSize} />
+```
+
+```js
+const Avatar = ({ src, height = 27, text }) => {
+  ...
+  <img
+    className={styles.Avatar}
+    src={src}
+    height={height}
+    width="auto"
+    alt="avatar"
+  />
+```
+
+However, the imageSize in the props is all undefined.
+
+For this image, the shape is an oval:
+
+https://res.cloudinary.com/dr3am91m4/image/upload/v1/media/images/Screenshot_2024-02-14_100906_vuavp2
+
+For this image the shape is actually a circle:
+
+image: "https://res.cloudinary.com/dr3am91m4/image/upload/v1/media/images/Screenshot_2024-02-17_101635_eq07ma"
+
+I'm not sure why the size is not there.  Something with the backend or Cloudinary?
+
+My notes from the backend work show this:
+
+```py
+    # the default image
+    image = models.ImageField(
+        upload_to='images/', default='../default_profile_qdjgyp'
+    )
+```
+
+After the starting the project section in the README there, look at the Create the profile app section for what the official solution is.
+
+I think though that it will experience the same issues as can be seen on the official deployed version.
+
+There appear to be other issues with a broken profile image sometimes also.
+
+Eventually I just set the width and height to 40px for both user icons and the default icon and things look consistent for now.
 
 ## House keeping todo
 

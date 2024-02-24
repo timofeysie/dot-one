@@ -9,13 +9,15 @@ import { ProfileDataProvider } from "./contexts/ProfileDataContext";
 
 // eslint-disable-next-line react/no-deprecated
 ReactDOM.render(
-  <Router>
-    <CurrentUserProvider>
-      <ProfileDataProvider>
-        <App />
-      </ProfileDataProvider>
-    </CurrentUserProvider>
-  </Router>,
+  // <React.StrictMode>
+    <Router>
+      <CurrentUserProvider>
+        <ProfileDataProvider>
+          <App />
+        </ProfileDataProvider>
+      </CurrentUserProvider>
+    </Router>,
+  // </React.StrictMode>,
   document.getElementById("root")
 );
 

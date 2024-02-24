@@ -9,7 +9,7 @@ import { Button } from "react-bootstrap";
 import { useSetProfileData } from "../../contexts/ProfileDataContext";
 
 const Profile = (props) => {
-  const { profile, mobile, imageSize = 27 } = props;
+  const { profile, mobile, imageSize } = props;
   const { id, following_id, image, owner } = profile;
 
   const currentUser = useCurrentUser();
@@ -19,7 +19,7 @@ const Profile = (props) => {
 
   return (
     <div
-      className={`my-3 d-flex align-items-center ${mobile && "flex-column"}`}
+      className={`my-3 d-flex align-items-center ${mobile && "flex-column my-1"}`}
     >
       <div>
         <Link className="align-self-center" to={`/profiles/${id}`}>
