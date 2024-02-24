@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 const Avatar = ({ src, height = 27, text }) => {
   //<i class="fa-solid fa-user"></i>
 
-  const classes = `fa-solid fa-user ${styles.minHeight}`
+  const classes = `fa-solid fa-user ${styles.Avatar}`
 
   return (
     <span>

@@ -16,6 +16,7 @@ import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 import { useRedirect } from "../../hooks/useRedirect";
+import { setTokenTimestamp } from "../../utils/utils";
 
 function SignInForm() {
   const setCurrentUser = useSetCurrentUser();
@@ -36,18 +37,18 @@ function SignInForm() {
     try {
       const { data } = await axios.post("/dj-rest-auth/login/", signInData);
       setCurrentUser(data.user);
+      setTokenTimestamp(data);
       history.goBack();
     } catch (err) {
-      console.log('error in /dj-rest-auth/login/')
       setErrors(err.response?.data);
     }
   };
 
   const handleChange = (event) => {
-    setSignInData((prevSignInData) => ({
-      ...prevSignInData,
+    setSignInData({
+      ...signInData,
       [event.target.name]: event.target.value,
-    }));
+    });
   };
 
   return (
@@ -67,7 +68,7 @@ function SignInForm() {
                 onChange={handleChange}
               />
             </Form.Group>
-            {errors?.username?.map((message, idx) => (
+            {errors.username?.map((message, idx) => (
               <Alert key={idx} variant="warning">
                 {message}
               </Alert>
@@ -84,7 +85,7 @@ function SignInForm() {
                 onChange={handleChange}
               />
             </Form.Group>
-            {errors?.password?.map((message, idx) => (
+            {errors.password?.map((message, idx) => (
               <Alert key={idx} variant="warning">
                 {message}
               </Alert>
@@ -95,7 +96,7 @@ function SignInForm() {
             >
               Sign in
             </Button>
-            {errors?.non_field_errors?.map((message, idx) => (
+            {errors.non_field_errors?.map((message, idx) => (
               <Alert key={idx} variant="warning" className="mt-3">
                 {message}
               </Alert>
@@ -104,7 +105,7 @@ function SignInForm() {
         </Container>
         <Container className={`mt-3 ${appStyles.Content}`}>
           <Link className={styles.Link} to="/signup">
-            Don&apos;t have an account? <span>Sign up now!</span>
+            Don&lsquo;t have an account? <span>Sign up now!</span>
           </Link>
         </Container>
       </Col>

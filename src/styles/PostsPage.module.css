@@ -16,3 +16,9 @@
   cursor: default;
   color: #cfced3;
 }
+
+@media screen and (max-width: 991px) {
+  .SearchBar {
+    margin: 0 10px;
+  }
+}

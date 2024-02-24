@@ -59,10 +59,18 @@ export const setTokenTimestamp = (data) => {
   localStorage.setItem("refreshTokenTimestamp", refreshTokenTimestamp);
 };
 
+/**
+ * (!!) is a JavaScript operator known as the “double bang” or “not not” operator that
+ * converts a value for use in conditional statements.
+ * @returns the refresh token time stamp from local storage.
+ */
 export const shouldRefreshToken = () => {
   return !!localStorage.getItem("refreshTokenTimestamp");
 };
 
+/**
+ * remove the localStorage value if the user logs out or their refresh token has expired.
+ */
 export const removeTokenTimestamp = () => {
   localStorage.removeItem("refreshTokenTimestamp");
 };
