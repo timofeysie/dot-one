@@ -2214,6 +2214,30 @@ Run `npm audit` for details.
 
 The tutorial from what must be about two years ago has only one critical vulnerability.  Things move quickly in the front end space.
 
+#### Fixing npm vulnerabilities
+
+```shell
+$ npm audit fix
+npm WARN ERESOLVE overriding peer dependency
+...
+Severity: critical
+Improper Neutralization of Special Elements used in a Command in Shell-quote - https://github.com/advisories/GHSA-g4rg-993r-mgx7
+fix available via `npm audit fix`
+node_modules/shell-quote
+
+108 vulnerabilities (1 low, 81 moderate, 17 high, 9 critical)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+```
+
+That's slightly better.  Since this is a demo app, vulnerabilities are not an issue.  However, using force could break things and them we don't have a demo, so in this case, I will leave them as they are.
+
+### Using the token utilities
+
 We already have the setTokenTimestamp, shouldRefreshToken and removeTokenTimestamp functions in the util.js file.
 
 We use them in the SignInForm to set the timestamp and the CurrentUserContext.js to run the POST only if the token should be refreshed as well as in the catch blocks to remove the token timestamp when the refresh token expires.
@@ -2300,6 +2324,55 @@ I think though that it will experience the same issues as can be seen on the off
 There appear to be other issues with a broken profile image sometimes also.
 
 Eventually I just set the width and height to 40px for both user icons and the default icon and things look consistent for now.
+
+## A few last things
+
+1. Display a graphic and message to users that find themselves on the “page not found” page using the Asset component.
+2. Adjust and organize your imports to minimize the build
+3. Remove all the console.logs from the application
+4. Replace the application default title in index.html
+5. Refetch posts when the currentUser changes
+6. Add the heroku deployment commands
+
+### Bootstrap imports
+
+Since the entire react-bootstrap library is imported when you do this:
+
+```js
+  import { Navbar, Container, Nav } from "react-bootstrap";
+```
+
+Bootstrap documentation recommends importing each component individually:
+
+```js
+  import Navbar from "react-bootstrap/Navbar";
+  import Container from "react-bootstrap/Container";
+  import Nav from "react-bootstrap/Nav";
+```
+
+The curly brackets have to be removed otherwise you see this error for example:
+
+Attempted import error: 'Alert' is not exported from 'react-bootstrap/Alert'.
+
+### Remove all the console.logs
+
+This step says:
+
+*we don’t want to be printing data to the console in a completed application.*
+
+Since this whole project is just a demo app, we will be leaving them in and deploying as debugging will continue during the development process.
+
+### Add the Heroku deployment commands
+
+This step has already been done, but they are included in this section.
+
+- add this script in the package.json: ```"heroku-prebuild": "npm install -g serve",```
+
+This step we haven't done, yet the app does deploy when pushed to the master branch.
+
+- create a Procfile with the following: ```web: serve -s build```
+
+The backend needs a Procfile, but I think it's not needed in this project.
 
 ## House keeping todo
 
