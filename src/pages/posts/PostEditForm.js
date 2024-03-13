@@ -14,6 +14,8 @@ import btnStyles from "../../styles/Button.module.css";
 
 import { useHistory, useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 function PostEditForm() {
   const [errors, setErrors] = useState({});
@@ -43,10 +45,12 @@ function PostEditForm() {
   }, [history, id]);
 
   const handleChange = (event) => {
-    setPostData({
-      ...postData,
-      [event.target.name]: event.target.value,
-    });
+    if (event?.target) {
+      setPostData((prevData) => ({
+        ...prevData,
+        [event.target.name]: event.target.value,
+      }));
+    }
   };
 
   const handleChangeImage = (event) => {
@@ -100,12 +104,24 @@ function PostEditForm() {
 
       <Form.Group>
         <Form.Label>Content</Form.Label>
-        <Form.Control
-          as="textarea"
-          rows={6}
-          name="content"
+        <ReactQuill
+          className={appStyles.quill}
           value={content}
-          onChange={handleChange}
+          onChange={(value) => handleChange(null, value)}
+          modules={{
+            toolbar: [
+              [{ header: "1" }, { header: "2" }, { font: [] }],
+              [{ size: [] }],
+              ["bold", "italic", "underline", "strike", "blockquote"],
+              [{ color: [] }, { background: [] }],
+              ["link", "image", "video"],
+              ["clean"],
+            ],
+            clipboard: {
+              matchVisual: false,
+            },
+          }}
+          formats={null}
         />
       </Form.Group>
       {errors?.content?.map((message, idx) => (

@@ -57,6 +57,18 @@ a:hover i {
     transition: color ease-in-out 0.3s;
 }
 
+.quill{
+    height: 200px;
+    margin-bottom: 50px;
+
+}
+
+.Image {
+    max-height: 40vh;
+    max-width: 100%;
+    object-fit: contain;
+}
+
 input[type="file"] {
     display: none;
 }
