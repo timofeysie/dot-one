@@ -14,6 +14,8 @@ import btnStyles from "../../styles/Button.module.css";
 import { useHistory } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useRedirect } from "../../hooks/useRedirect";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 function PostCreateForm() {
   useRedirect("loggedOut");
@@ -29,11 +31,18 @@ function PostCreateForm() {
   const imageInput = useRef(null);
   const history = useHistory();
 
-  const handleChange = (event) => {
+  const handleTitleChange = (event) => {
     setPostData({
       ...postData,
       [event.target.name]: event.target.value,
     });
+  };
+
+  const handleChange = (value) => {
+     setPostData((prevData) => ({
+      ...prevData,
+      content: value,
+    }));
   };
 
   const handleChangeImage = (event) => {
@@ -73,7 +82,7 @@ function PostCreateForm() {
           type="text"
           name="title"
           value={title}
-          onChange={handleChange}
+          onChange={handleTitleChange}
         />
       </Form.Group>
       {errors?.title?.map((message, idx) => (
@@ -84,13 +93,14 @@ function PostCreateForm() {
 
       <Form.Group>
         <Form.Label>Content</Form.Label>
-        <Form.Control
-          as="textarea"
-          rows={6}
-          name="content"
-          value={content}
-          onChange={handleChange}
-        />
+        <div name="desciption-container">
+          <ReactQuill
+            className={appStyles.quill}
+            value={content}
+            preserveWhitespace={true}
+            onChange={(value) => handleChange(value)}
+          />
+        </div>
       </Form.Group>
       {errors?.content?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
