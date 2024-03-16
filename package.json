@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.4",
     "bootstrap": "^4.6.0",
+    "heroku": "^8.10.0",
     "html-react-parser": "^5.1.8",
     "jwt-decode": "^3.1.2",
     "react": "^17.0.2",
