@@ -10,7 +10,7 @@ import { Link, useHistory } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../api/axiosDefaults";
 import { MoreDropdown } from "../../components/MoreDropdown";
-import ReactHtmlParser from 'react-html-parser';
+import parse from "html-react-parser";
 
 const Post = (props) => {
   const {
@@ -102,7 +102,7 @@ const Post = (props) => {
       </Link>
       <Card.Body>
         {title && <Card.Title className="text-center">{title}</Card.Title>}
-        {content && <Card.Text>{ReactHtmlParser(content)}</Card.Text>}
+        {content && <Card.Text>{parse(content)}</Card.Text>}
         <div className={styles.PostBar}>
           {is_owner ? (
             <OverlayTrigger
