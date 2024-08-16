@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
 import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-
+// import InputGroup from "react-bootstrap/InputGroup";
 import styles from "../../styles/CommentCreateEditForm.module.css";
 import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../api/axiosDefaults";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import appStyles from "../../App.module.css";
 
 function CommentCreateForm(props) {
   // eslint-disable-next-line react/prop-types
@@ -14,7 +15,7 @@ function CommentCreateForm(props) {
   const [content, setContent] = useState("");
 
   const handleChange = (event) => {
-    setContent(event.target.value);
+    setContent(event?.target?.value);
   };
 
   const handleSubmit = async (event) => {
@@ -45,19 +46,29 @@ function CommentCreateForm(props) {
   return (
     <Form className="mt-2" onSubmit={handleSubmit}>
       <Form.Group>
-        <InputGroup>
           <Link to={`/profiles/${profile_id}`}>
             <Avatar src={profileImage} />
           </Link>
-          <Form.Control
-            className={styles.Form}
-            placeholder="my comment..."
-            as="textarea"
+          <ReactQuill
+            className={appStyles.quill}
             value={content}
-            onChange={handleChange}
-            rows={2}
+            preserveWhitespace={true}
+            onChange={(value) => handleChange(value)}
+            modules={{
+              toolbar: [
+                [{ header: "1" }, { header: "2" }, { font: [] }],
+                [{ size: [] }],
+                ["bold", "italic", "underline", "strike", "blockquote"],
+                [{ color: [] }, { background: [] }],
+                ["link", "image", "video"],
+                ["clean"],
+              ],
+              clipboard: {
+                matchVisual: false,
+              },
+            }}
+            formats={null}
           />
-        </InputGroup>
       </Form.Group>
       <button
         className={`${styles.Button} btn d-block ml-auto`}

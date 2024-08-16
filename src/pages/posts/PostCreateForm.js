@@ -39,7 +39,7 @@ function PostCreateForm() {
   };
 
   const handleChange = (value) => {
-     setPostData((prevData) => ({
+    setPostData((prevData) => ({
       ...prevData,
       content: value,
     }));
@@ -99,6 +99,19 @@ function PostCreateForm() {
             value={content}
             preserveWhitespace={true}
             onChange={(value) => handleChange(value)}
+            modules={{
+              toolbar: [
+                [{ header: "1" }, { header: "2" }, { font: [] }],
+                [{ size: [] }],
+                ["bold", "italic", "underline", "strike", "blockquote"],
+                [{ color: [] }, { background: [] }],
+                ["link", "image", "video"],
+                ["clean"],
+              ],
+              clipboard: {
+                matchVisual: false,
+              },
+            }}
           />
         </div>
       </Form.Group>
