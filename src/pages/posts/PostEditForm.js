@@ -107,21 +107,9 @@ function PostEditForm() {
         <ReactQuill
           className={appStyles.quill}
           value={content}
+          
           onChange={(value) => handleChange(null, value)}
-          modules={{
-            toolbar: [
-              [{ header: "1" }, { header: "2" }, { font: [] }],
-              [{ size: [] }],
-              ["bold", "italic", "underline", "strike", "blockquote"],
-              [{ color: [] }, { background: [] }],
-              ["link", "image", "video"],
-              ["clean"],
-            ],
-            clipboard: {
-              matchVisual: false,
-            },
-          }}
-          formats={null}
+          theme="snow"
         />
       </Form.Group>
       {errors?.content?.map((message, idx) => (
@@ -129,7 +117,11 @@ function PostEditForm() {
           {message}
         </Alert>
       ))}
+    </div>
+  );
 
+  const formButtons = (
+    <>
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
         onClick={() => history.goBack()}
@@ -139,7 +131,7 @@ function PostEditForm() {
       <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
         save
       </Button>
-    </div>
+    </>
   );
 
   return (
@@ -177,6 +169,7 @@ function PostEditForm() {
 
             <div className="d-md-none">{textFields}</div>
           </Container>
+          <Container className={appStyles.Content}>{formButtons}</Container>
         </Col>
         <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">
           <Container className={appStyles.Content}>{textFields}</Container>

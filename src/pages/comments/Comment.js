@@ -67,7 +67,7 @@ const Comment = (props) => {
               setShowEditForm={setShowEditForm}
             />
           ) : (
-            <p>{content}</p>
+            <div dangerouslySetInnerHTML={{ __html: content }} />
           )}
         </Media.Body>
         {is_owner && !showEditForm && (
@@ -78,7 +78,7 @@ const Comment = (props) => {
         )}
       </Media>
     </>
-  );
+  ); 
 };
 
 export default Comment;
