@@ -54,7 +54,11 @@ These sections follow the [Code Institute](https://codeinstitute.net/global/abou
 
 Instead of the command ```npm install react-router-dom``` use this ```npm install react-router-dom@5.3.0```
 
-I'm so used to seeing example code that looks like this:
+The current version of react-router-dom is v6.4 as of August 2024.  The architecture for this project as set in September 2021 when the DOM router version was at v5.3.
+
+There are all kinds of differences from v4 and v5 before 5.1 which introduced hooks.
+
+Version 5 uses a switch statement to handle routes in the App.js file and looks like this:
 
 ```js
 <Switch>
@@ -64,7 +68,7 @@ I'm so used to seeing example code that looks like this:
 </Switch>
 ```
 
-and having to convert that to router 4:
+You will no doubt see a lot of router v6 example around the web that look like like this:
 
 ```js
 <Routes>
@@ -72,7 +76,7 @@ and having to convert that to router 4:
     <Route path="/posts/:postId" element={<SinglePostPage />} />
 ```
 
-Just thought I would point that out in case it helps someone.
+It's good to be aware that the syntax is different, and that we are using v5 syntax for now which is inside the switch statement.
 
 ## Authentication
 
@@ -83,7 +87,7 @@ CLIENT_ORIGIN = the react app url.
 CLIENT_ORIGIN_DEV = the gitpod url.
 ```
 
-Import axios into the frontend:
+Install axios with npm:
 
 ```sh
 npm i axios
