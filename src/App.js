@@ -16,6 +16,9 @@ import UsernameForm from "./pages/profiles/UsernameForm";
 import UserPasswordForm from "./pages/profiles/UserPasswordForm";
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import NotFound from "./components/NotFound";
+import Questions from "./pages/polls/Questions";
+import QuestionForm from "./pages/polls/QuestionForm";
+import QuestionPage from "./pages/polls/QuestionPage";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -74,6 +77,13 @@ function App() {
             path="/profiles/:id/edit"
             render={() => <ProfileEditForm />}
           />
+          <Route exact path="/questions" render={() => <Questions />} />
+          <Route
+            exact
+            path="/questions/create"
+            render={() => <QuestionForm />}
+          />
+          <Route exact path="/questions/:id" render={() => <QuestionPage />} />
           <Route render={() => <NotFound />} />
         </Switch>
       </Container>
