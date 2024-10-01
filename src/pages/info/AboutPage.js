@@ -1,12 +1,15 @@
 import React from "react";
-import AboutPage from "./AboutPage";
 
-function App() {
+import Card from "react-bootstrap/Card";
+
+const AboutPage = () => {
   return (
-    <div className="App">
-      <AboutPage />
-    </div>
+    <Card>
+      <Card.Body>
+        <h1>About Page</h1>
+      </Card.Body>
+    </Card>
   );
-}
+};
 
-export default App;
+export default AboutPage;
