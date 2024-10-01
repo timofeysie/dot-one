@@ -99,7 +99,7 @@ const NavBar = () => {
       fixed="top"
     >
       <Container>
-        <NavLink to="/">
+        <NavLink to="/about">
           <Navbar.Brand>
           <img src={logo} alt="logo" height="45" className={styles.logo}/>
           </Navbar.Brand>
