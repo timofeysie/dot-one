@@ -176,7 +176,7 @@ const Questions = ({ message = "No questions found." }) => {
         <div className="d-flex justify-content-center mb-4">
           <Button type="button" onClick={handleAddQuestion} className={btnStyles.StandardBtn}>
             <i className="fa-regular fa-square-plus" />
-            Add question!
+            Add question
           </Button>
         </div>
         <i className={`fas fa-search ${styles.SearchIcon}`} />
