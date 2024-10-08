@@ -83,6 +83,21 @@ Change the 'start' to  "start": "react-scripts --openssl-legacy-provider start" 
 
 The issue and solutions are described in [this StackOverflow link](https://stackoverflow.com/questions/69692842/error-message-error0308010cdigital-envelope-routinesunsupported).
 
+```sh
+> dot-one@0.1.7 start
+> react-scripts --openssl-legacy-provider start
+
+C:\Program Files\nodejs\node.exe: bad option: --openssl-legacy-provider
+```
+
+In this case I needed to remove the ``` --openssl-legacy-provider``` from the package.json scripts section:
+
+```json
+  "scripts": {
+    "heroku-prebuild": "npm install -g serve",
+    "start": "react-scripts --openssl-legacy-provider start",
+```
+
 ## Developer work flow
 
 Create a branch from the develop branch.  Don't work on the main branch directly.  Pull requests will be made by requesting to merge work from your issue branch into the develop branch.  When we want to do a deployment to prod, there will be a merge of the develop branch into the main branch which will then automatically trigger a deployment to production.
