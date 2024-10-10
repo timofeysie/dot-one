@@ -69,8 +69,15 @@ function ProfilePage() {
 
   const mainProfile = (
     <>
-      {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
-      <Row noGutters className="px-3 text-center">
+      <Row noGutters className="px-3 text-center position-relative">
+        {profile?.is_owner && (
+          <div
+            className="position-absolute"
+            style={{ top: "10px", right: "10px", zIndex: 1000 }}
+          >
+            <ProfileEditDropdown id={profile?.id} />
+          </div>
+        )}
         <Col lg={3} className="text-lg-left">
           <Image
             className={styles.ProfileImage}

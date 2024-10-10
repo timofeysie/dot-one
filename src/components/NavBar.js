@@ -60,7 +60,7 @@ const NavBar = () => {
         to="/questions"
       >
         <i className="fa-regular fa-circle-question" />
-        Questions
+        Polls
       </NavLink>
       <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
         <i className="fas fa-sign-out-alt"></i>Sign out
