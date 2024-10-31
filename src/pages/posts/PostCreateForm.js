@@ -93,20 +93,35 @@ function PostCreateForm() {
 
       <Form.Group>
         <Form.Label>Content</Form.Label>
-        <div name="desciption-container">
+        <div name="desciption-container" className={styles.EditorContainer}>
           <ReactQuill
-            className={appStyles.quill}
+            className={`${appStyles.quill} ${styles.Editor}`}
             value={content}
             preserveWhitespace={true}
             onChange={(value) => handleChange(value)}
             modules={{
               toolbar: [
-                [{ header: "1" }, { header: "2" }, { font: [] }],
-                [{ size: [] }],
-                ["bold", "italic", "underline", "strike", "blockquote"],
+                [{ header: [1, 2, 3, 4, 5, 6, false] }],
+                [{ font: [] }],
+                [{ size: ["small", false, "large", "huge"] }],
+
+                ["bold", "italic", "underline", "strike"],
+                [{ script: "sub" }, { script: "super" }],
+
                 [{ color: [] }, { background: [] }],
+
+                [{ align: [] }],
+
+                [{ list: "ordered" }, { list: "bullet" }],
+                [{ indent: "-1" }, { indent: "+1" }],
+
+                ["blockquote", "code-block"],
+
                 ["link", "image", "video"],
+
                 ["clean"],
+
+                [{ direction: "rtl" }],
               ],
               clipboard: {
                 matchVisual: false,

@@ -30,9 +30,19 @@ function PostsPage({ message, filter = "" }) {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
+        const cacheKey = `posts-${filter}-${query}`;
+
+        const cachedData = localStorage.getItem(cacheKey);
+        if (cachedData) {
+          setPosts(JSON.parse(cachedData));
+          setHasLoaded(true);
+        }
+
         const { data } = await axiosReq.get(`/posts/?${filter}search=${query}`);
         setPosts(data);
         setHasLoaded(true);
+
+        localStorage.setItem(cacheKey, JSON.stringify(data));
       } catch (err) {
         console.log(err);
       }
