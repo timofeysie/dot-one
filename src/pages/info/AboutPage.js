@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 import AboutCard from "../../components/AboutCard";
 
 const AboutPage = () => (
-  <div style={{ width: "100%", paddingTop: "81px"}}>
+  <div style={{ width: "98%", paddingTop: "81px", margin: "16px" }}>
     <Card className="mt-4" style={{ width: "100%" }}>
       <Card.Body>
         <h1>About Us</h1>
@@ -11,7 +11,7 @@ const AboutPage = () => (
       </Card.Body>
     </Card>
 
-    <Card className="mt-4" style={{ width: "100%" }}>
+    <Card className="mt-4 mb-4" style={{ width: "100%" }}>
       <Card.Body>
         <h2>Our Mission</h2>
         <p>Our mission is to create a community.</p>
