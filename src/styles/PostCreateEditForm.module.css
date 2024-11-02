@@ -1,3 +1,24 @@
 .Container {
   min-height: 343px;
 }
+
+.EditorContainer {
+  position: relative;
+}
+
+.Editor {
+  resize: vertical;
+  min-height: 200px;
+  max-height: 800px;
+}
+
+.Editor :global(.ql-container) {
+  height: calc(100% - 42px);
+  min-height: 150px;
+}
+
+.Editor :global(.ql-editor) {
+  height: 100%;
+  resize: vertical;
+  overflow-y: auto;
+}
