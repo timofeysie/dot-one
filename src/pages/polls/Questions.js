@@ -144,7 +144,15 @@ const Questions = ({ message = "No questions found." }) => {
                   }
                 />
                 {showResults[question.id] && (
-                  <span className="ml-2">{answer.votes_count || 0} votes</span>
+                  <span
+                    style={{
+                      marginLeft: "10px",
+                      minWidth: "70px",
+                      textAlign: "right",
+                    }}
+                  >
+                    {answer.votes_count || 0} votes
+                  </span>
                 )}
               </div>
             ))}
@@ -174,9 +182,13 @@ const Questions = ({ message = "No questions found." }) => {
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2 mx-auto" lg={8}>
         <div className="d-flex justify-content-center mb-4">
-          <Button type="button" onClick={handleAddQuestion} className={btnStyles.StandardBtn}>
+          <Button
+            type="button"
+            onClick={handleAddQuestion}
+            className={btnStyles.StandardBtn}
+          >
             <i className="fa-regular fa-square-plus" />
-            Add question!
+            Add question
           </Button>
         </div>
         <i className={`fas fa-search ${styles.SearchIcon}`} />

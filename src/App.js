@@ -8,6 +8,7 @@ import SignUpForm from "./pages/auth/SignUpForm";
 import SignInForm from "./pages/auth/SignInForm";
 import PostCreateForm from "./pages/posts/PostCreateForm";
 import PostPage from "./pages/posts/PostPage";
+import AboutPage from "./pages/info/AboutPage";
 import PostsPage from "./pages/posts/PostsPage";
 import { useCurrentUser } from "./contexts/CurrentUserContext";
 import PostEditForm from "./pages/posts/PostEditForm";
@@ -27,66 +28,166 @@ function App() {
   return (
     <div className={styles.App}>
       <NavBar />
-      <Container className={styles.Main}>
-        <Switch>
-          <Route
-            exact
-            path="/"
-            render={() => (
+
+      <Switch>
+        <Route
+          exact
+          path="/about"
+          render={() => <AboutPage message="About Page" />}
+        />
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <Container className={styles.Main}>
               <PostsPage message="No results found. Adjust the search keyword." />
-            )}
-          />
-          <Route
-            exact
-            path="/feed"
-            render={() => (
+            </Container>
+          )}
+        />
+
+        <Route
+          exact
+          path="/feed"
+          render={() => (
+            <Container className={styles.Main}>
               <PostsPage
                 message="No results found. Adjust the search keyword or follow a user."
                 filter={`owner__followed__owner__profile=${profile_id}&`}
               />
-            )}
-          />
-          <Route
-            exact
-            path="/liked"
-            render={() => (
+            </Container>
+          )}
+        />
+        <Route
+          exact
+          path="/liked"
+          render={() => (
+            <Container className={styles.Main}>
               <PostsPage
                 message="No results found. Adjust the search keyword or like a post."
                 filter={`likes__owner__profile=${profile_id}&ordering=-likes__created_at&`}
               />
-            )}
-          />
-          <Route exact path="/signin" render={() => <SignInForm />} />
-          <Route exact path="/signup" render={() => <SignUpForm />} />
-          <Route exact path="/posts/create" render={() => <PostCreateForm />} />
-          <Route exact path="/posts/:id" render={() => <PostPage />} />
-          <Route exact path="/posts/:id/edit" render={() => <PostEditForm />} />
-          <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
-          <Route
-            exact
-            path="/profiles/:id/edit/username"
-            render={() => <UsernameForm />}
-          />
-          <Route
-            exact
-            path="/profiles/:id/edit/password"
-            render={() => <UserPasswordForm />}
-          />
-          <Route
-            exact
-            path="/profiles/:id/edit"
-            render={() => <ProfileEditForm />}
-          />
-          <Route exact path="/questions" render={() => <Questions />} />
-          <Route
-            exact
-            path="/questions/create"
-            render={() => <QuestionForm />}
-          />
-          <Route exact path="/questions/:id" render={() => <QuestionPage />} />
-          <Route render={() => <NotFound />} />
-        </Switch>
-      </Container>
+            </Container>
+          )}
+        />
+        <Route
+          exact
+          path="/signin"
+          render={() => (
+            <Container className={styles.Main}>
+              <SignInForm />{" "}
+            </Container>
+          )}
+        />
+
+        <Route
+          exact
+          path="/signup"
+          render={() => (
+            <Container className={styles.Main}>
+              <SignUpForm />{" "}
+            </Container>
+          )}
+        />
+        <Route
+          exact
+          path="/posts/create"
+          render={() => (
+            <Container className={styles.Main}>
+              <PostCreateForm />{" "}
+            </Container>
+          )}
+        />
+
+        <Route
+          exact
+          path="/posts/:id"
+          render={() => (
+            <Container className={styles.Main}>
+              <PostPage />{" "}
+            </Container>
+          )}
+        />
+
+        <Route
+          exact
+          path="/posts/:id/edit"
+          render={() => (
+            <Container className={styles.Main}>
+              <PostEditForm />{" "}
+            </Container>
+          )}
+        />
+        <Route
+          exact
+          path="/profiles/:id"
+          render={() => (
+            <Container className={styles.Main}>
+              <ProfilePage />{" "}
+            </Container>
+          )}
+        />
+        <Route
+          exact
+          path="/profiles/:id/edit/username"
+          render={() => (
+            <Container className={styles.Main}>
+              <UsernameForm />{" "}
+            </Container>
+          )}
+        />
+        <Route
+          exact
+          path="/profiles/:id/edit/password"
+          render={() => (
+            <Container className={styles.Main}>
+              <UserPasswordForm />{" "}
+            </Container>
+          )}
+        />
+        <Route
+          exact
+          path="/profiles/:id/edit"
+          render={() => (
+            <Container className={styles.Main}>
+              <ProfileEditForm />{" "}
+            </Container>
+          )}
+        />
+        <Route
+          exact
+          path="/questions"
+          render={() => (
+            <Container className={styles.Main}>
+              <Questions />{" "}
+            </Container>
+          )}
+        />
+        <Route
+          exact
+          path="/questions/create"
+          render={() => (
+            <Container className={styles.Main}>
+              <QuestionForm />{" "}
+            </Container>
+          )}
+        />
+        <Route
+          exact
+          path="/questions/:id"
+          render={() => (
+            <Container className={styles.Main}>
+              <QuestionPage />{" "}
+            </Container>
+          )}
+        />
+        <Route
+          render={() => (
+            <Container className={styles.Main}>
+              <NotFound />{" "}
+            </Container>
+          )}
+        />
+      </Switch>
     </div>
   );
 }

@@ -29,12 +29,27 @@ function PostPage() {
   useEffect(() => {
     const handleMount = async () => {
       try {
+        const cachedData = localStorage.getItem(`post-${id}`);
+        if (cachedData) {
+          const { post: cachedPost, comments: cachedComments } =
+            JSON.parse(cachedData);
+          setPost({ results: [cachedPost] });
+          setComments(cachedComments);
+        }
         const [{ data: post }, { data: comments }] = await Promise.all([
           axiosReq.get(`/posts/${id}`),
           axiosReq.get(`/comments/?post=${id}`),
         ]);
         setPost({ results: [post] });
         setComments(comments);
+        localStorage.setItem(
+          `post-${id}`,
+          JSON.stringify({
+            post,
+            comments,
+            timestamp: new Date().getTime(),
+          })
+        );
       } catch (err) {
         console.log(err);
       }

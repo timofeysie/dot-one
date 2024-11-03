@@ -59,7 +59,8 @@ const NavBar = () => {
         activeClassName={styles.Active}
         to="/questions"
       >
-        <i className="fa-regular fa-circle-question" />Questions
+        <i className="fa-regular fa-circle-question" />
+        Polls
       </NavLink>
       <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
         <i className="fas fa-sign-out-alt"></i>Sign out
@@ -99,14 +100,12 @@ const NavBar = () => {
       fixed="top"
     >
       <Container>
-        <NavLink to="/">
+        <NavLink to="/about">
           <Navbar.Brand>
-          <img src={logo} alt="logo" height="45" className={styles.logo}/>
+            <img src={logo} alt="logo" height="45" className={styles.logo} />
           </Navbar.Brand>
         </NavLink>
-        <div className={`${styles.version}`}>
-          v{version}
-        </div>
+        <div className={`${styles.version}`}>v{version}</div>
         {currentUser && addPostIcon}
         <Navbar.Toggle
           ref={ref}
