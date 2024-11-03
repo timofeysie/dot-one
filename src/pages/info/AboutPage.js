@@ -1,22 +1,25 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
-import MyComponentWrapper from "../../components/WebComponents/MyComponentWrapper";
+import AboutCard from "../../components/AboutCard";
 
-const AboutPage = () => {
-  const handleIncrement = () => {
-    console.log('Increment occurred in the Web Component');
-    // Add any additional logic you want to execute when increment happens
-  };
-
-  return (
-    <Card>
+const AboutPage = () => (
+  <div style={{ width: "98%", paddingTop: "81px", margin: "16px" }}>
+    <Card className="mt-4" style={{ width: "100%" }}>
       <Card.Body>
-        <h1>About Page</h1>
-        <h1>My React App with Web Component</h1>
-        <MyComponentWrapper onIncrement={handleIncrement} />
+        <h1>About Us</h1>
+        <p>Welcome to our platform!</p>
       </Card.Body>
     </Card>
-  );
-};
+
+    <Card className="mt-4 mb-4" style={{ width: "100%" }}>
+      <Card.Body>
+        <h2>Our Mission</h2>
+        <p>Our mission is to create a community.</p>
+      </Card.Body>
+    </Card>
+
+    <AboutCard />
+  </div>
+);
 
 export default AboutPage;
