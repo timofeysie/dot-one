@@ -26,20 +26,22 @@ class LinkSelector extends HTMLElement {
   }
 
   attachEventListeners() {
-    const select = this.shadowRoot.querySelector('select');
+    const select = this.shadowRoot.querySelector("select");
     if (select) {
-      select.addEventListener('change', this.handleChange);
+      select.addEventListener("change", this.handleChange);
     }
   }
 
   handleChange(event) {
     const selectedValue = event.target.value;
     this.setState({ selectedLink: selectedValue });
-    this.dispatchEvent(new CustomEvent('linkSelected', {
-      detail: selectedValue,
-      bubbles: true,
-      composed: true
-    }));
+    this.dispatchEvent(
+      new CustomEvent("linkSelected", {
+        detail: selectedValue,
+        bubbles: true,
+        composed: true,
+      })
+    );
   }
 
   setState(newState) {
@@ -66,12 +68,16 @@ class LinkSelector extends HTMLElement {
       </style>
       <select>
         <option value="">Select a link source...</option>
-        ${this.state.links.map(link => `
+        ${this.state.links
+          .map(
+            (link) => `
           <option value="${link.type}">${link.title}</option>
-        `).join('')}
+        `
+          )
+          .join("")}
       </select>
     `;
-    
+
     this.shadowRoot.innerHTML = template;
   }
 }

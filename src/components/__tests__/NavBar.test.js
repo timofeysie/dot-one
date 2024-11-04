@@ -1,49 +1,95 @@
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
-import { CurrentUserProvider } from "../../contexts/CurrentUserContext";
 import NavBar from "../NavBar";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import axios from "axios";
 
-test("renders NavBar", () => {
-  render(
-    <Router>
-      <NavBar />
-    </Router>
-  );
+// Mock axios
+jest.mock("axios");
 
-  // screen.debug();
-  const signInLink = screen.getByRole("link", { name: "Sign in" });
-  expect(signInLink).toBeInTheDocument();
-});
+// Mock the useClickOutsideToggle hook
+jest.mock("../hooks/useClickOutsideToggle", () => ({
+  __esModule: true,
+  default: () => ({
+    expanded: false,
+    setExpanded: jest.fn(),
+    ref: { current: null },
+  }),
+}));
 
-test("renders link to the user profile for a logged in user", async () => {
-  render(
-    <Router>
-      <CurrentUserProvider>
-        <NavBar />
-      </CurrentUserProvider>
-    </Router>
-  );
+describe("NavBar", () => {
+  const renderNavBar = (currentUser = null) => {
+    const setCurrentUser = jest.fn();
+    const contextValue = {
+      currentUser,
+      setCurrentUser,
+    };
 
-  const profileAvatar = await screen.findByText("Profile");
-  expect(profileAvatar).toBeInTheDocument();
-});
+    render(
+      <CurrentUserContext.Provider value={contextValue}>
+        <Router>
+          <NavBar />
+        </Router>
+      </CurrentUserContext.Provider>
+    );
 
-test("renders Sign in and Sign up buttons again on log out", async () => {
-  render(
-    <Router>
-      <CurrentUserProvider>
-        <NavBar />
-      </CurrentUserProvider>
-    </Router>
-  );
+    return { setCurrentUser };
+  };
 
-  const signOutLink = await screen.findByRole("link", { name: "Sign out" });
-  fireEvent.click(signOutLink);
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
-  const signInLink = await screen.findByRole("link", { name: "Sign in" });
-  const signUpLink = await screen.findByRole("link", { name: "Sign up" });
+  test("renders NavBar with user logged in", () => {
+    const currentUser = {
+      profile_id: 1,
+      profile_image: "https://example.com/image.jpg",
+      username: "testuser"
+    };
 
-  expect(signInLink).toBeInTheDocument();
-  expect(signUpLink).toBeInTheDocument();
+    renderNavBar(currentUser);
+
+    // Check for logged-in navigation links
+    expect(screen.getByText(/feed/i)).toBeInTheDocument();
+    expect(screen.getByText(/liked/i)).toBeInTheDocument();
+    expect(screen.getByText(/polls/i)).toBeInTheDocument();
+    expect(screen.getByText(/sign out/i)).toBeInTheDocument();
+    expect(screen.getByText(/add post/i)).toBeInTheDocument();
+  });
+
+  test("renders NavBar with user logged out", () => {
+    renderNavBar(null);
+
+    // Check for logged-out navigation links
+    expect(screen.getByText(/sign in/i)).toBeInTheDocument();
+    expect(screen.getByText(/sign up/i)).toBeInTheDocument();
+    
+    // Verify logged-in content is not present
+    expect(screen.queryByText(/feed/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/liked/i)).not.toBeInTheDocument();
+  });
+
+  test("handles sign out", async () => {
+    const currentUser = {
+      profile_id: 1,
+      profile_image: "https://example.com/image.jpg",
+      username: "testuser"
+    };
+
+    // Mock successful axios response
+    axios.post.mockResolvedValueOnce({});
+
+    const { setCurrentUser } = renderNavBar(currentUser);
+
+    // Find and click the sign out link
+    const signOutLink = screen.getByText(/sign out/i);
+    fireEvent.click(signOutLink);
+
+    // Wait for the async operations to complete
+    await waitFor(() => {
+      expect(axios.post).toHaveBeenCalledWith("dj-rest-auth/logout/");
+      expect(setCurrentUser).toHaveBeenCalledWith(null);
+    });
+  });
 });
