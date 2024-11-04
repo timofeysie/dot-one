@@ -16,6 +16,7 @@ import { axiosReq } from "../../api/axiosDefaults";
 import { useRedirect } from "../../hooks/useRedirect";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import LinkSelectorWrapper from "../../components/WebComponents/LinkSelector/LinkSelectorWrapper";
 
 function PostCreateForm() {
   useRedirect("loggedOut");
@@ -72,6 +73,12 @@ function PostCreateForm() {
         setErrors(err.response?.data);
       }
     }
+  };
+
+  const handleLinkSelected = (selectedValue) => {
+    console.log("Selected link type:", selectedValue);
+    // Here you can handle the selected link type
+    // Maybe update the content in the ReactQuill editor
   };
 
   const textFields = (
@@ -196,6 +203,9 @@ function PostCreateForm() {
             ))}
 
             <div className="d-md-none">{textFields}</div>
+          </Container>
+          <Container className={`${appStyles.Content} mt-3`}>
+            <LinkSelectorWrapper onSelect={handleLinkSelected} />
           </Container>
         </Col>
         <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">
