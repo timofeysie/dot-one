@@ -2,14 +2,13 @@ import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import NavBar from "../NavBar";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import axios from "axios";
 
 // Mock axios
 jest.mock("axios");
 
 // Mock the useClickOutsideToggle hook
-jest.mock("../hooks/useClickOutsideToggle", () => ({
+jest.mock("../../hooks/useClickOutsideToggle", () => ({
   __esModule: true,
   default: () => ({
     expanded: false,
@@ -18,39 +17,34 @@ jest.mock("../hooks/useClickOutsideToggle", () => ({
   }),
 }));
 
+// Mock the CurrentUserContext hooks
+jest.mock("../../contexts/CurrentUserContext", () => ({
+  useCurrentUser: jest.fn(),
+  useSetCurrentUser: jest.fn(),
+}));
+
+// Import the actual hooks after mocking
+const { useCurrentUser, useSetCurrentUser } = require("../../contexts/CurrentUserContext");
+
 describe("NavBar", () => {
-  const renderNavBar = (currentUser = null) => {
-    const setCurrentUser = jest.fn();
-    const contextValue = {
-      currentUser,
-      setCurrentUser,
-    };
-
-    render(
-      <CurrentUserContext.Provider value={contextValue}>
-        <Router>
-          <NavBar />
-        </Router>
-      </CurrentUserContext.Provider>
-    );
-
-    return { setCurrentUser };
-  };
-
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
   test("renders NavBar with user logged in", () => {
-    const currentUser = {
+    useCurrentUser.mockReturnValue({
       profile_id: 1,
       profile_image: "https://example.com/image.jpg",
       username: "testuser"
-    };
+    });
+    useSetCurrentUser.mockReturnValue(jest.fn());
 
-    renderNavBar(currentUser);
+    render(
+      <Router>
+        <NavBar />
+      </Router>
+    );
 
-    // Check for logged-in navigation links
     expect(screen.getByText(/feed/i)).toBeInTheDocument();
     expect(screen.getByText(/liked/i)).toBeInTheDocument();
     expect(screen.getByText(/polls/i)).toBeInTheDocument();
@@ -59,11 +53,22 @@ describe("NavBar", () => {
   });
 
   test("renders NavBar with user logged out", () => {
-    renderNavBar(null);
+    useCurrentUser.mockReturnValue(null);
+    useSetCurrentUser.mockReturnValue(jest.fn());
+
+    render(
+      <Router>
+        <NavBar />
+      </Router>
+    );
 
     // Check for logged-out navigation links
-    expect(screen.getByText(/sign in/i)).toBeInTheDocument();
-    expect(screen.getByText(/sign up/i)).toBeInTheDocument();
+    const navLinks = screen.getAllByRole('link');
+    const signInLink = navLinks.find(link => link.href.includes('/signin'));
+    const signUpLink = navLinks.find(link => link.href.includes('/signup'));
+
+    expect(signInLink).toBeInTheDocument();
+    expect(signUpLink).toBeInTheDocument();
     
     // Verify logged-in content is not present
     expect(screen.queryByText(/feed/i)).not.toBeInTheDocument();
@@ -71,25 +76,29 @@ describe("NavBar", () => {
   });
 
   test("handles sign out", async () => {
-    const currentUser = {
+    const mockSetCurrentUser = jest.fn();
+    useCurrentUser.mockReturnValue({
       profile_id: 1,
       profile_image: "https://example.com/image.jpg",
       username: "testuser"
-    };
+    });
+    useSetCurrentUser.mockReturnValue(mockSetCurrentUser);
 
     // Mock successful axios response
     axios.post.mockResolvedValueOnce({});
 
-    const { setCurrentUser } = renderNavBar(currentUser);
+    render(
+      <Router>
+        <NavBar />
+      </Router>
+    );
 
-    // Find and click the sign out link
     const signOutLink = screen.getByText(/sign out/i);
     fireEvent.click(signOutLink);
 
-    // Wait for the async operations to complete
     await waitFor(() => {
       expect(axios.post).toHaveBeenCalledWith("dj-rest-auth/logout/");
-      expect(setCurrentUser).toHaveBeenCalledWith(null);
+      expect(mockSetCurrentUser).toHaveBeenCalledWith(null);
     });
   });
 });
