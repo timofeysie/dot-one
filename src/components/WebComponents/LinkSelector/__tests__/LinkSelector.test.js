@@ -53,4 +53,79 @@ describe("LinkSelector", () => {
 
     expect(linkSelector.state.selectedLink).toBe("WikipediaLink");
   });
+
+  test('displays first link option as preselected with constructed URL', () => {
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+    container.innerHTML = '<link-selector></link-selector>';
+    const linkSelector = container.querySelector('link-selector');
+    const shadow = linkSelector.shadowRoot;
+
+    const select = shadow.querySelector('[data-testid="link-select"]');
+    expect(select.value).toBe('APNewsLink');
+
+    const urlDisplay = shadow.querySelector('[data-testid="url-display"]');
+    expect(urlDisplay).toBeInTheDocument();
+    expect(urlDisplay.textContent).toBe('https://apnews.com/hub/');
+  });
+
+  test('updates URL when searchTerm attribute changes', () => {
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+    container.innerHTML = '<link-selector></link-selector>';
+    const linkSelector = container.querySelector('link-selector');
+    
+    // Set the search term
+    linkSelector.setAttribute('search-term', 'Breaking News Story');
+    
+    const shadow = linkSelector.shadowRoot;
+    const urlDisplay = shadow.querySelector('[data-testid="url-display"]');
+    
+    // Should format the URL with dashes
+    expect(urlDisplay.textContent).toBe('https://apnews.com/hub/Breaking-News-Story');
+    expect(urlDisplay.href).toBe('https://apnews.com/hub/Breaking-News-Story');
+  });
+
+  test('updates URL format based on selected link type', () => {
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+    container.innerHTML = '<link-selector search-term="Breaking News"></link-selector>';
+    const linkSelector = container.querySelector('link-selector');
+    const shadow = linkSelector.shadowRoot;
+
+    // Change to Wikipedia
+    const select = shadow.querySelector('[data-testid="link-select"]');
+    select.value = 'WikipediaLink';
+    select.dispatchEvent(new Event('change'));
+
+    const urlDisplay = shadow.querySelector('[data-testid="url-display"]');
+    expect(urlDisplay.textContent).toBe('https://en.wikipedia.org/wiki/Breaking_News');
+  });
+
+  test('emits useLink event when button is clicked', () => {
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+    container.innerHTML = '<link-selector search-term="Test Title"></link-selector>';
+    const linkSelector = container.querySelector('link-selector');
+    
+    // Create a spy for the event
+    const useLinkSpy = jest.fn();
+    linkSelector.addEventListener('useLink', (e) => useLinkSpy(e.detail));
+    
+    const shadow = linkSelector.shadowRoot;
+    const useButton = shadow.querySelector('[data-testid="use-link-button"]');
+    
+    useButton.click();
+    
+    expect(useLinkSpy).toHaveBeenCalledWith({
+      url: 'https://apnews.com/hub/Test-Title',
+      title: 'Test Title',
+      linkType: 'AP News'
+    });
+  });
+
+  // Clean up after test
+  afterEach(() => {
+    document.body.innerHTML = '';
+  });
 });

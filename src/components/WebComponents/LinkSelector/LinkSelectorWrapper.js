@@ -1,40 +1,38 @@
-import React, { useRef, useEffect } from "react";
-import PropTypes from "prop-types";
+import React, { useEffect, useRef } from 'react';
+import './LinkSelector';
 
-// Import the web component
-import "./LinkSelector";
-
-const LinkSelectorWrapper = ({ onSelect }) => {
-  const webComponentRef = useRef(null);
+// eslint-disable-next-line react/prop-types, no-unused-vars
+const LinkSelectorWrapper = ({ searchTerm = '', onSelect, onUseLink }) => {
+  const selectorRef = useRef(null);
 
   useEffect(() => {
-    const webComponent = webComponentRef.current;
-    if (webComponent) {
-      const handleLinkSelected = (event) => {
-        if (onSelect) onSelect(event.detail);
+
+    if (selectorRef.current) {
+      const handleUseLink = (e) => {
+        if (onUseLink) {
+          onUseLink(e.detail);
+        } else {
+          console.warn('LinkSelectorWrapper: onUseLink prop is not defined');
+        }
       };
 
-      webComponent.addEventListener("linkSelected", handleLinkSelected);
+      selectorRef.current.addEventListener('useLink', handleUseLink);
 
       return () => {
-        webComponent.removeEventListener("linkSelected", handleLinkSelected);
+        if (selectorRef.current) {
+          selectorRef.current.removeEventListener('useLink', handleUseLink);
+        }
       };
     }
-  }, [onSelect]);
+  }, [onUseLink]);
 
-  return (
-    <div>
-      <link-selector ref={webComponentRef}></link-selector>
-    </div>
-  );
-};
+  useEffect(() => {
+    if (selectorRef.current) {
+      selectorRef.current.setAttribute('search-term', searchTerm || '');
+    }
+  }, [searchTerm]);
 
-LinkSelectorWrapper.propTypes = {
-  onSelect: PropTypes.func,
-};
-
-LinkSelectorWrapper.defaultProps = {
-  onSelect: () => {},
+  return <link-selector ref={selectorRef} search-term={searchTerm} />;
 };
 
 export default LinkSelectorWrapper;

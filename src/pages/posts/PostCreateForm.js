@@ -77,8 +77,17 @@ function PostCreateForm() {
 
   const handleLinkSelected = (selectedValue) => {
     console.log("Selected link type:", selectedValue);
-    // Here you can handle the selected link type
-    // Maybe update the content in the ReactQuill editor
+  };
+
+  const handleUseLink = ({ url, title, linkType }) => {
+    // Create the link HTML
+    const linkText = `${title} (${linkType})`;
+    const linkHtml = `<a href="${url}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
+    
+    setPostData(prevData => ({
+      ...prevData,
+      content: prevData.content ? `${prevData.content}<p>${linkHtml}</p>` : `<p>${linkHtml}</p>`
+    }));
   };
 
   const textFields = (
@@ -205,7 +214,11 @@ function PostCreateForm() {
             <div className="d-md-none">{textFields}</div>
           </Container>
           <Container className={`${appStyles.Content} mt-3`}>
-            <LinkSelectorWrapper onSelect={handleLinkSelected} />
+            <LinkSelectorWrapper 
+              searchTerm={title} 
+              onSelect={handleLinkSelected}
+              onUseLink={handleUseLink}
+            />
           </Container>
         </Col>
         <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">

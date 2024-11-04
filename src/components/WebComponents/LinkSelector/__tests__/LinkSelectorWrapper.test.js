@@ -75,4 +75,21 @@ describe("LinkSelectorWrapper", () => {
       expect(mockOnSelect).toHaveBeenCalledWith("APNewsLink");
     });
   });
+
+  test("passes search term to link-selector component", () => {
+    // Mock the custom element registration
+    if (!customElements.get('link-selector')) {
+      customElements.define('link-selector', class extends HTMLElement {
+        constructor() {
+          super();
+          this.attachShadow({ mode: 'open' });
+        }
+      });
+    }
+
+    render(<LinkSelectorWrapper searchTerm="Test Title" onSelect={() => {}} />);
+    
+    const linkSelector = document.querySelector('link-selector');
+    expect(linkSelector).toHaveAttribute('search-term', 'Test Title');
+  });
 });
