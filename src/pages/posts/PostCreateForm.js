@@ -16,6 +16,7 @@ import { axiosReq } from "../../api/axiosDefaults";
 import { useRedirect } from "../../hooks/useRedirect";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import LinkSelectorWrapper from "../../components/WebComponents/LinkSelector/LinkSelectorWrapper";
 
 function PostCreateForm() {
   useRedirect("loggedOut");
@@ -72,6 +73,21 @@ function PostCreateForm() {
         setErrors(err.response?.data);
       }
     }
+  };
+
+  const handleLinkSelected = (selectedValue) => {
+    console.log("Selected link type:", selectedValue);
+  };
+
+  const handleUseLink = ({ url, title, linkType }) => {
+    // Create the link HTML
+    const linkText = `${title} (${linkType})`;
+    const linkHtml = `<a href="${url}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
+    
+    setPostData(prevData => ({
+      ...prevData,
+      content: prevData.content ? `${prevData.content}<p>${linkHtml}</p>` : `<p>${linkHtml}</p>`
+    }));
   };
 
   const textFields = (
@@ -196,6 +212,13 @@ function PostCreateForm() {
             ))}
 
             <div className="d-md-none">{textFields}</div>
+          </Container>
+          <Container className={`${appStyles.Content} mt-3`}>
+            <LinkSelectorWrapper 
+              searchTerm={title} 
+              onSelect={handleLinkSelected}
+              onUseLink={handleUseLink}
+            />
           </Container>
         </Col>
         <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">
