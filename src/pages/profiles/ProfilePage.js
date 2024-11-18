@@ -32,6 +32,7 @@ function ProfilePage() {
 
   const currentUser = useCurrentUser();
   const { id } = useParams();
+  const [error, setError] = useState(null);
 
   const { setProfileData, handleFollow, handleUnfollow } = useSetProfileData();
   const { pageProfile } = useProfileData();
@@ -61,7 +62,12 @@ function ProfilePage() {
         setProfilePosts(profilePosts);
         setHasLoaded(true);
       } catch (err) {
-        console.log(err);
+        setHasLoaded(true);
+        if (err.response?.status === 404) {
+          setError("Profile not found!"); // Set the error message
+        } else {
+          console.log(err);
+        }
       }
     };
     fetchData();
@@ -157,10 +163,14 @@ function ProfilePage() {
         <PopularProfiles mobile />
         <Container className={appStyles.Content}>
           {hasLoaded ? (
-            <>
-              {mainProfile}
-              {mainProfilePosts}
-            </>
+            error ? (
+              <p>{error}</p> // Display error message
+            ) : (
+              <>
+                {mainProfile}
+                {mainProfilePosts}
+              </>
+            )
           ) : (
             <Asset spinner />
           )}
