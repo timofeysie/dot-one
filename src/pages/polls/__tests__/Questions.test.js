@@ -11,12 +11,6 @@ jest.mock("../../../contexts/CurrentUserContext", () => ({
     currentUser: { username: "user1" }
   })
 }));
-jest.mock("lottie-react", () => {
-  return {
-    __esModule: true,
-    default: () => <div>Mocked Lottie Animation</div>,
-  };
-});
 
 const mockQuestionsData = {
   results: [
