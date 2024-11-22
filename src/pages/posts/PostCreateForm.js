@@ -17,6 +17,7 @@ import { useRedirect } from "../../hooks/useRedirect";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import LinkSelectorWrapper from "../../components/WebComponents/LinkSelector/LinkSelectorWrapper";
+import GoogleTrends from "../../components/Trends/GoogleTrends";
 
 function PostCreateForm() {
   useRedirect("loggedOut");
@@ -219,6 +220,9 @@ function PostCreateForm() {
               onSelect={handleLinkSelected}
               onUseLink={handleUseLink}
             />
+          </Container>
+          <Container className={`${appStyles.Content} mt-3`}>
+            <GoogleTrends />
           </Container>
         </Col>
         <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">
