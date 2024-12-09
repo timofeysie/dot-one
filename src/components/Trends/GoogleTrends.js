@@ -7,7 +7,7 @@ import Container from "react-bootstrap/Container";
 import Spinner from "react-bootstrap/Spinner";
 import Alert from "react-bootstrap/Alert";
 import styles from "../../styles/GoogleTrends.module.css";
-import axios from "axios";
+import { axiosNest } from "../../api/axiosDefaults";
 
 function GoogleTrends() {
   const [trends, setTrends] = useState([]);
@@ -20,34 +20,24 @@ function GoogleTrends() {
     type: "all",
     sort: "relevance",
   });
-
   const fetchTrends = async () => {
     setIsLoading(true);
     setError(null);
+    console.log("Fetching trends...");
     try {
-      const response = await axios.get(
-        "http://localhost:3001/parse-realtime-data",
-        {
-          params: {
-            geo: params.geo,
-            hours: params.hours,
-            category: params.category,
-            type: params.type,
-            sort: params.sort,
-          },
-          withCredentials: false,
-        }
-      );
+      const response = await axiosNest.get("/parse-realtime-data", {
+        geo: params.geo,
+        hours: params.hours,
+        category: params.category,
+        type: params.type,
+        sort: params.sort,
+      });
 
       console.log("API Response:", response);
 
       if (response.data) {
         console.log("Response data:", response.data);
-        if (response.data.data) {
-          setTrends(response.data.data);
-        } else {
-          setTrends(response.data);
-        }
+        setTrends(response.data.data || response.data);
       } else {
         setError("No data received from the API");
       }
@@ -62,7 +52,6 @@ function GoogleTrends() {
       setIsLoading(false);
     }
   };
-
   const handleParamChange = (event) => {
     const { name, value } = event.target;
     setParams((prevParams) => ({

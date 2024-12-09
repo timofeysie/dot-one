@@ -7,5 +7,21 @@ axios.defaults.baseURL = "https://drf-two-eb17ecbff99f.herokuapp.com/";
 axios.defaults.headers.post["Content-Type"] = "multipart/form-data";
 axios.defaults.withCredentials = true;
 
+export const axiosNest = axios.create({
+  baseURL: "http://localhost:3001",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  withCredentials: true,
+});
+
+axiosNest.interceptors.request.use((config) => {
+  const token = localStorage.getItem("access_token"); // or however you store your DRF token
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
 export const axiosReq = axios.create();
 export const axiosRes = axios.create();

@@ -1,0 +1,654 @@
+{
+    "timestamp": "2024-12-01T00:42:40.066Z",
+    "data": [
+        {
+            "title": "syracuse football",
+            "sparkline": "-10,48 0,47 1,47 3,47 4,47 6,47 7,47 9,47 10,47 11,47 13,47 14,47 16,47 17,47 18,47 20,47 21,46 23,46 24,46 26,46 27,46 28,47 30,47 31,47 33,47 34,47 36,47 37,47 38,47 40,47 41,47 43,47 44,47 46,47 47,47 48,46 50,46 51,46 53,46 54,46 55,46 57,46 58,46 60,46 61,46 63,46 64,46 65,46 67,46 68,46 70,46 71,45 73,45 74,45 75,45 77,45 78,45 80,45 81,45 82,45 84,45 85,45 87,45 88,45 90,45 91,45 92,45 94,45 95,45 97,45 98,45 100,45 101,44 102,44 104,43 105,42 107,41 108,40 110,40 111,40 112,39 114,39 115,38 117,37 118,35 119,33 121,29 122,24 124,18 125,14 127,18 128,25 138,48",
+            "searchVolume": "200K+ searches",
+            "trendStatus": "Active",
+            "timeAgo": "3 hrs ago",
+            "trendPercentage": "500%",
+            "breakdownTerms": [
+                "miami fl vs syracuse",
+                "miami football"
+            ],
+            "details": {
+                "title": "syracuse football",
+                "terms": [
+                    "miami fl vs syracuse",
+                    "miami football",
+                    "miami vs syracuse",
+                    "miami hurricanes",
+                    "miami hurricanes football",
+                    "miami syracuse",
+                    "syracuse",
+                    "miami",
+                    "syracuse vs miami",
+                    "cam ward",
+                    "syracuse miami",
+                    "university of miami football",
+                    "miami game",
+                    "miami score",
+                    "fran brown"
+                ],
+                "news": [
+                    {
+                        "title": "Miami (FL) Hurricanes vs. Syracuse Orange Live Score and Stats - November \n30, 2024 Gametracker",
+                        "url": "https://www.cbssports.com/college-football/gametracker/live/NCAAF_20241130_MIAMI@CUSE/",
+                        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdMXAvTeqVLZMgCKiUTpMbfMKcj_NCO5JFrf3lRpL62WWKsbEqyMSzT1E3pzU",
+                        "time": "3 days ago",
+                        "source": "CBS Sports"
+                    },
+                    {
+                        "title": "Clemson clinches spot in ACC championship game",
+                        "url": "https://www.wyff4.com/article/clemson-clinches-spot-in-acc-championship-game/63058436",
+                        "imageUrl": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcR9o6jGVAnQNGVQz6toMztr3pNaiDHjkqXC-vEI89Scd0YrSdgEDaF5W4LjkXY",
+                        "time": "30 minutes ago",
+                        "source": "WYFF"
+                    },
+                    {
+                        "title": "SU trails Miami 21-14 at the half",
+                        "url": "https://www.localsyr.com/orange-nation/su-trails-miami-21-14-at-the-half/",
+                        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ6qprm2C2jF1wQKAaMB1MdDRMIPZOqFDSY5a74RoHaRsKeSbYJtRe1UvJSaI",
+                        "time": "2 hours ago",
+                        "source": "WSYR"
+                    }
+                ],
+                "graphData": "<svg width=\"100%\" aria-label=\"Search interest graph\" height=\"190\" viewBox=\"0 0 375 190\"><line class=\"fNzu9c\" x1=\"1\" y1=\"1\" x2=\"374\" y2=\"1\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"48\" x2=\"374\" y2=\"48\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"95\" x2=\"374\" y2=\"95\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"142\" x2=\"374\" y2=\"142\"></line><line class=\"vi1oL\" x1=\"1\" y1=\"189\" x2=\"374\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"1\" x2=\"1\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"125\" x2=\"125\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"250\" x2=\"250\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"374\" x2=\"374\" y2=\"189\"></line><polyline class=\"EATUte\" points=\"2,186 6,186 10,186 14,186 18,186 23,186 27,186 31,186 35,186 39,186 43,186 47,186 51,186 56,186 60,186 64,186 68,186 72,185 76,186 80,186 84,186 89,186 93,186 97,186 101,186 105,186 109,186 113,186 117,186 122,186 126,186 130,186 134,186 138,186 142,186 146,185 150,185 155,184 159,184 163,184 167,184 171,184 175,184 179,183 183,183 187,183 192,183 196,183 200,183 204,182 208,182 212,182 216,181 220,181 225,181 229,181 233,181 237,181 241,181 245,180 249,180 253,179 258,179 262,179 266,179 270,179 274,179 278,179 282,179 286,179 291,179 295,178 299,176 303,173 307,168 311,163 315,159 319,158 324,158 328,157 332,155 336,153 340,148 344,140 348,130 352,115 357,95 361,71 365,56 369,69 373,99\"></polyline></svg>"
+            },
+            "sparklineAnalysis": {
+                "isRising": true,
+                "highestPoint": 14,
+                "lastPoint": 25,
+                "percentageFromPeak": 78.57142857142857
+            }
+        },
+        {
+            "title": "auburn vs alabama",
+            "sparkline": "-10,48 0,47 1,47 3,47 4,47 6,47 7,47 9,47 10,47 11,47 13,47 14,47 16,47 17,47 18,47 20,47 21,47 23,47 24,47 26,47 27,47 28,47 30,47 31,47 33,47 34,47 36,47 37,47 38,47 40,47 41,47 43,47 44,47 46,47 47,47 48,46 50,46 51,46 53,47 54,47 55,47 57,47 58,47 60,47 61,47 63,47 64,47 65,47 67,47 68,47 70,47 71,46 73,46 74,46 75,46 77,46 78,46 80,46 81,46 82,46 84,46 85,46 87,46 88,46 90,46 91,46 92,46 94,46 95,46 97,46 98,46 100,47 101,46 102,41 104,31 105,18 107,10 108,10 110,14 111,17 112,20 114,21 115,21 117,21 118,21 119,21 121,21 122,20 124,19 125,18 127,14 128,8 138,48",
+            "searchVolume": "200K+ searches",
+            "trendStatus": "Active",
+            "timeAgo": "12 hrs ago",
+            "trendPercentage": "1,000%",
+            "breakdownTerms": [
+                "alabama auburn game",
+                "auburn alabama game"
+            ],
+            "details": {
+                "title": "auburn vs alabama",
+                "terms": [
+                    "alabama auburn game",
+                    "auburn alabama game",
+                    "iron bowl score",
+                    "alabama auburn",
+                    "alabama score",
+                    "iron bowl 2024 score",
+                    "auburn",
+                    "jalen milroe",
+                    "where to watch alabama crimson tide football vs auburn tigers football",
+                    "auburn alabama",
+                    "alabama vs auburn 2024",
+                    "alabama crimson tide football",
+                    "alabama auburn score",
+                    "hugh freeze",
+                    "bama"
+                ],
+                "news": [
+                    {
+                        "title": "Jalen Milroe carries the Tide to victory against Auburn during his last \ngame at Bryant-Denny Stadium",
+                        "url": "https://www.wvtm13.com/article/iron-bowl-2024-alabama-auburn-win-milroe/63058383",
+                        "imageUrl": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTmK6IffgWRks3sYvtml3XlR9cEehX-V-97rF7fQEMQWCK4Rf_6TCgddeWNYDc",
+                        "time": "20 minutes ago",
+                        "source": "WVTM"
+                    },
+                    {
+                        "title": "Alabama 28-14 Auburn (Nov 30, 2024) Game Recap",
+                        "url": "http://www.espn.com/ncf/recap?gameId=401628437",
+                        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThETUcB-312N7LeO4X7vGqzhuuLX-J2c9BL-rZwG3CLYXv3cPMwc8oB9cgyUg",
+                        "time": "10 minutes ago",
+                        "source": "ESPN"
+                    },
+                    {
+                        "title": "What channel is Alabama football vs Auburn on today? Time, TV schedule for \nIron Bowl",
+                        "url": "https://www.tuscaloosanews.com/story/sports/college/sec/2024/11/30/watch-alabama-football-vs-auburn-game-today-time-streaming-info-for-iron-bowl/76488119007/",
+                        "imageUrl": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQ6YkbJOiWjUGqwEAMz8UjETWekMR0lawgxcwp5Op2ZTAtrN8qrN6vTzWnbc7E",
+                        "time": "14 hours ago",
+                        "source": "The Tuscaloosa News"
+                    }
+                ],
+                "graphData": "<svg width=\"100%\" aria-label=\"Search interest graph\" height=\"190\" viewBox=\"0 0 375 190\"><line class=\"fNzu9c\" x1=\"1\" y1=\"1\" x2=\"374\" y2=\"1\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"48\" x2=\"374\" y2=\"48\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"95\" x2=\"374\" y2=\"95\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"142\" x2=\"374\" y2=\"142\"></line><line class=\"vi1oL\" x1=\"1\" y1=\"189\" x2=\"374\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"1\" x2=\"1\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"125\" x2=\"125\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"250\" x2=\"250\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"374\" x2=\"374\" y2=\"189\"></line><polyline class=\"EATUte\" points=\"2,186 6,187 10,187 14,187 18,187 23,187 27,187 31,187 35,187 39,187 43,187 47,186 51,186 56,186 60,186 64,186 68,186 72,186 76,186 80,186 84,187 89,187 93,187 97,187 101,187 105,187 109,187 113,187 117,187 122,187 126,187 130,187 134,187 138,186 142,185 146,185 150,186 155,187 159,187 163,187 167,188 171,188 175,187 179,187 183,186 187,186 192,186 196,187 200,187 204,186 208,186 212,185 216,185 220,185 225,185 229,185 233,185 237,184 241,184 245,184 249,184 253,184 258,184 262,184 266,184 270,184 274,183 278,183 282,184 286,186 291,187 295,182 299,164 303,124 307,72 311,40 315,40 319,53 324,67 328,77 332,82 336,83 340,83 344,85 348,84 352,81 357,78 361,75 365,69 369,55 373,29\"></polyline></svg>"
+            },
+            "sparklineAnalysis": {
+                "isRising": true,
+                "highestPoint": 8,
+                "lastPoint": 8,
+                "percentageFromPeak": 0
+            }
+        },
+        {
+            "title": "notre dame vs usc",
+            "sparkline": "-10,48 0,47 1,47 3,47 4,47 6,47 7,47 9,47 10,47 11,47 13,47 14,47 16,47 17,47 18,47 20,47 21,47 23,47 24,47 26,47 27,47 28,47 30,47 31,47 33,47 34,47 36,47 37,47 38,47 40,47 41,47 43,47 44,47 46,47 47,47 48,46 50,46 51,46 53,46 54,46 55,46 57,46 58,47 60,47 61,47 63,46 64,46 65,46 67,46 68,47 70,47 71,47 73,47 74,47 75,47 77,46 78,46 80,46 81,46 82,46 84,46 85,46 87,46 88,46 90,46 91,46 92,46 94,46 95,46 97,46 98,47 100,47 101,46 102,43 104,36 105,27 107,22 108,22 110,24 111,26 112,27 114,27 115,26 117,25 118,23 119,21 121,20 122,18 124,15 125,12 127,9 128,4 138,48",
+            "searchVolume": "200K+ searches",
+            "trendStatus": "Active",
+            "timeAgo": "9 hrs ago",
+            "trendPercentage": "1,000%",
+            "breakdownTerms": [
+                "notre dame football",
+                "usc vs notre dame"
+            ],
+            "details": {
+                "title": "notre dame vs usc",
+                "terms": [
+                    "notre dame football",
+                    "usc vs notre dame",
+                    "notre dame",
+                    "usc football",
+                    "usc",
+                    "usc notre dame",
+                    "notre dame score",
+                    "notre dame usc",
+                    "usc game",
+                    "nd football",
+                    "notre dame game",
+                    "jayden maiava",
+                    "usc trojans football",
+                    "nd vs usc",
+                    "riley leonard"
+                ],
+                "news": [
+                    {
+                        "title": "Will Notre Dame Escape an Upset vs. USC? Bold Predictions for the Big Game",
+                        "url": "https://www.si.com/college/notredame/football/notre-dame-usc-upset-predictions",
+                        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSOplP7zVWcfQf_x71SSbvApQoxv6B7mptUPxmW4aococmJPhvtpJx1VCFl6w",
+                        "time": "20 hours ago",
+                        "source": "Sports Illustrated"
+                    },
+                    {
+                        "title": "Notre Dame football finishes off improbable run through regular season",
+                        "url": "https://www.southbendtribune.com/story/sports/college/football/2024/11/30/could-notre-dame-football-deliver-on-10-wins-over-the-seasons-final-10-weeks/76222773007/",
+                        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiDBPC_UXHpoheIZO8JXga7Mzrz4aWmJ4qeyIhQeV736nwp8dhz_oGR-yWZ2M",
+                        "time": "10 minutes ago",
+                        "source": "South Bend Tribune"
+                    },
+                    {
+                        "title": "Don’t treat Notre Dame VS USC as just another game",
+                        "url": "https://www.onefootdown.com/2024/11/29/24308849/dont-treat-notre-dame-vs-usc-just-another-game-rivalry-jeweled-shillelagh-nd-irish-trojans-football",
+                        "imageUrl": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR1peh9vFm79dkKjNSTh6t-8X1yUmBsyGApkBx0cHPnIKKBf6Xr47uRJpxemY8",
+                        "time": "yesterday",
+                        "source": "One Foot Down"
+                    }
+                ],
+                "graphData": "<svg width=\"100%\" aria-label=\"Search interest graph\" height=\"190\" viewBox=\"0 0 375 190\"><line class=\"fNzu9c\" x1=\"1\" y1=\"1\" x2=\"374\" y2=\"1\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"48\" x2=\"374\" y2=\"48\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"95\" x2=\"374\" y2=\"95\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"142\" x2=\"374\" y2=\"142\"></line><line class=\"vi1oL\" x1=\"1\" y1=\"189\" x2=\"374\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"1\" x2=\"1\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"125\" x2=\"125\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"250\" x2=\"250\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"374\" x2=\"374\" y2=\"189\"></line><polyline class=\"EATUte\" points=\"2,188 6,188 10,188 14,188 18,187 23,187 27,187 31,186 35,186 39,186 43,187 47,187 51,187 56,187 60,188 64,187 68,187 72,186 76,186 80,186 84,187 89,187 93,187 97,187 101,187 105,187 109,188 113,188 117,188 122,188 126,188 130,188 134,188 138,187 142,185 146,184 150,184 155,184 159,183 163,183 167,186 171,187 175,188 179,187 183,185 187,184 192,185 196,186 200,187 204,187 208,187 212,187 216,186 220,186 225,186 229,186 233,185 237,185 241,184 245,184 249,184 253,185 258,185 262,185 266,185 270,184 274,184 278,185 282,186 286,187 291,188 295,184 299,170 303,142 307,106 311,87 315,87 319,95 324,103 328,106 332,106 336,104 340,100 344,92 348,84 352,79 357,73 361,60 365,47 369,35 373,15\"></polyline></svg>"
+            },
+            "sparklineAnalysis": {
+                "isRising": true,
+                "highestPoint": 4,
+                "lastPoint": 4,
+                "percentageFromPeak": 0
+            }
+        },
+        {
+            "title": "kash patel",
+            "sparkline": "-10,48 0,47 1,47 3,47 4,47 6,47 7,47 9,47 10,47 11,47 13,47 14,47 16,47 17,47 18,47 20,47 21,47 23,47 24,47 26,47 27,47 28,47 30,47 31,47 33,47 34,47 36,47 37,47 38,47 40,47 41,47 43,47 44,47 46,47 47,47 48,47 50,47 51,47 53,47 54,47 55,47 57,47 58,47 60,47 61,47 63,47 64,47 65,47 67,47 68,47 70,47 71,47 73,47 74,47 75,47 77,47 78,47 80,47 81,47 82,47 84,47 85,47 87,47 88,47 90,47 91,47 92,47 94,47 95,47 97,47 98,47 100,47 101,47 102,47 104,47 105,47 107,47 108,47 110,47 111,47 112,47 114,47 115,47 117,47 118,47 119,47 121,47 122,45 124,36 125,22 127,8 128,1 138,48",
+            "searchVolume": "50K+ searches",
+            "trendStatus": "Active",
+            "timeAgo": "50 mins ago",
+            "trendPercentage": "1,000%",
+            "breakdownTerms": [
+                "kash patel fbi",
+                "who is kash patel"
+            ],
+            "details": {
+                "title": "kash patel",
+                "terms": [
+                    "kash patel fbi",
+                    "who is kash patel",
+                    "christopher wray",
+                    "kashyap patel",
+                    "kash patel news",
+                    "fbi",
+                    "kash patrl"
+                ],
+                "news": [
+                    {
+                        "title": "Trump announces he intends to replace current FBI director with loyalist \nKash Patel",
+                        "url": "https://www.cnn.com/2024/11/30/politics/kash-patel-fbi-director-trump/index.html",
+                        "imageUrl": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRj9453kSbf_q5X0Xw_1TsVT_5PpJs96SiGHpjfpexjoQQDQYY13jf_zI4PHKY",
+                        "time": "20 minutes ago",
+                        "source": "CNN"
+                    },
+                    {
+                        "title": "Trump Says He Will Replace F.B.I. Director With Kash Patel",
+                        "url": "https://www.nytimes.com/2024/11/30/us/politics/trump-replace-christopher-wray.html",
+                        "imageUrl": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcT7H9PuKCoEwAzC-VVZu1ELwdkF9B_dIPjHRzOtoPBdvAP-xiUvyeZo4LmlACw",
+                        "time": "40 minutes ago",
+                        "source": "The New York Times"
+                    },
+                    {
+                        "title": "Trump says he'll fire FBI Director Christopher Wray, replace him with \nlongtime ally Kash Patel",
+                        "url": "https://abcnews.go.com/Politics/trump-hell-fire-fbi-director-christopher-wray-replace/story?id=116342099",
+                        "imageUrl": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSa4JvRvWieYJjuWH2dlbeQO0ppvu4lA9dSpmFPgLF6z2DnULRX-9CmZX6I49A",
+                        "time": "20 minutes ago",
+                        "source": "ABC News - Breaking News, Latest News and Videos"
+                    }
+                ],
+                "graphData": "<svg width=\"100%\" aria-label=\"Search interest graph\" height=\"190\" viewBox=\"0 0 375 190\"><line class=\"fNzu9c\" x1=\"1\" y1=\"1\" x2=\"374\" y2=\"1\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"48\" x2=\"374\" y2=\"48\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"95\" x2=\"374\" y2=\"95\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"142\" x2=\"374\" y2=\"142\"></line><line class=\"vi1oL\" x1=\"1\" y1=\"189\" x2=\"374\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"1\" x2=\"1\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"125\" x2=\"125\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"250\" x2=\"250\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"374\" x2=\"374\" y2=\"189\"></line><polyline class=\"EATUte\" points=\"2,188 6,188 10,188 14,188 18,188 23,188 27,188 31,188 35,188 39,188 43,188 47,188 51,188 56,188 60,188 64,188 68,188 72,188 76,188 80,188 84,188 89,188 93,188 97,188 101,188 105,188 109,188 113,188 117,188 122,188 126,187 130,188 134,188 138,188 142,187 146,188 150,188 155,188 159,188 163,188 167,188 171,188 175,188 179,187 183,188 187,188 192,188 196,188 200,188 204,188 208,188 212,188 216,188 220,188 225,188 229,188 233,188 237,188 241,188 245,188 249,188 253,188 258,188 262,188 266,188 270,188 274,188 278,188 282,188 286,188 291,188 295,188 299,188 303,188 307,188 311,188 315,188 319,188 324,188 328,188 332,188 336,188 340,188 344,188 348,188 352,188 357,178 361,142 365,85 369,32 373,2\"></polyline></svg>"
+            },
+            "sparklineAnalysis": {
+                "isRising": true,
+                "highestPoint": 1,
+                "lastPoint": 1,
+                "percentageFromPeak": 0
+            }
+        },
+        {
+            "title": "survivor series 2024",
+            "sparkline": "-10,48 0,42 1,41 3,40 4,39 6,39 7,40 9,40 10,40 11,40 13,41 14,41 16,41 17,41 18,41 20,42 21,42 23,42 24,42 26,41 27,41 28,41 30,41 31,42 33,42 34,42 36,42 37,41 38,41 40,41 41,42 43,42 44,43 46,43 47,42 48,40 50,39 51,38 53,38 54,38 55,38 57,39 58,40 60,40 61,39 63,39 64,38 65,38 67,38 68,37 70,37 71,37 73,36 74,36 75,35 77,34 78,33 80,33 81,33 82,33 84,33 85,33 87,32 88,32 90,31 91,31 92,31 94,31 95,31 97,31 98,31 100,30 101,28 102,28 104,28 105,28 107,26 108,24 110,21 111,19 112,18 114,17 115,15 117,13 118,11 119,9 121,10 122,11 124,10 125,6 127,3 128,1 138,48",
+            "searchVolume": "100K+ searches",
+            "trendStatus": "Active",
+            "timeAgo": "14 hrs ago",
+            "trendPercentage": "500%",
+            "breakdownTerms": [
+                "wwe war games 2024",
+                "war games wwe"
+            ],
+            "details": {
+                "title": "survivor series 2024",
+                "terms": [
+                    "wwe war games 2024",
+                    "war games wwe",
+                    "survivor series 2024 start time",
+                    "wwe survivor series wargames match card",
+                    "survivor series 2024 date and time",
+                    "wwe shop",
+                    "ludwig kaiser",
+                    "rhea ripley",
+                    "survivor series",
+                    "wwe",
+                    "survivor series 2024 match card",
+                    "war games",
+                    "wwe war games",
+                    "war games wwe 2024",
+                    "wargames 2024"
+                ],
+                "news": [
+                    {
+                        "title": "WWE Survivor Series: WarGames 2024 live results: Winners, highlights and \nanalysis",
+                        "url": "https://www.usatoday.com/story/sports/2024/11/30/wwe-survivor-series-wargames-2024-live-results-highlights/76605996007/",
+                        "imageUrl": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTibwfXbZvvTVbclR20s-pUp0k8UaeLTEeu8QTEVn0iR2SEBY30Mv6z6LSzm1Q",
+                        "time": "1 hour ago",
+                        "source": "USA Today"
+                    },
+                    {
+                        "title": "Rhea Ripley Puts Champion Through Table, Wins Women's WarGames At WWE \nSurvivor Series",
+                        "url": "https://www.wrestlinginc.com/1726147/rhea-ripley-puts-champion-table-wins-womens-wargames-wwe-survivor-series/",
+                        "imageUrl": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRt9E1ZebaTqswKTErKl1KFGvclxq9tIE4ijv1zJ2AZcdTPhFR0SOUiYuNCPFU",
+                        "time": "20 minutes ago",
+                        "source": "Wrestling Inc."
+                    },
+                    {
+                        "title": "Survivor Series: WarGames Match Card, How to Watch, Previews, Start Time \nand More",
+                        "url": "http://www.wwe.com/article/survivor-series-wargames-2024-match-card-how-to-watch-previews-start-time-and-more",
+                        "imageUrl": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRFuEkAG5IqQbk225JIej9KPwBe1XVZYi7h6zlcAAKHu_8Ulwxenaq0vO7yJeA",
+                        "time": "10 hours ago",
+                        "source": "WWE"
+                    }
+                ],
+                "graphData": "<svg width=\"100%\" aria-label=\"Search interest graph\" height=\"190\" viewBox=\"0 0 375 190\"><line class=\"fNzu9c\" x1=\"1\" y1=\"1\" x2=\"374\" y2=\"1\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"48\" x2=\"374\" y2=\"48\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"95\" x2=\"374\" y2=\"95\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"142\" x2=\"374\" y2=\"142\"></line><line class=\"vi1oL\" x1=\"1\" y1=\"189\" x2=\"374\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"1\" x2=\"1\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"125\" x2=\"125\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"250\" x2=\"250\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"374\" x2=\"374\" y2=\"189\"></line><polyline class=\"EATUte\" points=\"2,167 6,162 10,158 14,157 18,158 23,158 27,159 31,160 35,161 39,162 43,164 47,165 51,165 56,165 60,166 64,167 68,167 72,166 76,165 80,164 84,164 89,164 93,166 97,169 101,169 105,168 109,165 113,163 117,164 122,167 126,170 130,171 134,171 138,167 142,161 146,157 150,153 155,152 159,151 163,153 167,157 171,160 175,158 179,156 183,155 187,153 192,151 196,150 200,149 204,148 208,147 212,145 216,142 220,139 225,135 229,133 233,133 237,133 241,132 245,131 249,130 253,129 258,127 262,125 266,124 270,125 274,125 278,125 282,124 286,122 291,118 295,113 299,111 303,112 307,111 311,104 315,93 319,83 324,76 328,72 332,66 336,58 340,50 344,40 348,35 352,38 357,44 361,39 365,24 369,11 373,3\"></polyline></svg>"
+            },
+            "sparklineAnalysis": {
+                "isRising": true,
+                "highestPoint": 1,
+                "lastPoint": 1,
+                "percentageFromPeak": 0
+            }
+        },
+        {
+            "title": "acc championship game",
+            "sparkline": "-10,48 0,47 1,47 3,47 4,47 6,46 7,46 9,46 10,46 11,46 13,46 14,46 16,46 17,46 18,46 20,46 21,46 23,46 24,46 26,46 27,47 28,47 30,47 31,47 33,47 34,47 36,47 37,47 38,47 40,47 41,47 43,47 44,46 46,47 47,47 48,47 50,47 51,46 53,46 54,46 55,47 57,47 58,47 60,47 61,47 63,47 64,46 65,46 67,46 68,46 70,46 71,46 73,46 74,46 75,46 77,46 78,46 80,46 81,46 82,46 84,46 85,46 87,46 88,46 90,46 91,46 92,46 94,46 95,46 97,46 98,46 100,46 101,46 102,46 104,45 105,45 107,44 108,43 110,43 111,44 112,44 114,44 115,44 117,45 118,45 119,44 121,43 122,39 124,30 125,17 127,9 128,6 138,48",
+            "searchVolume": "100K+ searches",
+            "trendStatus": "Active",
+            "timeAgo": "4 hrs ago",
+            "trendPercentage": "1,000%",
+            "breakdownTerms": [
+                "smu football",
+                "acc championship game 2024"
+            ],
+            "details": {
+                "title": "acc championship game",
+                "terms": [
+                    "smu football",
+                    "acc championship game 2024",
+                    "acc championship 2024",
+                    "acc championship",
+                    "acc standings football",
+                    "acc championship scenarios",
+                    "acc title game",
+                    "acc football",
+                    "acc",
+                    "acc football championship",
+                    "smu game",
+                    "clemson acc championship",
+                    "clemson game"
+                ],
+                "news": [
+                    {
+                        "title": "No. 6 Miami coughs up 21-0 lead and loses at Syracuse to put Clemson in the \nACC title game vs. SMU",
+                        "url": "https://sports.yahoo.com/no-6-miami-coughs-up-21-0-lead-and-loses-at-syracuse-to-put-clemson-in-the-acc-title-game-vs-smu-000839619.html",
+                        "imageUrl": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR2981VZ9-6O5pXnxMWalGE2kvrYqdC1uQg67BzVChlXBEUANMxQzJq0iuuje8",
+                        "time": "10 minutes ago",
+                        "source": "Yahoo Sports"
+                    },
+                    {
+                        "title": "Clemson football earns ACC championship bid after Miami's loss to Syracuse",
+                        "url": "https://www.greenvilleonline.com/story/sports/college/clemson/2024/11/30/clemson-football-acc-championship-miami-syracuse-cfp/76485815007/",
+                        "imageUrl": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSt2-RMjwAqMDDLWvMyAXmcAxy6Mi4FBV03VJX88WspVlNiMA7diCgfJrXsM_Y",
+                        "time": "30 minutes ago",
+                        "source": "Greenville Online"
+                    },
+                    {
+                        "title": "College Football Playoff rankings: Projected 12-team bracket; ASU in, \nClemson out",
+                        "url": "https://www.usatoday.com/story/sports/ncaaf/2024/11/26/cfp-rankings-release-2024-live-updates/76593212007/",
+                        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHuQkImLE4RzgH0xNaOrEfgtImFr37KiTzNQzH1HWHYRJnYNC8TRn9DiDqz8E",
+                        "time": "3 days ago",
+                        "source": "USA Today"
+                    }
+                ],
+                "graphData": "<svg width=\"100%\" aria-label=\"Search interest graph\" height=\"190\" viewBox=\"0 0 375 190\"><line class=\"fNzu9c\" x1=\"1\" y1=\"1\" x2=\"374\" y2=\"1\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"48\" x2=\"374\" y2=\"48\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"95\" x2=\"374\" y2=\"95\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"142\" x2=\"374\" y2=\"142\"></line><line class=\"vi1oL\" x1=\"1\" y1=\"189\" x2=\"374\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"1\" x2=\"1\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"125\" x2=\"125\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"250\" x2=\"250\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"374\" x2=\"374\" y2=\"189\"></line><polyline class=\"EATUte\" points=\"2,188 6,187 10,186 14,186 18,186 23,186 27,185 31,184 35,184 39,184 43,184 47,184 51,183 56,184 60,185 64,185 68,185 72,185 76,186 80,186 84,187 89,187 93,187 97,187 101,187 105,187 109,187 113,188 117,188 122,187 126,186 130,185 134,186 138,187 142,188 146,187 150,185 155,183 159,185 163,187 167,188 171,188 175,188 179,188 183,187 187,186 192,185 196,186 200,186 204,186 208,186 212,186 216,186 220,186 225,186 229,185 233,184 237,184 241,185 245,185 249,185 253,185 258,184 262,184 266,184 270,184 274,184 278,184 282,184 286,184 291,185 295,185 299,184 303,182 307,178 311,174 315,173 319,174 324,175 328,176 332,177 336,178 340,178 344,178 348,177 352,172 357,155 361,118 365,67 369,34 373,23\"></polyline></svg>"
+            },
+            "sparklineAnalysis": {
+                "isRising": true,
+                "highestPoint": 6,
+                "lastPoint": 6,
+                "percentageFromPeak": 0
+            }
+        },
+        {
+            "title": "arkansas vs missouri",
+            "sparkline": "-10,48 0,47 1,47 3,47 4,47 6,47 7,47 9,47 10,47 11,47 13,47 14,47 16,47 17,47 18,47 20,47 21,47 23,47 24,47 26,47 27,47 28,46 30,46 31,46 33,46 34,46 36,46 37,46 38,47 40,47 41,47 43,47 44,47 46,47 47,47 48,47 50,47 51,47 53,47 54,47 55,47 57,46 58,46 60,46 61,46 63,46 64,47 65,47 67,47 68,47 70,47 71,46 73,46 74,46 75,46 77,46 78,46 80,46 81,46 82,46 84,46 85,46 87,46 88,46 90,46 91,46 92,46 94,46 95,46 97,46 98,46 100,47 101,46 102,42 104,33 105,23 107,18 108,19 110,22 111,23 112,23 114,21 115,23 117,26 118,28 119,28 121,26 122,21 124,15 125,9 127,6 128,6 138,48",
+            "searchVolume": "100K+ searches",
+            "trendStatus": "Active",
+            "timeAgo": "5 hrs ago",
+            "trendPercentage": "1,000%",
+            "breakdownTerms": [
+                "arkansas football",
+                "missouri football"
+            ],
+            "details": {
+                "title": "arkansas vs missouri",
+                "terms": [
+                    "arkansas football",
+                    "missouri football",
+                    "mizzou",
+                    "mizzou game today",
+                    "razorback football",
+                    "mizzou football",
+                    "mizzou game",
+                    "mizzou vs arkansas",
+                    "arkansas razorbacks football",
+                    "missouri",
+                    "missouri tigers football",
+                    "mizzou score",
+                    "arkansas",
+                    "where to watch missouri tigers football vs arkansas razorbacks football",
+                    "university of missouri"
+                ],
+                "news": [
+                    {
+                        "title": "Missouri football score: Brady Cook scores go-ahead TD as MU beats Arkansas",
+                        "url": "https://www.columbiatribune.com/story/sports/college/tiger-extra/2024/11/30/missouri-tigers-vs-arkansas-razorbacks-live-blog-from-sec-football-regular-season-finale/76412683007/",
+                        "imageUrl": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQHcX5Q4pQk1wVPlYhemsFuDL6oOVPlGc3T4VTCuoci2WOHj3Dxt3cbDnjbsbw",
+                        "time": "40 minutes ago",
+                        "source": "Columbia Daily Tribune"
+                    },
+                    {
+                        "title": "Brady Cook rushes for TD with 1:53 remaining as No. 24 Missouri beats \nArkansas 28-21",
+                        "url": "https://www.cbssports.com/college-football/news/brady-cook-rushes-for-td-with-153-remaining-as-no-24-missouri-beats-arkansas-28-21/",
+                        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROjCWAIQrh2IAlmoO6Z8RvI0ANJwaWXEAilAy_Q7jjU-ubAgkt0vtFpP-cU7U",
+                        "time": "20 minutes ago",
+                        "source": "CBS Sports"
+                    },
+                    {
+                        "title": "PICTURES: Several inches of snow falls on the University of Missouri on \nSaturday",
+                        "url": "https://www.ky3.com/2024/11/30/pictures-several-inches-snow-falls-university-missouri-saturday/",
+                        "imageUrl": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSr6vQSlooMroPVaW5gqCMoQZm8_BRdtTRQcgFLgUOdqUPmNnxx-u_T2ltWdXY",
+                        "time": "5 hours ago",
+                        "source": "KSPR"
+                    }
+                ],
+                "graphData": "<svg width=\"100%\" aria-label=\"Search interest graph\" height=\"190\" viewBox=\"0 0 375 190\"><line class=\"fNzu9c\" x1=\"1\" y1=\"1\" x2=\"374\" y2=\"1\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"48\" x2=\"374\" y2=\"48\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"95\" x2=\"374\" y2=\"95\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"142\" x2=\"374\" y2=\"142\"></line><line class=\"vi1oL\" x1=\"1\" y1=\"189\" x2=\"374\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"1\" x2=\"1\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"125\" x2=\"125\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"250\" x2=\"250\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"374\" x2=\"374\" y2=\"189\"></line><polyline class=\"EATUte\" points=\"2,188 6,188 10,188 14,188 18,188 23,188 27,188 31,188 35,187 39,187 43,187 47,187 51,187 56,187 60,187 64,188 68,188 72,188 76,187 80,186 84,186 89,185 93,185 97,185 101,184 105,185 109,186 113,186 117,186 122,187 126,188 130,188 134,188 138,188 142,188 146,188 150,188 155,188 159,188 163,187 167,185 171,183 175,183 179,184 183,186 187,187 192,187 196,187 200,187 204,187 208,186 212,185 216,186 220,185 225,185 229,185 233,186 237,185 241,185 245,185 249,185 253,185 258,185 262,184 266,184 270,184 274,184 278,183 282,184 286,186 291,186 295,182 299,166 303,132 307,91 311,72 315,75 319,85 324,91 328,89 332,84 336,89 340,103 344,112 348,111 352,102 357,84 361,58 365,33 369,23 373,24\"></polyline></svg>"
+            },
+            "sparklineAnalysis": {
+                "isRising": true,
+                "highestPoint": 6,
+                "lastPoint": 6,
+                "percentageFromPeak": 0
+            }
+        },
+        {
+            "title": "texas football",
+            "sparkline": "-10,48 0,44 1,44 3,44 4,44 6,44 7,44 9,44 10,44 11,44 13,44 14,44 16,44 17,44 18,44 20,44 21,44 23,44 24,43 26,43 27,44 28,45 30,45 31,45 33,45 34,46 36,46 37,46 38,46 40,46 41,46 43,46 44,46 46,46 47,46 48,46 50,46 51,46 53,45 54,45 55,45 57,44 58,44 60,44 61,44 63,44 64,44 65,44 67,44 68,43 70,43 71,42 73,42 74,42 75,42 77,42 78,42 80,42 81,41 82,41 84,41 85,41 87,40 88,40 90,40 91,40 92,40 94,40 95,40 97,40 98,40 100,40 101,40 102,40 104,40 105,38 107,37 108,36 110,36 111,37 112,37 114,37 115,37 117,36 118,36 119,35 121,33 122,32 124,28 125,23 127,14 128,4 138,48",
+            "searchVolume": "100K+ searches",
+            "trendStatus": "Active",
+            "timeAgo": "40 mins ago",
+            "trendPercentage": "100%",
+            "breakdownTerms": [
+                "texas a&m vs texas",
+                "a&m vs ut",
+                "ut a&m game"
+            ],
+            "details": {
+                "title": "texas football",
+                "terms": [
+                    "texas a&m vs texas",
+                    "a&m vs ut",
+                    "ut a&m game",
+                    "a&m vs texas",
+                    "texas game",
+                    "texas a&m",
+                    "texas vs texas a&m prediction",
+                    "longhorns game",
+                    "longhorn football",
+                    "texas longhorns football",
+                    "texas texas a&m game",
+                    "marcel reed",
+                    "texas vs a&m",
+                    "ut game",
+                    "longhorns vs aggies"
+                ],
+                "news": [
+                    {
+                        "title": "Texas football vs Texas A&M: Live score updates, highlights from Week 14 \ngame",
+                        "url": "https://www.statesman.com/story/sports/college/longhorns/football/2024/11/30/texas-vs-texas-am-football-game-score-live-updates/76564430007/",
+                        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSO73UVlDVokXuzppRRguyUtnepyOmJSzl94GvcGtLpeKX0gwxCLONRC9MZ1S0",
+                        "time": "2 hours ago",
+                        "source": "Austin American-Statesman"
+                    },
+                    {
+                        "title": "Three key Aggies game-time decisions",
+                        "url": "https://tamu.rivals.com/news/three-key-aggies-game-time-decisions",
+                        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsVWu5G47YOCnHscHvWbQxZaB03kBPn5LlyTASKzJWtb9F8g1ORalyBfoi294",
+                        "time": "1 hour ago",
+                        "source": "AggieYell"
+                    },
+                    {
+                        "title": "Aggie Gameday: Texas A&M vs. Texas",
+                        "url": "https://www.kbtx.com/2024/11/30/aggie-gameday-texas-am-vs-texas/",
+                        "imageUrl": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSJ1NBQDzxeYCE7teSyo2z7qQ6wuVEsiCAOTWaBvHAts5pXpZLrCi92EnwmV_A",
+                        "time": "7 hours ago",
+                        "source": "KBTX News 3"
+                    }
+                ],
+                "graphData": "<svg width=\"100%\" aria-label=\"Search interest graph\" height=\"190\" viewBox=\"0 0 375 190\"><line class=\"fNzu9c\" x1=\"1\" y1=\"1\" x2=\"374\" y2=\"1\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"48\" x2=\"374\" y2=\"48\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"95\" x2=\"374\" y2=\"95\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"142\" x2=\"374\" y2=\"142\"></line><line class=\"vi1oL\" x1=\"1\" y1=\"189\" x2=\"374\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"1\" x2=\"1\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"125\" x2=\"125\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"250\" x2=\"250\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"374\" x2=\"374\" y2=\"189\"></line><polyline class=\"EATUte\" points=\"2,176 6,177 10,178 14,178 18,176 23,175 27,174 31,175 35,177 39,178 43,177 47,176 51,176 56,176 60,177 64,176 68,174 72,173 76,174 80,176 84,178 89,180 93,181 97,182 101,182 105,183 109,184 113,184 117,184 122,183 126,184 130,184 134,184 138,184 142,183 146,183 150,182 155,181 159,180 163,179 167,178 171,177 175,177 179,177 183,176 187,176 192,175 196,174 200,174 204,172 208,170 212,168 216,168 220,168 225,169 229,169 233,168 237,166 241,163 245,162 249,162 253,162 258,161 262,161 266,161 270,161 274,160 278,160 282,160 286,161 291,161 295,161 299,161 303,158 307,153 311,147 315,144 319,145 324,147 328,148 332,148 336,147 340,145 344,143 348,138 352,133 357,125 361,113 365,90 369,56 373,13\"></polyline></svg>"
+            },
+            "sparklineAnalysis": {
+                "isRising": true,
+                "highestPoint": 4,
+                "lastPoint": 4,
+                "percentageFromPeak": 0
+            }
+        },
+        {
+            "title": "brics nations",
+            "sparkline": "-10,48 0,47 1,47 3,47 4,47 6,47 7,47 9,46 10,47 11,47 13,47 14,47 16,47 17,47 18,47 20,47 21,47 23,46 24,46 26,46 27,47 28,47 30,47 31,47 33,47 34,47 36,47 37,47 38,47 40,47 41,46 43,45 44,44 46,44 47,45 48,43 50,40 51,40 53,41 54,43 55,45 57,44 58,43 60,45 61,46 63,47 64,47 65,47 67,47 68,47 70,47 71,47 73,47 74,47 75,47 77,47 78,47 80,47 81,47 82,47 84,46 85,46 87,46 88,46 90,46 91,44 92,39 94,33 95,26 97,21 98,18 100,17 101,18 102,19 104,18 105,18 107,18 108,18 110,18 111,17 112,13 114,9 115,9 117,10 118,10 119,10 121,10 122,10 124,10 125,8 127,6 128,4 138,48",
+            "searchVolume": "20K+ searches",
+            "trendStatus": "Active",
+            "timeAgo": "6 hrs ago",
+            "trendPercentage": "600%",
+            "breakdownTerms": [
+                "brics",
+                "brics countries",
+                "brics currency"
+            ],
+            "details": {
+                "title": "brics nations",
+                "terms": [
+                    "brics",
+                    "brics countries",
+                    "brics currency"
+                ],
+                "news": [
+                    {
+                        "title": "Trump threatens 100% tariff on the BRIC bloc of nations if they act to \nundermine US dollar",
+                        "url": "https://apnews.com/article/trump-dollar-dominance-brics-treasury-8572985f41754fe008b98f38180945c3",
+                        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWt9DPo1P_Z6qxvpmPIfzafo6n-ibZqm3iA-fDt2IZlc5CzpzPRv1ZcHpejWM",
+                        "time": "4 hours ago",
+                        "source": "AP News"
+                    },
+                    {
+                        "title": "Trump threatens 100% tariffs on BRICS nations over dollar support",
+                        "url": "https://www.axios.com/2024/11/30/trump-tariffs-brics-dollar",
+                        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQx6A50W5EJ0WyAhoChEXZD71nbs588VE8TnasTIv6u7BOyM4b7ub9rF_vf-U",
+                        "time": "5 hours ago",
+                        "source": "Axios"
+                    },
+                    {
+                        "title": "Trump threatens a 100% tariff on BRICS countries if they abandon U.S. dollar",
+                        "url": "https://www.nbcnews.com/politics/white-house/trump-threatens-100-tariff-brics-countries-abandon-us-dollar-rcna182300",
+                        "imageUrl": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcR0REfWpztfuzrw5FhvtzO5CKalHVzfnwWlDhzzKIJD1benzyaTpVUd0ZrW0o8",
+                        "time": "2 hours ago",
+                        "source": "NBC News"
+                    }
+                ],
+                "graphData": "<svg width=\"100%\" aria-label=\"Search interest graph\" height=\"190\" viewBox=\"0 0 375 190\"><line class=\"fNzu9c\" x1=\"1\" y1=\"1\" x2=\"374\" y2=\"1\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"48\" x2=\"374\" y2=\"48\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"95\" x2=\"374\" y2=\"95\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"142\" x2=\"374\" y2=\"142\"></line><line class=\"vi1oL\" x1=\"1\" y1=\"189\" x2=\"374\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"1\" x2=\"1\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"125\" x2=\"125\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"250\" x2=\"250\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"374\" x2=\"374\" y2=\"189\"></line><polyline class=\"EATUte\" points=\"2,188 6,188 10,188 14,188 18,187 23,186 27,185 31,186 35,187 39,188 43,188 47,188 51,188 56,188 60,188 64,187 68,184 72,183 76,184 80,187 84,188 89,188 93,188 97,188 101,188 105,188 109,188 113,188 117,188 122,184 126,179 130,175 134,178 138,178 142,171 146,160 150,159 155,163 159,173 163,179 167,177 171,173 175,178 179,184 183,187 187,188 192,188 196,188 200,188 204,188 208,188 212,188 216,188 220,188 225,188 229,188 233,188 237,188 241,187 245,185 249,184 253,185 258,186 262,185 266,175 270,156 274,131 278,105 282,83 286,69 291,66 295,72 299,75 303,72 307,70 311,71 315,72 319,72 324,65 328,49 332,35 336,34 340,37 344,37 348,37 352,39 357,40 361,38 365,29 369,22 373,14\"></polyline></svg>"
+            },
+            "sparklineAnalysis": {
+                "isRising": true,
+                "highestPoint": 4,
+                "lastPoint": 4,
+                "percentageFromPeak": 0
+            }
+        },
+        {
+            "title": "rutgers vs mi state",
+            "sparkline": "-10,48 0,47 1,47 3,47 4,47 6,47 7,47 9,47 10,47 11,47 13,47 14,47 16,47 17,47 18,47 20,47 21,47 23,47 24,47 26,47 27,47 28,47 30,47 31,47 33,47 34,47 36,47 37,47 38,47 40,47 41,47 43,47 44,47 46,47 47,47 48,47 50,47 51,47 53,47 54,47 55,47 57,47 58,47 60,47 61,47 63,47 64,47 65,47 67,47 68,47 70,46 71,46 73,46 74,46 75,47 77,47 78,47 80,47 81,47 82,47 84,47 85,47 87,47 88,47 90,47 91,47 92,47 94,47 95,47 97,47 98,47 100,47 101,47 102,42 104,31 105,17 107,10 108,11 110,18 111,23 112,24 114,25 115,28 117,31 118,32 119,32 121,31 122,26 124,19 125,14 127,13 128,16 138,48",
+            "searchVolume": "20K+ searches",
+            "trendStatus": "Active",
+            "timeAgo": "4 hrs ago",
+            "trendPercentage": "1,000%",
+            "breakdownTerms": [
+                "rutgers",
+                "msu",
+                "msu game"
+            ],
+            "details": {
+                "title": "rutgers vs mi state",
+                "terms": [
+                    "rutgers",
+                    "msu",
+                    "msu game"
+                ],
+                "news": [
+                    {
+                        "title": "Couch: 3 quick takes on Michigan State football's 41-14 season-ending loss \nto Rutgers",
+                        "url": "https://www.lansingstatejournal.com/story/sports/columnists/graham-couch/2024/11/30/michigan-state-football-loses-to-rutgers-three-quick-takes/76650193007/",
+                        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnECNyQ1RDX-PhsSEhOiPKMclck7v-gdifneAe8oFiH4ZOwrAlembknhPRohA",
+                        "time": "40 minutes ago",
+                        "source": "Lansing State Journal"
+                    },
+                    {
+                        "title": "Rutgers 41-14 Michigan State (Nov 30, 2024) Game Recap",
+                        "url": "https://www.espn.com/college-football/recap?gameId=401628567",
+                        "imageUrl": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS6Y8mVjU-8ty8CGqIDT9LZb6TjoWA2_PaltkCH8lBnOdLd6LF7og1Phhhhx1k",
+                        "time": "10 minutes ago",
+                        "source": "ESPN"
+                    },
+                    {
+                        "title": "Rutgers Scarlet Knights vs. Michigan State Spartans Highlights | FOX \nCollege Football",
+                        "url": "https://www.foxsports.com/watch/fmc-kmfxsczx7hm2v7sc",
+                        "imageUrl": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRgwGrJMQFTbZ7nRr4iDTrL4n6ZwevHw0c06pizXX096DUaaYWnrIfu0-2Nr6A",
+                        "time": "30 minutes ago",
+                        "source": "FOX Sports"
+                    }
+                ],
+                "graphData": "<svg width=\"100%\" aria-label=\"Search interest graph\" height=\"190\" viewBox=\"0 0 375 190\"><line class=\"fNzu9c\" x1=\"1\" y1=\"1\" x2=\"374\" y2=\"1\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"48\" x2=\"374\" y2=\"48\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"95\" x2=\"374\" y2=\"95\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"142\" x2=\"374\" y2=\"142\"></line><line class=\"vi1oL\" x1=\"1\" y1=\"189\" x2=\"374\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"1\" x2=\"1\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"125\" x2=\"125\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"250\" x2=\"250\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"374\" x2=\"374\" y2=\"189\"></line><polyline class=\"EATUte\" points=\"2,188 6,188 10,188 14,188 18,188 23,188 27,188 31,188 35,188 39,188 43,188 47,188 51,188 56,188 60,188 64,188 68,188 72,188 76,188 80,188 84,188 89,188 93,188 97,188 101,188 105,188 109,188 113,188 117,188 122,188 126,188 130,188 134,188 138,188 142,188 146,188 150,188 155,188 159,188 163,188 167,188 171,188 175,188 179,188 183,188 187,188 192,188 196,187 200,186 204,185 208,186 212,186 216,186 220,187 225,188 229,188 233,188 237,188 241,188 245,188 249,188 253,188 258,188 262,188 266,188 270,188 274,188 278,188 282,188 286,188 291,188 295,188 299,169 303,125 307,67 311,37 315,44 319,69 324,89 328,97 332,100 336,111 340,123 344,129 348,128 352,121 357,104 361,77 365,55 369,51 373,64\"></polyline></svg>"
+            },
+            "sparklineAnalysis": {
+                "isRising": true,
+                "highestPoint": 10,
+                "lastPoint": 16,
+                "percentageFromPeak": 60
+            }
+        },
+        {
+            "title": "fsu vs uf",
+            "sparkline": "-10,48 0,47 1,47 3,46 4,46 6,46 7,46 9,46 10,45 11,45 13,45 14,46 16,46 17,46 18,46 20,46 21,45 23,45 24,45 26,46 27,46 28,47 30,46 31,45 33,44 34,44 36,45 37,46 38,46 40,46 41,46 43,47 44,47 46,47 47,47 48,47 50,47 51,47 53,47 54,47 55,47 57,47 58,47 60,47 61,46 63,45 64,45 65,45 67,44 68,43 70,44 71,44 73,44 74,44 75,44 77,44 78,44 80,43 81,43 82,43 84,43 85,43 87,43 88,43 90,42 91,42 92,42 94,42 95,42 97,41 98,41 100,41 101,41 102,41 104,40 105,40 107,39 108,39 110,39 111,38 112,38 114,37 115,36 117,36 118,35 119,33 121,31 122,27 124,20 125,11 127,4 128,1 138,48",
+            "searchVolume": "20K+ searches",
+            "trendStatus": "Active",
+            "timeAgo": "9 hrs ago",
+            "trendPercentage": "300%",
+            "breakdownTerms": [
+                "uf vs fsu",
+                "uf fsu",
+                "fsu vs florida"
+            ],
+            "details": {
+                "title": "fsu vs uf",
+                "terms": [
+                    "uf vs fsu",
+                    "uf fsu",
+                    "fsu vs florida",
+                    "uf fsu game",
+                    "fsu uf game",
+                    "fsu uf",
+                    "florida florida state game",
+                    "gators vs fsu",
+                    "florida vs fsu",
+                    "fsu game today",
+                    "where to watch florida state seminoles football vs florida gators football",
+                    "florida state football"
+                ],
+                "news": [
+                    {
+                        "title": "What channel is FSU football vs Florida on today? Time, TV schedule to \nwatch Week 14 game",
+                        "url": "https://www.tallahassee.com/story/sports/college/fsu/football/2024/11/30/florida-fsu-football-game-today-time-tv-schedule-streaming/76599668007/",
+                        "imageUrl": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRhyWcUMu7Gtn7cvhYvaqs5OU9duf8KLGLRXBMTPaSMmlU1_G-XqfWYnWJvfWs",
+                        "time": "14 hours ago",
+                        "source": "Tallahassee Democrat"
+                    },
+                    {
+                        "title": "What channel is Florida football vs Florida State on today? Time, TV \nschedule to watch Week 14 game",
+                        "url": "https://www.gainesville.com/story/sports/college/football/2024/11/30/florida-florida-state-channel-today-time-tv-schedule-streaming-info/76523045007/",
+                        "imageUrl": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR2BcMJTFmhil-W43uNjfxmxheysSoVgyAOdf8vxqk3hpFwTDhDDCOCw-upK5A",
+                        "time": "14 hours ago",
+                        "source": "Gainesville Sun"
+                    },
+                    {
+                        "title": "Gameday Central: Florida State Seminoles vs. Florida Gators previews, \npredictions, how to watch",
+                        "url": "https://www.tomahawknation.com/florida-state-football-fsu-seminoles-college-cfb-acc-norvell-team-roster-schedule-game/2024/11/30/24309242/score-watch-fsu-florida-gators-stream-espn2-channel-tv-prediction-odds-free-spread-fanduel-time-sec",
+                        "imageUrl": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSan8H7r09jteczI1O-HtAeM3HY1kQCbTBCLZC5cMRpTHfxiPCs66XeeSEwYWE",
+                        "time": "13 hours ago",
+                        "source": "Tomahawk Nation"
+                    }
+                ],
+                "graphData": "<svg width=\"100%\" aria-label=\"Search interest graph\" height=\"190\" viewBox=\"0 0 375 190\"><line class=\"fNzu9c\" x1=\"1\" y1=\"1\" x2=\"374\" y2=\"1\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"48\" x2=\"374\" y2=\"48\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"95\" x2=\"374\" y2=\"95\"></line><line class=\"fNzu9c\" x1=\"1\" y1=\"142\" x2=\"374\" y2=\"142\"></line><line class=\"vi1oL\" x1=\"1\" y1=\"189\" x2=\"374\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"1\" x2=\"1\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"125\" x2=\"125\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"250\" x2=\"250\" y2=\"189\"></line><line y1=\"1\" class=\"fNzu9c\" x1=\"374\" x2=\"374\" y2=\"189\"></line><polyline class=\"EATUte\" points=\"2,188 6,186 10,185 14,186 18,185 23,183 27,182 31,181 35,181 39,182 43,183 47,184 51,184 56,184 60,183 64,182 68,181 72,181 76,183 80,186 84,186 89,183 93,178 97,175 101,174 105,179 109,183 113,184 117,183 122,184 126,187 130,188 134,188 138,188 142,188 146,188 150,188 155,188 159,188 163,188 167,188 171,188 175,186 179,184 183,181 187,181 192,180 196,176 200,173 204,174 208,175 212,175 216,174 220,175 225,175 229,174 233,173 237,172 241,172 245,172 249,172 253,172 258,170 262,168 266,167 270,168 274,168 278,167 282,166 286,164 291,164 295,164 299,163 303,161 307,159 311,156 315,155 319,155 324,153 328,150 332,147 336,145 340,143 344,140 348,133 352,123 357,106 361,78 365,43 369,14 373,2\"></polyline></svg>"
+            },
+            "sparklineAnalysis": {
+                "isRising": true,
+                "highestPoint": 1,
+                "lastPoint": 1,
+                "percentageFromPeak": 0
+            }
+        }
+    ]
+}
