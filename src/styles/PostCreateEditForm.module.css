@@ -1,20 +1,24 @@
 .Container {
   min-height: 343px;
+  border-radius: var(--main-border-radius);
 }
 
 .EditorContainer {
   position: relative;
+  border-radius: var(--main-border-radius);
 }
 
 .Editor {
   resize: vertical;
   min-height: 200px;
   max-height: 800px;
+  border-radius: var(--main-border-radius) !important;
 }
 
 .Editor :global(.ql-container) {
   height: calc(100% - 42px);
   min-height: 150px;
+  border-radius: var(--main-border-radius);
 }
 
 .Editor :global(.ql-editor) {

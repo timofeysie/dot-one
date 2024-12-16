@@ -1,3 +1,7 @@
+:root {
+  --main-border-radius: 0.25rem;
+}
+
 .App {
     font-family: "DM Sans", sans-serif;
     background-color: tan;
@@ -11,7 +15,7 @@
 .Content {
     background-color: #ffffff;
     padding: 10px;
-    border-radius: 2px;
+    border-radius: var(--main-border-radius);
     border: 1px solid #dadadf;
 }
 
@@ -37,6 +41,7 @@
     max-height: 40vh;
     max-width: 100%;
     object-fit: contain;
+    border-radius: var(--main-border-radius) !important;
 }
 
 * {

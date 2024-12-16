@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -10,8 +11,9 @@ import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import styles from "../../styles/GoogleTrends.module.css";
 import { axiosNest } from "../../api/axiosDefaults";
+import btnStyles from "../../styles/Button.module.css";
 
-function GoogleTrends() {
+function GoogleTrends({ onTrendSelect }) {
   const [trends, setTrends] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -23,6 +25,7 @@ function GoogleTrends() {
     sort: "relevance",
   });
   const [selectedTrends, setSelectedTrends] = useState([]);
+  const [postTitle, setPostTitle] = useState("");
 
   const fetchTrends = async () => {
     setIsLoading(true);
@@ -66,11 +69,14 @@ function GoogleTrends() {
 
   const handleTrendSelection = (trendIndex) => {
     setSelectedTrends((prev) => {
-      if (prev.includes(trendIndex)) {
-        return prev.filter((index) => index !== trendIndex);
-      } else {
-        return [...prev, trendIndex];
-      }
+      const newSelectedTrends = prev.includes(trendIndex)
+        ? prev.filter((index) => index !== trendIndex)
+        : [...prev, trendIndex];
+      
+      const selectedTrendTitles = newSelectedTrends.map(index => trends[index].title);
+      onTrendSelect(selectedTrendTitles);
+      
+      return newSelectedTrends;
     });
   };
 
@@ -165,7 +171,7 @@ function GoogleTrends() {
           <Button
             onClick={fetchTrends}
             variant="primary"
-            className="w-100"
+            className={`${btnStyles.Button} ${btnStyles.Blue}`}
             disabled={isLoading}
           >
             {isLoading ? (
@@ -181,7 +187,7 @@ function GoogleTrends() {
                 Loading...
               </>
             ) : (
-              "Apply Filters"
+              "Fetch trends"
             )}
           </Button>
         </Col>
@@ -193,20 +199,21 @@ function GoogleTrends() {
         </Alert>
       )}
 
-      {isLoading && (
-        <div className="text-center mt-5">
-          <Spinner animation="border" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </Spinner>
-          <p className="mt-2">Fetching trends data...</p>
-        </div>
-      )}
+      <Form.Group className="mb-3">
+        <Form.Label>Post Title</Form.Label>
+        <Form.Control
+          type="text"
+          value={postTitle}
+          onChange={(e) => setPostTitle(e.target.value)}
+          placeholder="Selected trends will appear here"
+        />
+      </Form.Group>
 
       {!isLoading &&
         trends &&
         trends.length > 0 &&
         trends.map((trend, index) => (
-          <div key={index} className="mb-3 p-3 border rounded">
+          <div key={index} className="mb-2 pt-1 ps-3 border rounded">
             <Row>
               <Col xs={1} className="d-flex align-items-center">
                 <Form.Check
@@ -217,92 +224,88 @@ function GoogleTrends() {
                 />
               </Col>
               <Col xs={11}>
-                <Accordion defaultActiveKey="0">
-                  <Card>
-                    <Accordion.Toggle
-                      as={Card.Header}
-                      eventKey={index.toString()}
-                    >
-                      <div className={styles.trendHeader}>
-                        <h5 className={styles.trendTitle}>{trend.title}</h5>
-                        <div className={styles.trendMetadata}>
-                          <span className={styles.searchVolume}>
-                            {trend.searchVolume}
-                          </span>
-                          <span className={styles.timeInfo}>
-                            {trend.timeAgo}
-                            {trend.trendStatus && (
-                              <span className={styles.trendStatus}>
-                                {trend.trendStatus}
-                              </span>
-                            )}
-                          </span>
-                          {trend.trendPercentage && (
-                            <span className={styles.trendPercentage}>
-                              +{trend.trendPercentage}
+                <Accordion>
+                  <Accordion.Toggle
+                    as={Card.Header}
+                    eventKey={index.toString()}
+                  >
+                    <div className={styles.trendHeader}>
+                      <h5 className={styles.trendTitle}>{trend.title}</h5>
+                      <div className={styles.trendMetadata}>
+                        <span className={styles.searchVolume}>
+                          {trend.searchVolume}
+                        </span>
+                        <span className={styles.timeInfo}>
+                          {trend.timeAgo}
+                          {trend.trendStatus && (
+                            <span className={styles.trendStatus}>
+                              {trend.trendStatus}
                             </span>
                           )}
-                        </div>
+                        </span>
+                        {trend.trendPercentage && (
+                          <span className={styles.trendPercentage}>
+                            +{trend.trendPercentage}
+                          </span>
+                        )}
                       </div>
-                    </Accordion.Toggle>
-                    <Accordion.Collapse eventKey={index.toString()}>
-                      <Card.Body>
-                        <Row>
-                          <Col md={8}>
-                            {trend.breakdownTerms &&
-                              trend.breakdownTerms.length > 0 && (
-                                <div className={styles.breakdownTerms}>
-                                  {trend.breakdownTerms.map((term, idx) => (
-                                    <span
-                                      key={idx}
-                                      className={styles.breakdownTerm}
-                                    >
-                                      {term}
-                                    </span>
-                                  ))}
-                                </div>
-                              )}
-                            <div className={styles.newsContainer}>
-                              {trend.details?.news?.map((newsItem, idx) => (
-                                <div key={idx} className={styles.newsItem}>
-                                  <img
-                                    src={newsItem.imageUrl}
-                                    alt={newsItem.title}
-                                    className={styles.newsImage}
-                                  />
-                                  <div className={styles.newsContent}>
-                                    <a
-                                      href={newsItem.url}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                    >
-                                      {newsItem.title}
-                                    </a>
-                                    <div className={styles.newsMetadata}>
-                                      <span>{newsItem.source}</span>
-                                      <span>{newsItem.time}</span>
-                                    </div>
-                                  </div>
-                                </div>
+                    </div>
+                  </Accordion.Toggle>
+                  <Accordion.Collapse eventKey={index.toString()}>
+                    <Row>
+                      <Col md={8}>
+                        {trend.breakdownTerms &&
+                          trend.breakdownTerms.length > 0 && (
+                            <div className={styles.breakdownTerms}>
+                              {trend.breakdownTerms.map((term, idx) => (
+                                <span
+                                  key={idx}
+                                  className={styles.breakdownTerm}
+                                >
+                                  {term}
+                                </span>
                               ))}
                             </div>
-                          </Col>
-                          <Col md={4}>
-                            <div className={styles.sparklineContainer}>
-                              <svg viewBox="0 0 100 30">
-                                <path
-                                  d={`M ${trend.sparkline}`}
-                                  fill="none"
-                                  stroke="#2196f3"
-                                  strokeWidth="2"
-                                />
-                              </svg>
+                          )}
+                        <div className={styles.newsContainer}>
+                          {trend.details?.news?.map((newsItem, idx) => (
+                            <div key={idx} className={styles.newsItem}>
+                              <img
+                                src={newsItem.imageUrl}
+                                alt={newsItem.title}
+                                className={styles.newsImage}
+                              />
+                              <div className={styles.newsContent}>
+                                <a
+                                  href={newsItem.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  {newsItem.title}
+                                </a>
+                                <div className={styles.newsMetadata}>
+                                  <span>{newsItem.source}</span>
+                                  <span>{newsItem.time}</span>
+                                </div>
+                              </div>
                             </div>
-                          </Col>
-                        </Row>
-                      </Card.Body>
-                    </Accordion.Collapse>
-                  </Card>
+                          ))}
+                        </div>
+                      </Col>
+                      <Col md={4}>
+                        <div className={styles.sparklineContainer}>
+                          <svg viewBox="0 0 100 30">
+                            <path
+                              d={`M ${trend.sparkline}`}
+                              fill="none"
+                              stroke="#2196f3"
+                              strokeWidth="2"
+                            />
+                          </svg>
+                        </div>
+                      </Col>
+                    </Row>
+                  </Accordion.Collapse>
                 </Accordion>
               </Col>
             </Row>
