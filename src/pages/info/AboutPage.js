@@ -13,23 +13,24 @@ const AboutPage = () => (
           creating the social context around a given subject.
         </p>
         <p>
-          A social context is a time and a place mixed with events not
+          A social context is a multi-faceted concept mixed with events not
           necessarily in the same place. Creating content that has a cultural
-          setting is a difficult thing. Understanding a group of{" "}
+          setting is a difficult thing. We see to create a tool to help in understanding a group of{" "}
           <a href="https://www.searchenginejournal.com/what-are-googles-core-topicality-systems/523537/">
             topics
           </a>{" "}
-          and how they fit into a social context is an ongoing challenge.
-          Drawing from a number of news and content sources as well as trending
-          searches using Google real time trends. The CMS allows users to choose
-          a group of subjects and the CMS will create the links, the hashtags
-          and meta descriptions required for performant SEO and various social
+          and how they fit into a social context.
+          Drawing from current real-time trending searches and 
+          a number of news and content sources the CMS allows users to choose
+          a group of subjects, discover imagery and create the links, the hashtags,
+          meta descriptions, etc. required for performant SEO and required by various social
           network and other publishing options. It help visibility in apps,
           social media and other channels.
         </p>
         <p>
-          This is an ongoing research project that is under development. If you
-          have any feedback or suggestions, please reach out and let us know.
+          This is an ongoing research project that is under development. 
+          The technology behind SEO and search is rapidly evolving, and so may our solutions.
+          If you have any feedback or suggestions, please reach out and let us know.
         </p>
       </Card.Body>
     </Card>
