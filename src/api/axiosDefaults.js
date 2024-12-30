@@ -9,7 +9,7 @@ axios.defaults.headers.post["Content-Type"] = "multipart/form-data";
 axios.defaults.withCredentials = true;
 
 export const axiosNest = axios.create({
-  baseURL: "http://ec2-52-65-222-223.ap-southeast-2.compute.amazonaws.com:3001",
+  baseURL: "https://api.mcayreserve.com",
   headers: {
     "Content-Type": "application/json",
   },
