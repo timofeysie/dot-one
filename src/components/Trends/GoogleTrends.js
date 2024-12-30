@@ -41,8 +41,6 @@ function GoogleTrends({ onTrendSelect }) {
           type: params.type,
           sort: params.sort,
         },
-        // Explicitly set withCredentials for this request
-        withCredentials: true,
       });
 
       console.log("API Response:", response);
@@ -56,7 +54,6 @@ function GoogleTrends({ onTrendSelect }) {
     } catch (err) {
       console.error("Error fetching trends:", err);
 
-      // More detailed error logging
       if (err.response) {
         console.log("Error status:", err.response.status);
         console.log("Error headers:", err.response.headers);

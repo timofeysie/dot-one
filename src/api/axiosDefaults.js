@@ -13,7 +13,6 @@ export const axiosNest = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-  withCredentials: true,
 });
 
 // Keep your existing interceptor
