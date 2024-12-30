@@ -33,11 +33,13 @@ function GoogleTrends({ onTrendSelect }) {
     console.log("Fetching trends...");
     try {
       const response = await axiosNest.get("/parse-realtime-data", {
-        geo: params.geo,
-        hours: params.hours,
-        category: params.category,
-        type: params.type,
-        sort: params.sort,
+        params: {
+          geo: params.geo,
+          hours: params.hours,
+          category: params.category,
+          type: params.type,
+          sort: params.sort,
+        },
       });
 
       console.log("API Response:", response);
@@ -59,6 +61,7 @@ function GoogleTrends({ onTrendSelect }) {
       setIsLoading(false);
     }
   };
+
   const handleParamChange = (event) => {
     const { name, value } = event.target;
     setParams((prevParams) => ({
@@ -72,10 +75,12 @@ function GoogleTrends({ onTrendSelect }) {
       const newSelectedTrends = prev.includes(trendIndex)
         ? prev.filter((index) => index !== trendIndex)
         : [...prev, trendIndex];
-      
-      const selectedTrendTitles = newSelectedTrends.map(index => trends[index].title);
+
+      const selectedTrendTitles = newSelectedTrends.map(
+        (index) => trends[index].title
+      );
       onTrendSelect(selectedTrendTitles);
-      
+
       return newSelectedTrends;
     });
   };
