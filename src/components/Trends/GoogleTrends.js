@@ -31,6 +31,7 @@ function GoogleTrends({ onTrendSelect }) {
     setIsLoading(true);
     setError(null);
     console.log("Fetching trends...");
+
     try {
       const response = await axiosNest.get("/parse-realtime-data", {
         params: {
@@ -40,6 +41,8 @@ function GoogleTrends({ onTrendSelect }) {
           type: params.type,
           sort: params.sort,
         },
+        // Explicitly set withCredentials for this request
+        withCredentials: true,
       });
 
       console.log("API Response:", response);
@@ -52,11 +55,19 @@ function GoogleTrends({ onTrendSelect }) {
       }
     } catch (err) {
       console.error("Error fetching trends:", err);
-      setError(`Failed to fetch trends: ${err.message || "Unknown error"}`);
+
+      // More detailed error logging
       if (err.response) {
-        console.log("Error response:", err.response);
-        console.log("Error response data:", err.response.data);
+        console.log("Error status:", err.response.status);
+        console.log("Error headers:", err.response.headers);
+        console.log("Error data:", err.response.data);
+      } else if (err.request) {
+        console.log("Request made but no response:", err.request);
+      } else {
+        console.log("Error setting up request:", err.message);
       }
+
+      setError(`Failed to fetch trends: ${err.message || "Unknown error"}`);
     } finally {
       setIsLoading(false);
     }

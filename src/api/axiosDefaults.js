@@ -12,14 +12,14 @@ export const axiosNest = axios.create({
   baseURL: "https://api.mcayreserve.com",
   headers: {
     "Content-Type": "application/json",
-    Origin: "https://dot-one-26b272efdbb8.herokuapp.com",
   },
-  withCredentials: false,
+  withCredentials: true,
 });
 
+// Keep your existing interceptor
 axiosNest.interceptors.request.use((config) => {
   const token = localStorage.getItem("access_token");
-  if (token && !config.url?.includes("parse-realtime-data")) {
+  if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
