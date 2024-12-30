@@ -1,23 +1,44 @@
+/* eslint-disable react/prop-types */
 import React from "react";
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { Link } from "react-router-dom";
 
-const AboutCard = () => {
+const AboutCard = ({ 
+  title, 
+  text, 
+  icon, 
+  imageUrl, 
+  linkText, 
+  linkUrl 
+}) => {
   return (
     <Card style={{ width: "18rem" }}>
-      <div className="d-flex justify-content-center mt-3">
-        <i className="fa-solid fa-user fa-3x"></i>
+      <div className="d-flex justify-content-center p-4">
+        {imageUrl ? (
+          <img 
+            src={imageUrl} 
+            alt={title || 'Card image'} 
+            style={{ 
+              width: '150px', 
+              height: '150px', 
+              objectFit: 'cover',
+              borderRadius: '50%',
+              border: '2px solid #dee2e6'
+            }} 
+          />
+        ) : (
+          <i className={`fa-solid ${icon || 'fa-user'} fa-5x`}></i>
+        )}
       </div>
       <Card.Body>
-        <Card.Title>Card Title</Card.Title>
+        <Card.Title>{title || 'Card Title'}</Card.Title>
         <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card content.
+          {text || 'Some quick example text to build on the card title and make up the bulk of the card content.'}
         </Card.Text>
-        <Link to="/">
-          <Button variant="primary">Go Home</Button>
-        </Link>
+        {linkUrl && linkText && (
+          <div className="mt-2">
+            <a href={linkUrl}>{linkText}</a>
+          </div>
+        )}
       </Card.Body>
     </Card>
   );
