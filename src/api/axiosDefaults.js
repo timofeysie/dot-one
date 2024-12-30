@@ -12,13 +12,14 @@ export const axiosNest = axios.create({
   baseURL: "https://api.mcayreserve.com",
   headers: {
     "Content-Type": "application/json",
+    Origin: "https://dot-one-26b272efdbb8.herokuapp.com",
   },
-  withCredentials: true,
+  withCredentials: false,
 });
 
 axiosNest.interceptors.request.use((config) => {
-  const token = localStorage.getItem("access_token"); // or however you store your DRF token
-  if (token) {
+  const token = localStorage.getItem("access_token");
+  if (token && !config.url?.includes("parse-realtime-data")) {
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
