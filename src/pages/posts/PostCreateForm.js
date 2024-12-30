@@ -17,6 +17,7 @@ import { useRedirect } from "../../hooks/useRedirect";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import LinkSelectorWrapper from "../../components/WebComponents/LinkSelector/LinkSelectorWrapper";
+import GoogleTrends from "../../components/Trends/GoogleTrends";
 
 function PostCreateForm() {
   useRedirect("loggedOut");
@@ -31,6 +32,8 @@ function PostCreateForm() {
 
   const imageInput = useRef(null);
   const history = useHistory();
+
+  const [selectedTrendTitles, setSelectedTrendTitles] = useState([]);
 
   const handleTitleChange = (event) => {
     setPostData({
@@ -83,10 +86,23 @@ function PostCreateForm() {
     // Create the link HTML
     const linkText = `${title} (${linkType})`;
     const linkHtml = `<a href="${url}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
-    
-    setPostData(prevData => ({
+
+    setPostData((prevData) => ({
       ...prevData,
-      content: prevData.content ? `${prevData.content}<p>${linkHtml}</p>` : `<p>${linkHtml}</p>`
+      content: prevData.content
+        ? `${prevData.content}<p>${linkHtml}</p>`
+        : `<p>${linkHtml}</p>`,
+    }));
+  };
+
+  /**
+   * Titles come from selected Google Trends
+   */
+  const handleTrendSelect = (trendTitles) => {
+    setSelectedTrendTitles(trendTitles);
+    setPostData((prevData) => ({
+      ...prevData,
+      title: trendTitles.join(" x "),
     }));
   };
 
@@ -152,6 +168,8 @@ function PostCreateForm() {
         </Alert>
       ))}
 
+      <br />
+      <br />
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
         onClick={() => history.goBack()}
@@ -161,6 +179,22 @@ function PostCreateForm() {
       <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
         create
       </Button>
+      <br />
+    </div>
+  );
+
+  const linkSelectors = (
+    <div className="text-center">
+      <div>Create links</div>
+      {selectedTrendTitles.map((trendTitle, index) => (
+        <Container key={index} className={`${appStyles.Content} mt-3`}>
+          <LinkSelectorWrapper
+            searchTerm={trendTitle}
+            onSelect={handleLinkSelected}
+            onUseLink={handleUseLink}
+          />
+        </Container>
+      ))}
     </div>
   );
 
@@ -214,15 +248,13 @@ function PostCreateForm() {
             <div className="d-md-none">{textFields}</div>
           </Container>
           <Container className={`${appStyles.Content} mt-3`}>
-            <LinkSelectorWrapper 
-              searchTerm={title} 
-              onSelect={handleLinkSelected}
-              onUseLink={handleUseLink}
-            />
+            <GoogleTrends onTrendSelect={handleTrendSelect} />
           </Container>
         </Col>
         <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">
           <Container className={appStyles.Content}>{textFields}</Container>
+          <br />
+          <Container className={appStyles.Content}>{linkSelectors}</Container>
         </Col>
       </Row>
     </Form>
