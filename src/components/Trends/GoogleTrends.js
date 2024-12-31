@@ -26,6 +26,7 @@ function GoogleTrends({ onTrendSelect }) {
   });
   const [selectedTrends, setSelectedTrends] = useState([]);
   const [postTitle, setPostTitle] = useState("");
+  const [showFilters, setShowFilters] = useState(false);
 
   const fetchTrends = async () => {
     setIsLoading(true);
@@ -41,6 +42,7 @@ function GoogleTrends({ onTrendSelect }) {
           type: params.type,
           sort: params.sort,
         },
+        timeout: 60000,
       });
 
       console.log("API Response:", response);
@@ -54,7 +56,9 @@ function GoogleTrends({ onTrendSelect }) {
     } catch (err) {
       console.error("Error fetching trends:", err);
 
-      if (err.response) {
+      if (err.code === "ECONNABORTED") {
+        setError("Request timed out after 60 seconds. Please try again.");
+      } else if (err.response) {
         console.log("Error status:", err.response.status);
         console.log("Error headers:", err.response.headers);
         console.log("Error data:", err.response.data);
@@ -95,122 +99,141 @@ function GoogleTrends({ onTrendSelect }) {
 
   return (
     <Container>
-      <Row className="mb-3 align-items-end">
-        <Col sm={12} md={2}>
-          <Form.Group>
-            <Form.Label>Region</Form.Label>
-            <Form.Control
-              as="select"
-              name="geo"
-              value={params.geo}
-              onChange={handleParamChange}
-            >
-              <option value="US">United States</option>
-              <option value="AU">Australia</option>
-              <option value="KR">Korea</option>
-            </Form.Control>
-          </Form.Group>
-        </Col>
-
-        <Col sm={12} md={2}>
-          <Form.Group>
-            <Form.Label>Time Range</Form.Label>
-            <Form.Control
-              as="select"
-              name="hours"
-              value={params.hours}
-              onChange={handleParamChange}
-            >
-              <option value="4">Last 4 hours</option>
-              <option value="24">Last 24 hours</option>
-              <option value="48">Last 48 hours</option>
-              <option value="168">Last week</option>
-            </Form.Control>
-          </Form.Group>
-        </Col>
-
-        <Col sm={12} md={2}>
-          <Form.Group>
-            <Form.Label>Category</Form.Label>
-            <Form.Control
-              as="select"
-              name="category"
-              value={params.category}
-              onChange={handleParamChange}
-            >
-              <option value="all">All categories</option>
-              <option value="news">News</option>
-              <option value="entertainment">Entertainment</option>
-              <option value="sports">Sports</option>
-              <option value="business">Business</option>
-            </Form.Control>
-          </Form.Group>
-        </Col>
-
-        <Col sm={12} md={2}>
-          <Form.Group>
-            <Form.Label>Type</Form.Label>
-            <Form.Control
-              as="select"
-              name="type"
-              value={params.type}
-              onChange={handleParamChange}
-            >
-              <option value="all">All trends</option>
-              <option value="rising">Rising</option>
-              <option value="top">Top</option>
-            </Form.Control>
-          </Form.Group>
-        </Col>
-
-        <Col sm={12} md={2}>
-          <Form.Group>
-            <Form.Label>Sort By</Form.Label>
-            <Form.Control
-              as="select"
-              name="sort"
-              value={params.sort}
-              onChange={handleParamChange}
-            >
-              <option value="relevance">Relevance</option>
-              <option value="search-volume">Search Volume</option>
-              <option value="title">Title</option>
-              <option value="recency">Recency</option>
-            </Form.Control>
-          </Form.Group>
-        </Col>
-
-        <Col sm={12} md={2}>
-          <Button
-            onClick={fetchTrends}
-            variant="primary"
-            className={`${btnStyles.Button} ${btnStyles.Blue}`}
-            disabled={isLoading}
+      <Accordion className="mb-3 mt-2">
+        <Card>
+          <Accordion.Toggle
+            as={Card.Header}
+            eventKey="0"
+            onClick={() => setShowFilters(!showFilters)}
+            className="d-flex justify-content-between align-items-center"
           >
-            {isLoading ? (
-              <>
-                <Spinner
-                  as="span"
-                  animation="border"
-                  size="sm"
-                  role="status"
-                  aria-hidden="true"
-                  className="me-2"
-                />
-                Loading...
-              </>
-            ) : (
-              "Fetch trends"
-            )}
-          </Button>
-        </Col>
-      </Row>
+            <span>Search Filters</span>
+            <i
+              className={
+                showFilters ? "fa-solid fa-minus" : "far fa-plus-square"
+              }
+            ></i>
+          </Accordion.Toggle>
+          <Accordion.Collapse eventKey="0">
+            <Card.Body>
+              <Row className="align-items-end">
+                <Col sm={12} md={2}>
+                  <Form.Group>
+                    <Form.Label>Region</Form.Label>
+                    <Form.Control
+                      as="select"
+                      name="geo"
+                      value={params.geo}
+                      onChange={handleParamChange}
+                    >
+                      <option value="US">United States</option>
+                      <option value="AU">Australia</option>
+                      <option value="KR">Korea</option>
+                    </Form.Control>
+                  </Form.Group>
+                </Col>
 
-      {error && (
-        <Alert variant="danger" className="mt-3">
-          {error}
-        </Alert>
-      )}
+                <Col sm={12} md={2}>
+                  <Form.Group>
+                    <Form.Label>Time Range</Form.Label>
+                    <Form.Control
+                      as="select"
+                      name="hours"
+                      value={params.hours}
+                      onChange={handleParamChange}
+                    >
+                      <option value="4">Last 4 hours</option>
+                      <option value="24">Last 24 hours</option>
+                      <option value="48">Last 48 hours</option>
+                      <option value="168">Last week</option>
+                    </Form.Control>
+                  </Form.Group>
+                </Col>
+
+                <Col sm={12} md={2}>
+                  <Form.Group>
+                    <Form.Label>Category</Form.Label>
+                    <Form.Control
+                      as="select"
+                      name="category"
+                      value={params.category}
+                      onChange={handleParamChange}
+                    >
+                      <option value="all">All categories</option>
+                      <option value="news">News</option>
+                      <option value="entertainment">Entertainment</option>
+                      <option value="sports">Sports</option>
+                      <option value="business">Business</option>
+                    </Form.Control>
+                  </Form.Group>
+                </Col>
+
+                <Col sm={12} md={2}>
+                  <Form.Group>
+                    <Form.Label>Type</Form.Label>
+                    <Form.Control
+                      as="select"
+                      name="type"
+                      value={params.type}
+                      onChange={handleParamChange}
+                    >
+                      <option value="all">All trends</option>
+                      <option value="rising">Rising</option>
+                      <option value="top">Top</option>
+                    </Form.Control>
+                  </Form.Group>
+                </Col>
+
+                <Col sm={12} md={2}>
+                  <Form.Group>
+                    <Form.Label>Sort By</Form.Label>
+                    <Form.Control
+                      as="select"
+                      name="sort"
+                      value={params.sort}
+                      onChange={handleParamChange}
+                    >
+                      <option value="relevance">Relevance</option>
+                      <option value="search-volume">Search Volume</option>
+                      <option value="title">Title</option>
+                      <option value="recency">Recency</option>
+                    </Form.Control>
+                  </Form.Group>
+                </Col>
+              </Row>
+            </Card.Body>
+          </Accordion.Collapse>
+        </Card>
+      </Accordion>
+      <div className="d-flex justify-content-center">
+        <Button
+          onClick={fetchTrends}
+          variant="primary"
+          className={`${btnStyles.Button} ${btnStyles.Blue}`}
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <>
+              <Spinner
+                as="span"
+                animation="border"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+                className="me-2"
+              />
+              Loading...
+            </>
+          ) : (
+            "Fetch trends"
+          )}
+        </Button>
+        {error && (
+          <Alert variant="danger" className="mt-3">
+            {error}
+          </Alert>
+        )}
+      </div>
 
       <Form.Group className="mb-3">
         <Form.Label>Post Title</Form.Label>
