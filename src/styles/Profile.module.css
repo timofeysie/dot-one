@@ -1,3 +1,8 @@
 .WordBreak {
   word-break: break-all;
 }
+
+.defaultIcon {
+  margin-left: 10px;
+  margin-right: 9px;
+}
