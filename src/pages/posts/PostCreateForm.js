@@ -251,6 +251,9 @@ function PostCreateForm() {
           <Container className={`${appStyles.Content} mt-3`}>
             <GoogleTrends onTrendSelect={handleTrendSelect} />
           </Container>
+          <Container className={`${appStyles.Content} mt-3 d-md-none`}>
+            {linkSelectors}
+          </Container>
         </Col>
         <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">
           <Container className={appStyles.Content}>{textFields}</Container>
