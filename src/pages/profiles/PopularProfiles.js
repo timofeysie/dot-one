@@ -19,6 +19,8 @@ const PopularProfiles = ({ mobile }) => {
         <>
           <span className="mb-0">Most followed profiles</span>
           {mobile ? (
+            // TBD: how to display popular profiles on mobile?
+            // This will probably be in a tool row with search and grid view options.
             // <div className="d-flex justify-content-around">
             //   {popularProfiles.results.slice(0, 4).map((profile) => (
             //     <Profile key={profile.id} profile={profile} mobile />
@@ -27,9 +29,7 @@ const PopularProfiles = ({ mobile }) => {
             <></>
           ) : (
             popularProfiles.results.map((profile) => (
-              <>
-                <Profile key={profile.id} profile={profile} />
-              </>
+              <Profile key={profile.id} profile={profile} />
             ))
           )}
         </>
